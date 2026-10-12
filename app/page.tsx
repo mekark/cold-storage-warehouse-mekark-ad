@@ -5,6 +5,7 @@ import WhyEditorialMobile from "@/components/WhyEditorialMobile";
 import ProjectsGallerySection from "@/components/ProjectsGallerySection";
 import FaqAccordionSection from "@/components/FaqAccordionSection";
 import LeadBlueprintSection from "@/components/LeadBlueprintSection";
+import FloatingContact from "@/components/FloatingContact";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
 
 
       
+      <FloatingContact />
       <BlueprintHeroSection />
       <ProcessSection />
       <WhyMekarkSection />

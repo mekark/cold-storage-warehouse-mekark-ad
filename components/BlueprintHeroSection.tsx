@@ -11,18 +11,29 @@ import {
   WHATSAPP_NUMBER,
 } from "@/components/heroData";
 
-// Logo sizes / offsets taken from the Figma frame (each sits in a 90x40 chip)
-const TRUSTED_LOGOS = [
-  { src: "/Images/hero/vwu.webp", alt: "Client logo", size: 42 },
-  { src: "/Images/hero/voltas.webp", alt: "Voltas", size: 75 },
-  { src: "/Images/hero/tvs.webp", alt: "TVS", size: 75 },
-  { src: "/Images/hero/tata.webp", alt: "Tata Electronics", size: 75 },
-  { src: "/Images/hero/stetter.webp", alt: "Schwing Stetter", size: 75 },
-  { src: "/Images/hero/srf.webp", alt: "SRF", size: 75 },
-];
+// Client logos (each sits in a 90x40 chip): `scale` zooms logos whose artwork has
+// extra padding inside the file; the rest use the default 34px height.
+const CLIENT_LOGOS = [
+  { name: "VWU", src: "/Images/hero/clients/vwu.webp", scale: 1 },
+  { name: "Voltas", src: "/Images/hero/clients/voltas.webp", scale: 1.6 },
+  { name: "TVS", src: "/Images/hero/clients/tvs.webp", scale: 1.6 },
+  { name: "Tata Electronics", src: "/Images/hero/clients/tata.webp", scale: 1.6 },
+  { name: "Schwing Stetter", src: "/Images/hero/clients/stetter.webp", scale: 1.6 },
+  { name: "SRF", src: "/Images/hero/clients/srf.webp", scale: 1.6 },
+  { name: "Saveetha", src: "/Images/hero/clients/saveetha.webp", scale: 1.2 },
+  { name: "Sarvam Safety", src: "/Images/hero/clients/sarvam.webp", scale: 1 },
+  { name: "Reliance", src: "/Images/hero/clients/reliance.webp", scale: 1.2 },
+  { name: "Orbittal", src: "/Images/hero/clients/orbittal.webp", scale: 1.2 },
+  { name: "NS Instruments", src: "/Images/hero/clients/nsi.webp", scale: 1 },
+  { name: "MRF", src: "/Images/hero/clients/mrf.webp", scale: 1 },
+  { name: "L&T", src: "/Images/hero/clients/lt.webp", scale: 1 },
+  { name: "Caterpillar", src: "/Images/hero/clients/cat.webp", scale: 1.2 },
+  { name: "LA Freightlift", src: "/Images/hero/clients/laf.webp", scale: 1.2 },
+  { name: "Komatsu", src: "/Images/hero/clients/komatsu.webp", scale: 1 },
+] as const;
 
 const STATS = [
-  { value: "200", suffix: "+", label: "Projects", width: "w-[145.333px]" },
+  { value: "300", suffix: "+", label: "Projects", width: "w-[145.333px]" },
   {
     value: "18",
     suffix: "+",
@@ -158,24 +169,25 @@ export default function BlueprintHeroSection() {
                   </p>
 
                   <div className="absolute top-[55px] right-[16px] left-[16px] h-[63px] overflow-hidden sm:right-auto sm:left-[32.17px] sm:w-[789px] sm:max-w-[calc(100%-64px)]">
-                    <div className="absolute top-[calc(50%-0.5px)] left-0 flex -translate-y-1/2 items-center gap-[50px]">
-                      {TRUSTED_LOGOS.map((logo) => (
+                    {/* Scrolling track: two identical sets for a seamless loop */}
+                    <div className="hero-logo-track absolute top-[calc(50%-0.5px)] left-0 flex w-max -translate-y-1/2 items-center gap-[50px] pr-[50px]">
+                      {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, index) => (
                         <div
-                          key={logo.src}
+                          key={`${logo.name}-${index}`}
                           className="relative h-[40px] w-[90px] shrink-0 rounded-[8px] bg-[#F9F6F7]"
+                          aria-hidden={index >= CLIENT_LOGOS.length}
                         >
-                          <div
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                            style={{ width: logo.size, height: logo.size }}
-                          >
-                            <Image
-                              src={logo.src}
-                              alt={logo.alt}
-                              fill
-                              sizes="75px"
-                              className="object-cover"
-                            />
-                          </div>
+                          <Image
+                            src={logo.src}
+                            alt={index < CLIENT_LOGOS.length ? logo.name : ""}
+                            width={120}
+                            height={40}
+                            className="pointer-events-none absolute top-1/2 left-1/2 h-[34px] w-auto max-w-[calc(100%-12px)] -translate-x-1/2 -translate-y-1/2 object-contain"
+                            style={{
+                              height: logo.scale === 1 ? 34 : 40,
+                              scale: logo.scale === 1 ? undefined : logo.scale,
+                            }}
+                          />
                         </div>
                       ))}
                     </div>

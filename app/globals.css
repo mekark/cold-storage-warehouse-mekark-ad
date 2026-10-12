@@ -49,3 +49,24 @@ select {
   background-size: 12px;
   padding-right: 2rem !important;
 }
+
+/* Hero client logo strip: the track holds two identical sets, so shifting by
+   half its width loops seamlessly. */
+@keyframes hero-logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.hero-logo-track {
+  animation: hero-logo-marquee 40s linear infinite;
+}
+
+.hero-logo-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo-track {
+    animation: none;
+  }
+}

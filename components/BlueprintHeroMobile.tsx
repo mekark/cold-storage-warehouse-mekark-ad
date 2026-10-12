@@ -9,35 +9,18 @@ import {
 } from "@/components/heroData";
 import { manrope } from "@/lib/fonts";
 
-// Client logos from the Figma mobile frame: each sits in a 40px-high chip
+// The four client logos and their crops from the mobile Figma node
+// (w / h = logo box inside the 64x40 tile, as in Figma).
 const LOGOS = [
-  {
-    src: "/Images/hero/vwu.webp",
-    alt: "Client logo",
-    w: 39,
-    h: 39,
-    chip: "w-[64px]",
-  },
-  {
-    src: "/Images/hero/voltas.webp",
-    alt: "Voltas",
-    w: 50,
-    h: 50,
-    chip: "w-[64px]",
-  },
-  { src: "/Images/hero/tvs.webp", alt: "TVS", w: 52, h: 53, chip: "px-[6px]" },
-  {
-    src: "/Images/hero/tata.webp",
-    alt: "Tata Electronics",
-    w: 54,
-    h: 54,
-    chip: "w-[64px]",
-  },
-];
+  { name: "L&T", src: "/Images/hero/mobile-lt.webp", w: 64, h: (64 * 1132) / 2084 },
+  { name: "CAT", src: "/Images/hero/mobile-cat.webp", w: 48, h: 48 },
+  { name: "TVS", src: "/Images/hero/mobile-tvs.webp", w: 52, h: 53 },
+  { name: "Tata", src: "/Images/hero/mobile-tata.webp", w: 32, h: 32 },
+] as const;
 
 const STATS = [
   {
-    value: "200",
+    value: "300",
     suffix: "+",
     label: "Projects",
     suffixClass: "text-[#C4161C]",
@@ -191,20 +174,36 @@ export default function BlueprintHeroMobile() {
             <p className="text-[14px] leading-[20px] font-semibold text-[#ED1D23] uppercase">
               Trusted Across India
             </p>
-            <div className="flex w-full flex-wrap gap-x-[18px] gap-y-[8px]">
+            {/* One row always: tiles are 64px wide (Figma) but shrink on narrow phones,
+                and the gap tightens below 380px so all four logos still fit. */}
+            <div className="flex w-full flex-nowrap items-start gap-x-[18px] max-[379px]:gap-x-2">
               {LOGOS.map((logo) => (
                 <div
-                  key={logo.src}
-                  className={`flex h-[40px] shrink-0 items-center justify-center overflow-hidden rounded-[6px] bg-[#F9F6F7] ${logo.chip}`}
+                  key={logo.name}
+                  className="flex h-[40px] max-w-[64px] min-w-0 flex-1 basis-0 items-center justify-center overflow-hidden rounded-[6px] bg-[#F9F6F7]"
                 >
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={logo.w}
-                    height={logo.h}
-                    sizes="54px"
-                    className="shrink-0 object-cover"
-                  />
+                  {logo.name === "Tata" ? (
+                    <span className="relative size-8 shrink-0 overflow-hidden">
+                      <Image
+                        src={logo.src}
+                        alt={logo.name}
+                        width={96}
+                        height={96}
+                        sizes="96px"
+                        className="absolute top-[-69.9%] left-[-100%] h-[301.97%] w-[300%] max-w-none"
+                      />
+                    </span>
+                  ) : (
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      width={Math.round(logo.w)}
+                      height={Math.round(logo.h)}
+                      sizes="64px"
+                      className="block shrink-0 object-cover"
+                      style={{ width: logo.w, height: logo.h }}
+                    />
+                  )}
                 </div>
               ))}
             </div>

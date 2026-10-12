@@ -202,7 +202,7 @@ export default function HeroBlueprintForm() {
             disabled={isSubmitting}
             className="flex h-[63.867px] w-full items-center justify-center rounded-[9px] bg-[#C4161C] px-[40px] py-[20px] text-center text-[18px] leading-[normal] font-bold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.809px_17.618px_rgba(196,22,28,0.3)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {isSubmitting ? "Submitting..." : "Get My Free Quote →"}
+            {isSubmitting ? "Submitting..." : "Get a Free Quote →"}
           </button>
 
           <p className="py-px text-center text-[12px] leading-[normal] font-medium tracking-[0.3303px] text-[#DCDCDC]">

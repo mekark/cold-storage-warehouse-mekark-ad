@@ -38,12 +38,12 @@ export default function ScrollToTopButton() {
   if (!visible) return null;
 
   return (
-    <div className="fixed right-4 bottom-4 z-[70] sm:right-5 sm:bottom-5 lg:right-6 lg:bottom-6">
+    <div className="fixed right-4 bottom-[148px] z-[70] flex sm:right-6 sm:bottom-[160px]">
       <button
         type="button"
         aria-label="Scroll to top"
         onClick={() => window.scrollTo({ top: 0 })}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#C4161C] text-white sm:h-14 sm:w-14 shadow-[0_20px_42px_-20px_rgba(196,22,28,0.72)]"
+        className="inline-flex size-[52px] items-center justify-center rounded-full bg-[#C4161C] text-white sm:size-14 shadow-[0_20px_42px_-20px_rgba(196,22,28,0.72)]"
       >
         <ArrowUpIcon />
       </button>

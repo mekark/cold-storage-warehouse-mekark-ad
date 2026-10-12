@@ -176,7 +176,7 @@ export default function HeroMobileForm() {
             disabled={isSubmitting}
             className="flex w-full items-center justify-center rounded-[10px] bg-[#C4161C] px-[24px] py-[13px] text-center text-[14px] leading-[normal] font-bold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.81px_17.62px_rgba(196,22,28,0.3)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {isSubmitting ? "Submitting..." : "Get My Free Quote →"}
+            {isSubmitting ? "Submitting..." : "Get a Free Quote →"}
           </button>
 
           <p className="w-full text-center text-[12px] leading-[normal] font-medium text-[#8A8A8A]">
