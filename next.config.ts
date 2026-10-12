@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    // Pin the root to this project; a stray lockfile in a parent folder
+    // otherwise makes Next.js pick the wrong workspace root
+    root: __dirname,
+  },
   images: {
     // Serve AVIF where supported (smaller than WebP), WebP otherwise
     formats: ["image/avif", "image/webp"],
