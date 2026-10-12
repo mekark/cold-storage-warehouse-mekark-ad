@@ -1,11 +1,11 @@
 import { manrope, spaceGrotesk } from "@/lib/fonts";
 import {
-  ClipboardCheck,
-  DraftingCompass,
-  Factory,
-  HardHat,
-  ShieldCheck,
-  Truck,
+  Building2,
+  CircleCheck,
+  Gauge,
+  Snowflake,
+  Thermometer,
+  Wrench,
   type LucideIcon,
 } from "lucide-react";
 import ScaledCanvas from "@/components/ScaledCanvas";
@@ -27,54 +27,54 @@ type Step = {
 const STEPS: Step[] = [
   {
     number: "01",
-    title: "Site & Project Feasibility",
-    description: "Geotechnical, regulatory, and budget checks.",
-    icon: ClipboardCheck,
+    title: "Product & Temperature Study",
+    description: "Storage temperature, product load, daily movement and pull-down requirement are fixed before design.",
+    icon: Thermometer,
     left: -1,
     width: 270,
     descriptionColor: "text-[#64748B]",
   },
   {
     number: "02",
-    title: "Design & Engineering",
-    description: "In-house engineering and planning.",
-    icon: DraftingCompass,
+    title: "Heat Load Engineering",
+    description: "In-Product heat, door openings, ambient conditions and operating loads determine the refrigeration capacity. engineering and planning.",
+    icon: Gauge,
     left: 298,
     width: 272,
     descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "03",
-    title: "Factory Fabrication",
-    description: "Precision-made columns, rafters, and purlins.",
-    icon: Factory,
+    title: "Cold Storage Designing",
+    description: "PEB structure, insulated floor and PUF/PIR envelope are engineered as one cold storage building.",
+    icon: Building2,
     left: 598,
     width: 268,
     descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "04",
-    title: "On-Site Erection",
-    description: "On-site structural assembly",
-    icon: HardHat,
+    title: "Refrigeration Integration",
+    description: "Compressors, evaporators, piping, electrical systems and controls are integrated with the building requirement.",
+    icon: Snowflake,
     left: 894,
     width: 271,
     descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "05",
-    title: "Quality Validation",
-    description: "Inspection, installation & compliance checks",
-    icon: ShieldCheck,
+    title: "Cold Room Installation",
+    description: "Insulated panels, cold-room doors, flooring and refrigeration equipment are installed under coordinated site execution.",
+    icon: Wrench,
     left: 1193,
     width: 271,
     descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "06",
-    title: "Handover & After-Sales",
-    description: "Snag clearance, documentation, and support.",
-    icon: Truck,
+    title: "Pull-Down & Commissioning",
+    description: "Temperature pull-down, controls, alarms and refrigeration performance are validated before final handover.",
+    icon: CircleCheck,
     left: 1492,
     width: 270,
     descriptionColor: "text-[#9A9A9A]",
@@ -92,12 +92,12 @@ function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
 function Heading() {
   return (
     <div className="flex flex-col gap-[10px]">
-      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:w-[1219px] min-[1024px]:text-[66px] min-[1024px]:leading-[73.333px]">
+      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:w-[1279px] min-[1024px]:text-[66px] min-[1024px]:whitespace-nowrap min-[1024px]:leading-[73.333px]">
         Our Turnkey{" "}
-        <span className="text-[#ED1D23]">Warehouse Construction</span>
+        <span className="text-[#ED1D23]">Cold Storage Construction</span>
       </h2>
       <p className="text-[18px] leading-[20px] font-normal text-[#64748B] min-[1024px]:text-[24px]">
-        As a warehouse construction company, we follow a proven 6-step process to ensure on-time delivery.
+        As a cold storage construction company, we follow a proven 6-step process to ensure on-time delivery.
       </p>
     </div>
   );
@@ -114,7 +114,7 @@ export default function ProcessSection() {
               <Heading />
 
               <div className="flex w-full flex-col items-center justify-center gap-[50px]">
-                <div className="relative h-[271px] w-full">
+                <div className="relative h-[351px] w-full">
                   {/* connector line */}
                   <div className="absolute top-[47px] left-[72px] h-[1.333px] w-[1430px] bg-[#E4DFE0]" />
 
@@ -184,21 +184,15 @@ export default function ProcessSection() {
           <div className="flex w-full max-w-[324px] flex-col gap-[12px]">
             <h2 className="text-[27px] leading-[34px] font-bold text-[#0F172A]">
               Our Turnkey{" "}
-              <span className="text-[#ED1D23]">Warehouse Construction</span>
+              <span className="text-[#ED1D23]">Cold Storage Construction</span>
             </h2>
             <p className="text-[14px] leading-[20px] font-normal text-[#64748B]">
-              As a warehouse construction company, we follow a proven 6-step process to ensure on-time delivery.
+              As a cold storage construction company, we follow a proven 6-step process to ensure on-time delivery.
             </p>
           </div>
 
           <ol className="relative flex w-full flex-col gap-[26px]">
-            {/* timeline rail, runs behind the numbered circles */}
-            <span
-              aria-hidden
-              className="absolute top-[25px] bottom-[33px] left-[16px] w-px -translate-x-1/2 bg-[#BCBCBC]"
-            />
-
-            {STEPS.map((step) => {
+            {STEPS.map((step, index) => {
               const Icon = step.icon;
 
               return (
@@ -206,10 +200,33 @@ export default function ProcessSection() {
                   key={step.number}
                   className="relative flex items-center gap-[17px]"
                 >
+                  {/* connector from this circle's centre to the next one */}
+                  {index < STEPS.length - 1 && (
+                    <span
+                      aria-hidden
+                      className="absolute top-1/2 left-[16px] h-[calc(100%+26px)] w-px -translate-x-1/2 bg-[#BCBCBC]"
+                    />
+                  )}
                   <span
-                    className={`${spaceGrotesk.className} relative flex size-[33px] shrink-0 items-center justify-center rounded-full border border-dashed border-[#BCBCBC] bg-[#F9F6F7] text-[14px] leading-[normal] font-bold text-[#080808]`}
+                    className={`${spaceGrotesk.className} relative flex size-[33px] shrink-0 items-center justify-center rounded-full bg-[#F9F6F7] text-[14px] leading-[normal] font-bold text-[#080808]`}
                   >
-                    {step.number}
+                    {/* 8 long dashes: circumference 2π·15.5 ≈ 97.4 → 8 × 12.18 */}
+                    <svg
+                      aria-hidden
+                      viewBox="0 0 33 33"
+                      className="absolute inset-0 size-full -rotate-90"
+                    >
+                      <circle
+                        cx="16.5"
+                        cy="16.5"
+                        r="15.5"
+                        fill="none"
+                        stroke="#BCBCBC"
+                        strokeWidth="1"
+                        strokeDasharray="8.5 3.68"
+                      />
+                    </svg>
+                    <span className="relative">{step.number}</span>
                   </span>
 
                   <div className="flex min-w-0 items-center gap-[10px] rounded-[6px] bg-[#FFFCFC] py-[6px] pr-[9px] pl-[10px] drop-shadow-[-1px_1px_3px_rgba(30,30,30,0.1)]">
