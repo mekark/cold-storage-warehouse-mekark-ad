@@ -8,10 +8,9 @@ const GTM_ID = "GTM-5SBMM86H";
 const GTM_LOAD_DELAY_MS = 5000;
 
 export const metadata: Metadata = {
-  title:
-    "India's No.1 Warehouse Construction Company | PEB Warehouse Design & Build Experts",
+  title: "Turnkey Cold Storage construction Company – Cold Storage construction contractor",
   description:
-    "Mekark delivers turnkey warehouse construction, PEB warehouse construction, and industrial warehouse design & build solutions across India.",
+    "Leading Turnkey Cold storage Warehouse construction EPC & Turnkey Cold chain warehouse construction Company – Cold Storage construction Turnkey EPC expertise in In House PEB Manufacturing, Civil, PEB, MEP and Seamless Execution servicing the needs of Turnkey cold storage building contractor & Turnkey cold storage warehouse construction , cold chain warehouse construction, refrigerated warehouse construction Company",
   icons: {
     icon: "/Images/LogoMekark.webp",
     shortcut: "/Images/LogoMekark.webp",
