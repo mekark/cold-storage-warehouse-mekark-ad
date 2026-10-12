@@ -9,6 +9,9 @@ import LeadBlueprintSection from "@/components/LeadBlueprintSection";
 export default function Home() {
   return (
     <main className="overflow-hidden">
+
+
+      
       <BlueprintHeroSection />
       <ProcessSection />
       <WhyMekarkSection />
