@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import {
-  INDUSTRIES,
   SQFT_OPTIONS,
   useBlueprintForm,
 } from "@/hooks/useBlueprintForm";
@@ -133,20 +132,15 @@ export function BlueprintForm() {
               <label htmlFor="lb-industry" className={labelClass}>
                 Industry Type*
               </label>
-              <select
+              <input
                 id="lb-industry"
+                type="text"
                 name="industry"
+                placeholder="Enter your Industry type"
                 value={values.industry}
                 onChange={handleChange}
-                className={selectClass(errors.industry, !!values.industry)}
-              >
-                <option value="">Select your Industry type</option>
-                {INDUSTRIES.map((industry) => (
-                  <option key={industry} value={industry}>
-                    {industry}
-                  </option>
-                ))}
-              </select>
+                className={`${inputClass(errors.industry)} rounded-[8.809px]}`}
+              />
               {errorText(errors.industry)}
             </div>
 
@@ -317,23 +311,15 @@ export function MobileBlueprintForm() {
           </div>
 
           <div>
-            <div className="relative">
-              <select
-                name="industry"
-                aria-label="Industry"
-                value={values.industry}
-                onChange={handleChange}
-                className={selectClass(errors.industry, !!values.industry)}
-              >
-                <option value="">Select your Industry</option>
-                {INDUSTRIES.map((industry) => (
-                  <option key={industry} value={industry}>
-                    {industry}
-                  </option>
-                ))}
-              </select>
-              {chevron}
-            </div>
+            <input
+              type="text"
+              name="industry"
+              aria-label="Industry"
+              placeholder="Enter your Industry"
+              value={values.industry}
+              onChange={handleChange}
+              className={`${mobileField} ${borderColor(errors.industry)} px-[16px]`}
+            />
             {errorText(errors.industry)}
           </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  INDUSTRIES,
   SQFT_OPTIONS,
   useBlueprintForm,
 } from "@/hooks/useBlueprintForm";
@@ -135,20 +134,15 @@ export default function HeroBlueprintForm() {
               <label htmlFor="bh-industry" className={labelClass}>
                 Industry Type*
               </label>
-              <select
+              <input
                 id="bh-industry"
+                type="text"
                 name="industry"
+                placeholder="Enter your Industry type"
                 value={values.industry}
                 onChange={handleChange}
-                className={`${selectClass(errors.industry, !!values.industry)} rounded-[8.809px] tracking-normal`}
-              >
-                <option value="">Select your Industry type</option>
-                {INDUSTRIES.map((industry) => (
-                  <option key={industry} value={industry}>
-                    {industry}
-                  </option>
-                ))}
-              </select>
+                className={`${inputClass(errors.industry)} rounded-[8.809px]}`}
+              />
               {errorText(errors.industry)}
             </div>
 

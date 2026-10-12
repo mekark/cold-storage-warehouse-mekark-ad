@@ -2,7 +2,7 @@ import Image from "next/image";
 import EnquiryFormButton from "@/components/EnquiryFormButton";
 import HeroMobileForm from "@/components/HeroMobileForm";
 import {
-  HIGHLIGHTS,
+  DESKTOP_HIGHLIGHTS,
   PHONE_NUMBER,
   WHATSAPP_MESSAGE,
   WHATSAPP_NUMBER,
@@ -102,66 +102,66 @@ export default function BlueprintHeroMobile() {
           <div className="absolute top-[15px] left-5 flex max-w-[calc(100%-40px)] items-center gap-[8px] rounded-full border border-solid border-white/20 px-[12px] py-[6px]">
             <span className="size-[8px] shrink-0 rounded-full bg-[#E40015]" />
             <p className="text-[10px] leading-[16px] font-medium">
-              FROM DESIGN TO HANDOVER | ONE TEAM | 150 DAYS
+              Cold Storage Warehouse Construction Company
             </p>
           </div>
 
           <div className="absolute bottom-0 left-0 h-[240px] w-full overflow-hidden bg-[#060606]">
-            <div className="absolute inset-x-0 bottom-0 h-[220px]">
+            <div className="absolute bottom-px left-0 h-[235px] w-[422px]">
               <Image
-                src="/Images/hero/m-hero.webp"
-                alt="Industrial warehouse interior"
+                src="/Images/hero/hero-bg-cold.webp"
+                alt="Cold storage warehouse interior"
                 fill
                 fetchPriority="high"
-                sizes="100vw"
-                className="object-cover"
+                sizes="422px"
+                className="object-cover object-bottom"
               />
             </div>
             <div className="absolute inset-x-0 -top-px h-[91px] bg-[linear-gradient(180deg,#060606_0%,#202020_45.616%,rgba(6,6,6,0)_76.212%)]" />
             <div className="absolute inset-x-0 bottom-0 h-[61px] bg-[linear-gradient(181.565deg,rgba(30,30,30,0)_1.0095%,#1E1E1E_99.312%)]" />
 
-            <h2 className="absolute top-[10px] left-5 w-[350px] max-w-[calc(100%-40px)] text-[22px] leading-[24px] font-semibold">
-              Build Your PEB Industrial Warehouse
+            <h2 className="absolute top-[2px] left-5 w-[350px] max-w-[calc(100%-40px)] text-[22px] leading-[24px] font-semibold">
+              Build Warehouses. Design to Delivery
             </h2>
 
-            <div className="absolute top-[206px] left-[-1px] flex h-[23px] w-[112px] items-center bg-[#C4161C] pl-5">
-              <p className="text-[16px] leading-[normal] font-semibold whitespace-nowrap">
-                in 150 Days
-              </p>
-            </div>
-            <p className="absolute top-[206px] left-[122px] flex h-[23px] items-center text-[16px] leading-[normal] font-semibold whitespace-nowrap">
-              not 9-12 months.
+            <p className="absolute top-[55px] left-0 flex h-[23px] items-center bg-[#C4161C] pr-[6px] pl-5 text-[16px] leading-[normal] font-semibold whitespace-nowrap">
+              Cold Storage Construction - 150 days*
             </p>
           </div>
         </div>
 
         <div className="flex w-full flex-col gap-[13px] px-5 pt-[12px]">
-          {/* DESCRIPTION */}
-          <p className="w-full text-[14px] leading-[normal] font-normal text-[#F3F3F3]">
-            From planning to handover, Mekark is a leading warehouse
-            construction company specializing in PEB warehouse construction,
-            steel warehouse construction, industrial warehouse construction,
-            turnkey warehouse construction, and pre-engineered warehouse
-            buildings across South India.
-          </p>
+          {/* DESCRIPTION + HIGHLIGHTS */}
+          <div className="flex w-full flex-col gap-[10px]">
+            <p className="w-full text-[13px] leading-[normal] font-normal text-[#F3F3F3]">
+              <span className="text-[#ED1D23]">MEKARK</span>
+              {" - Builds Every Structure You Want."}
+              <br />
+              {
+                "All Temperature Controlled - Refrigerated - Cold Storage - Warehouse Constructions  – "
+              }
+              <span className="font-bold text-white">ALL INDIA</span>
+            </p>
 
-          {/* HIGHLIGHTS */}
-          <ul className="flex w-full flex-col gap-[6px]">
-            {HIGHLIGHTS.map((item) => (
-              <li key={item} className="flex items-center gap-[8px] px-[12px]">
-                <Image
-                  src="/Images/hero/m-chevron.svg"
-                  alt=""
-                  width={15}
-                  height={15}
-                  className="size-[15px] shrink-0"
-                />
-                <span className="text-[12px] leading-[20px] text-white/70">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
+            <div className="flex w-full flex-col gap-[4px]">
+              <p className="w-full text-[13px] leading-[normal] font-bold text-white">
+                In-House PEB Manufacturing - Civil - PEB – MEP - Turnkey EPC.
+              </p>
+              <ul className="flex w-full flex-col gap-[6px]">
+                {DESKTOP_HIGHLIGHTS.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-[6px] px-[12px]"
+                  >
+                    <span className="size-[5px] shrink-0 rounded-full bg-[#ED1D23]" />
+                    <span className="min-w-0 flex-1 text-[12px] leading-[20px] text-white/70">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
           {/* TRUSTED ACROSS INDIA */}
           <div

@@ -8,34 +8,34 @@ const ROW_WIDTHS = [700, 672, 645, 645, 672, 700];
 
 const ITEMS = [
   {
-    title: "Turnkey Warehouse Building Construction",
+    title: "Product-Specific Refrigeration Sizing",
     description:
-      "We take single-point accountability from design to handover. Engineering, procurement and RCC construction are under one roof, so your logistics warehouse, distribution centre, or fulfillment center stays on schedule and on budget.",
+      "Every cold storage warehouse construction project sizes refrigeration around product load, storage temperature and room usage.",
   },
   {
-    title: "In-House Structural Engineers",
+    title: "PUF/PIR Insulated Cold Room",
     description:
-      "As an industrial warehouse contractor, we use BIM-based structural analysis to design every RCC structure accurately before work begins. This makes us a dependable warehouse building contractor for large warehouse construction, with fewer on-site design changes.",
+      "PUF/PIR walls, ceilings and joints reduce heat gain across chilled, frozen and deep-freeze storage.",
   },
   {
-    title: "Foundation Design for Your Loads",
+    title: "Temperature Controlled Warehouse Construction",
     description:
-      "We customise your foundation design for your racking systems, material handling equipment and floor loads. As a warehouse construction contractor, we size footings, pedestals and plinth beams for safe load transfer.",
+      "Our temperature controlled warehouse construction supports separate temperature zones within the same cold storage facility.",
   },
   {
-    title: "Established Credentials",
+    title: "Insulated Cold Storage Flooring",
     description:
-      "We have completed 200+ industrial and commercial RCC construction projects and earned a high customer rating. We measure our reliability by repeat orders from logistics operators, 3PL companies, e-commerce brands and cold chain businesses.",
+      "Cold-room floors are designed with insulation and vapour protection for low-temperature operating conditions.",
   },
   {
-    title: "Safe Construction",
+    title: "In-house Designing & Integration",
     description:
-      "We use modular formwork, routine site safety checks and clear, itemised pricing. This keeps our warehouse construction sites safe, organised and free of cost surprises.",
+      "As a cold storage building contractor, Mekark coordinates PEB structure, insulated panels and refrigeration before installation.",
   },
   {
-    title: "Pre-Handover Inspection",
+    title: "Turnkey Cold Chain EPC",
     description:
-      "Before handover, we inspect the structure, RCC quality and compliance with statutory requirements. For cold storage and temperature-controlled warehouses, this includes checking the building before insulation and refrigeration work.",
+      "For cold chain facility construction, civil works, structure, insulation, refrigeration and commissioning stay under one EPC contractor.",
   },
 ];
 
@@ -125,9 +125,9 @@ export function WhyMekarkMobileAccordion() {
               className="flex w-full cursor-pointer flex-col text-left text-white"
             >
               <span className="flex w-full items-center gap-[12px]">
-                <span className="min-w-0 flex-1 text-[16px] leading-[18px] font-bold">
-                  <span className="inline-block w-[24px]">{index + 1}.</span>
-                  {item.title}
+                <span className="flex min-w-0 flex-1 items-start text-[16px] leading-[18px] font-bold">
+                  <span className="w-[24px] shrink-0">{index + 1}.</span>
+                  <span className="min-w-0 flex-1">{item.title}</span>
                 </span>
                 <ChevronDown
                   size={26}

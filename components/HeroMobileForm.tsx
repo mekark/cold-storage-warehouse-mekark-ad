@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import {
-  INDUSTRIES,
   SQFT_OPTIONS,
   useBlueprintForm,
 } from "@/hooks/useBlueprintForm";
@@ -112,23 +111,15 @@ export default function HeroMobileForm() {
           </div>
 
           <div>
-            <div className="relative">
-              <select
-                name="industry"
-                aria-label="Industry type"
-                value={values.industry}
-                onChange={handleChange}
-                className={selectClass(errors.industry)}
-              >
-                <option value="">Select your Industry type</option>
-                {INDUSTRIES.map((industry) => (
-                  <option key={industry} value={industry}>
-                    {industry}
-                  </option>
-                ))}
-              </select>
-              {chevron}
-            </div>
+            <input
+              type="text"
+              name="industry"
+              aria-label="Industry type"
+              placeholder="Enter your Industry type"
+              value={values.industry}
+              onChange={handleChange}
+              className={`${fieldBase} ${borderColor(errors.industry)}`}
+            />
             {errorText(errors.industry)}
           </div>
 

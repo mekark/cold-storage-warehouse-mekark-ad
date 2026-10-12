@@ -7,17 +7,6 @@ const FORM_ENDPOINT = "/api/enquiry-form";
 const THANK_YOU_URL = "https://warehouse.mekark.com/thank-you";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const INDUSTRIES = [
-  "Manufacturing",
-  "Logistics & Warehousing",
-  "FMCG",
-  "Pharmaceutical",
-  "Automotive",
-  "E-commerce",
-  "Cold Storage",
-  "Other",
-];
-
 export const SQFT_OPTIONS = [
   "10,000 - 20,000",
   "20,000 - 30,000",
@@ -78,7 +67,7 @@ export function useBlueprintForm() {
       next.email = "Enter valid email.";
     }
 
-    if (!values.industry) next.industry = "This field is required.";
+    if (!values.industry.trim()) next.industry = "This field is required.";
     if (!values.sqft) next.sqft = "This field is required.";
 
     setErrors(next);

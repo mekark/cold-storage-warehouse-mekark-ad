@@ -115,7 +115,7 @@ function Heading() {
         Choose Mekark
       </h2>
       <p className="text-[16px] leading-[28px] font-normal text-[#424242] min-[1024px]:text-[20px] min-[1024px]:leading-[normal]">
-        India’s Leading Industrial Warehouse Construction
+        Cold Storage Construction Built Around Temperature Performance
       </p>
     </div>
   );
@@ -209,7 +209,7 @@ export default function   WhyMekarkSection() {
               Choose Mekark
             </h2>
             <p className="text-[12px] leading-[19px] font-normal text-[#424242]">
-              India’s Leading Industrial Warehouse Construction
+              Cold Storage Construction Built Around Temperature Performance
             </p>
           </div>
 
@@ -234,7 +234,7 @@ export default function   WhyMekarkSection() {
             Why Top Industries Choose Mekark
           </h2>
           <p className="mt-3 text-[16px] leading-[28px] font-normal text-white/80">
-            India’s Leading Industrial Warehouse Construction
+            Cold Storage Construction Built Around Temperature Performance
           </p>
 
           <ul className="mt-8 flex flex-col">
