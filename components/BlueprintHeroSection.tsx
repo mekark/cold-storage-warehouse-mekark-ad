@@ -67,7 +67,7 @@ export default function BlueprintHeroSection() {
             className={`${manrope.className} relative w-full overflow-hidden bg-[#060606] min-[1024px]:h-[1018px]`}
           >
             {/* BACKGROUND IMAGE */}
-            <div className="absolute inset-0 min-[1024px]:inset-auto min-[1024px]:top-[-3px] min-[1024px]:right-[-8.3%] min-[1024px]:h-[1020px] min-[1024px]:w-[94.44%] overflow-hidden">
+            <div className="absolute inset-0 min-[1024px]:inset-auto min-[1024px]:top-[-60px] min-[1024px]:right-[-8.3%] min-[1024px]:h-[1080px] min-[1024px]:w-[94.44%] overflow-hidden">
               <Image
                 src="/Images/hero/hero-bg-sharp.webp"
                 alt="Industrial warehouse interior"

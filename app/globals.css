@@ -70,3 +70,12 @@ select {
     animation: none;
   }
 }
+
+/* Desktop Figma frames: scale to viewport width in pure CSS (no JS flash).
+   --cw (viewport width, unitless) is set by the inline script in layout.tsx. */
+@media (min-width: 1024px) {
+  .scaled-canvas {
+    width: calc(var(--dw) * 1px);
+    zoom: calc(var(--cw, var(--dw)) / var(--dw));
+  }
+}
