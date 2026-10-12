@@ -3,86 +3,58 @@ import { manrope } from "@/lib/fonts";
 import ScaledCanvas from "@/components/ScaledCanvas";
 
 const DESIGN_WIDTH = 1920;
-const DESIGN_HEIGHT = 1425;
 
 const VIEW_ALL_HREF = "https://www.mekark.com/projects/completed-projects";
 
 type Tile = {
   src: string;
   alt: string;
-  /** Absolute position / size in the 1920px Figma frame */
-  left: number;
-  top: number;
-  width: number;
-  height: number;
-  /** Tailwind classes for the <img> inside the tile */
+  /** Rounded corner of the tile in the Figma grid (only outer-style corners are rounded) */
+  radiusClass: string;
+  /** Tailwind classes positioning the <img> inside the tile (Figma crop) */
   imageClass: string;
-  /** Extra classes for the tile wrapper (mobile grid span, aspect ratio) */
-  mobileClass: string;
 };
 
+// 2 x 3 grid, left-to-right / top-to-bottom, as laid out in the Figma frame
 const TILES: Tile[] = [
   {
-    src: "/Images/gallery/g1.webp",
-    alt: "Teal PEB warehouse with white roof",
-    left: 80,
-    top: 255,
-    width: 569,
-    height: 643,
-    imageClass: "object-cover",
-    mobileClass: "aspect-[569/643] row-span-2",
+    src: "/Images/gallery/p1.webp",
+    alt: "Modern PEB warehouse with striped glazed facade",
+    radiusClass: "rounded-tl-[32px]",
+    imageClass: "absolute top-0 left-[0.02%] h-[101.74%] w-[101.65%] max-w-none",
   },
   {
-    src: "/Images/gallery/g5.webp",
-    alt: "Aerial view of a PEB industrial warehouse",
-    left: 673,
-    top: 255,
-    width: 424,
-    height: 477,
-    // Figma stretches this photo to the tile (no object-fit set)
-    imageClass: "object-fill object-bottom",
-    mobileClass: "aspect-[424/477]",
+    src: "/Images/gallery/p2.webp",
+    alt: "Aerial view of a large white warehouse with loading docks",
+    radiusClass: "rounded-tr-[32px]",
+    imageClass: "absolute top-[-2.5%] left-[-5.01%] size-[104.97%] max-w-none",
   },
   {
-    src: "/Images/gallery/g4.webp",
+    src: "/Images/gallery/p3.webp",
     alt: "Warehouse with brown glazed entrance",
-    left: 1121,
-    top: 255,
-    width: 719,
-    height: 477,
-    imageClass: "object-cover",
-    mobileClass: "aspect-[719/477] sm:col-span-2",
-  },
-  {
-    src: "/Images/gallery/g3.webp",
-    alt: "White warehouse building with landscaped driveway",
-    left: 80,
-    top: 918,
-    width: 569,
-    height: 305,
+    radiusClass: "rounded-bl-[32px]",
     imageClass:
-      "absolute top-[-6.13%] left-[-0.35%] h-[112.26%] w-[100.35%] max-w-none",
-    mobileClass: "aspect-[569/305]",
+      "absolute top-[-2.25%] left-[-11.16%] h-[119.15%] w-[119.17%] max-w-none",
   },
   {
-    src: "/Images/gallery/g6.webp",
-    alt: "Steel warehouse with grey cladding",
-    left: 673,
-    top: 752,
-    width: 571,
-    height: 471,
-    imageClass: "object-fill object-bottom",
-    mobileClass: "aspect-[571/471]",
+    src: "/Images/gallery/p4.webp",
+    alt: "Blue PEB warehouse on an industrial estate",
+    radiusClass: "rounded-br-[32px]",
+    imageClass: "absolute inset-0 size-full max-w-none object-cover",
   },
   {
-    src: "/Images/gallery/g2.webp",
-    alt: "Large industrial warehouse under construction",
-    left: 1269,
-    top: 752,
-    width: 571,
-    height: 471,
-    imageClass: "object-cover",
-    mobileClass: "aspect-[571/471]",
+    src: "/Images/gallery/p5.webp",
+    alt: "Aerial view of a white PEB industrial warehouse",
+    radiusClass: "rounded-bl-[32px]",
+    imageClass:
+      "absolute top-[-16.65%] left-[-3.05%] h-[116.64%] w-[116.44%] max-w-none",
+  },
+  {
+    src: "/Images/gallery/p6.webp",
+    alt: "Steel warehouse with blue trim and loading bays",
+    radiusClass: "rounded-br-[32px]",
+    imageClass:
+      "absolute top-[-10.66%] left-[-10.82%] h-[110.75%] w-[110.81%] max-w-none",
   },
 ];
 
@@ -98,7 +70,7 @@ function Heading() {
         </h2>
       </div>
       <p className="text-[16px] leading-[26px] font-medium text-[#64748B] sm:text-[20px] min-[1024px]:text-[24px]! min-[1024px]:leading-[36px]! min-[1024px]:whitespace-nowrap">
-        Completed Ware House structures across Tamil Nadu and beyond.
+        Completed PEB structures across India .
       </p>
     </div>
   );
@@ -123,47 +95,26 @@ export default function ProjectsGallerySection() {
       {/* DESKTOP: exact Figma frame, scaled to the viewport */}
       <div className="hidden min-[1024px]:block">
         <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
-          <div
-            className="relative w-[1920px] bg-[#F9F6F7]"
-            style={{ height: DESIGN_HEIGHT }}
-          >
-            <div className="absolute top-[60px] left-[80px]">
-              <Heading />
+          <div className="flex w-[1920px] flex-col items-start gap-[52px] bg-[#F9F6F7] px-[80px] py-[52px]">
+            <Heading />
+
+            <div className="grid h-[1515.5px] w-full grid-cols-2 grid-rows-3 gap-[25px]">
+              {TILES.map((tile) => (
+                <div
+                  key={tile.src}
+                  className={`relative overflow-hidden bg-[#D9D9D9] ${tile.radiusClass}`}
+                >
+                  <Image
+                    src={tile.src}
+                    alt={tile.alt}
+                    width={1672}
+                    height={941}
+                    sizes="46vw"
+                    className={tile.imageClass}
+                  />
+                </div>
+              ))}
             </div>
-
-            {TILES.map((tile) => (
-              <div
-                key={tile.src}
-                className="absolute overflow-hidden bg-[#D9D9D9]"
-                style={{
-                  left: tile.left,
-                  top: tile.top,
-                  width: tile.width,
-                  height: tile.height,
-                }}
-              >
-                {tile.imageClass.startsWith("absolute") ? (
-                  <Image
-                    src={tile.src}
-                    alt={tile.alt}
-                    width={587}
-                    height={352}
-                    sizes={`${Math.ceil((tile.width / DESIGN_WIDTH) * 100)}vw`}
-                    className={tile.imageClass}
-                  />
-                ) : (
-                  <Image
-                    src={tile.src}
-                    alt={tile.alt}
-                    fill
-                    sizes={`${Math.ceil((tile.width / DESIGN_WIDTH) * 100)}vw`}
-                    className={tile.imageClass}
-                  />
-                )}
-              </div>
-            ))}
-
-            <ViewAllButton className="absolute top-[1293px] left-1/2 -translate-x-1/2 rounded-[8.809px] px-[50px] py-[20px] text-[24px] leading-[normal]" />
           </div>
         </ScaledCanvas>
       </div>
@@ -180,91 +131,44 @@ export default function ProjectsGallerySection() {
             </h2>
           </div>
           <p className="w-[307px] max-w-full text-[14px] leading-[20px] font-medium text-[#64748B]">
-            Completed Ware House structures across Tamil Nadu and beyond.
+            Completed PEB structures across India .
           </p>
         </div>
 
         <div className="flex w-full flex-col gap-[16px]">
-          {/* wide tile */}
-          <div className="relative h-[220px] w-full overflow-hidden">
-            <Image
-              src="/Images/gallery/g1.webp"
-              alt={TILES[0].alt}
-              width={1174}
-              height={704}
-              sizes="143vw"
-              className="absolute top-[-10.6%] left-[-32.69%] h-[135.59%] w-[142.13%] max-w-none"
-            />
-          </div>
-
-          {/* two 2-up rows */}
-          {[
-            [
-              { tile: TILES[1], fit: "object-fill object-bottom" },
-              { tile: TILES[2], fit: "object-cover" },
-            ],
-            [
-              { tile: TILES[4], fit: "object-fill object-bottom" },
-              { tile: TILES[5], fit: "object-cover" },
-            ],
-          ].map((row, rowIndex) => (
-            <div key={rowIndex} className="flex w-full gap-[12px]">
-              {row.map(({ tile, fit }) => (
-                <div
-                  key={tile.src}
-                  className="relative h-[174px] min-w-0 flex-1 overflow-hidden bg-[#D9D9D9]"
-                >
-                  <Image
-                    src={tile.src}
-                    alt={tile.alt}
-                    fill
-                    sizes="50vw"
-                    className={fit}
-                  />
-                </div>
-              ))}
+          {TILES.map((tile) => (
+            <div
+              key={tile.src}
+              className="relative aspect-[1672/941] w-full overflow-hidden rounded-[16px] bg-[#D9D9D9]"
+            >
+              <Image
+                src={tile.src}
+                alt={tile.alt}
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
             </div>
           ))}
-
-          {/* last wide tile */}
-          <div className="relative h-[196px] w-full overflow-hidden">
-            <Image
-              src="/Images/gallery/g3.webp"
-              alt={TILES[3].alt}
-              width={587}
-              height={352}
-              sizes="123vw"
-              className="absolute top-[-19.59%] left-[-17.92%] h-[131.24%] w-[122.56%] max-w-none"
-            />
-          </div>
         </div>
-
-        <a
-          href={VIEW_ALL_HREF}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex w-full items-center justify-center rounded-[8px] bg-[#C4161C] px-[24px] py-[14px] text-center text-[14px] leading-[normal] font-semibold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.809px_17.618px_rgba(196,22,28,0.3)]"
-        >
-          View All →
-        </a>
       </div>
 
       {/* TABLET (640px - 1023px) */}
       <div className="hidden px-10 py-16 sm:max-[1023px]:block">
         <Heading />
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="mt-8 grid grid-cols-2 gap-4">
           {TILES.map((tile) => (
             <div
               key={tile.src}
-              className={`relative overflow-hidden bg-[#D9D9D9] ${tile.mobileClass}`}
+              className="relative aspect-[1672/941] overflow-hidden rounded-[16px] bg-[#D9D9D9]"
             >
               <Image
                 src={tile.src}
                 alt={tile.alt}
                 fill
-                sizes="(min-width: 640px) 50vw, 100vw"
-                className="object-cover"
+                sizes="50vw"
+                  className="object-cover"
               />
             </div>
           ))}

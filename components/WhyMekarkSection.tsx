@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { manrope } from "@/lib/fonts";
 import ScaledCanvas from "@/components/ScaledCanvas";
+import WhyMekarkAccordion, {
+  WhyMekarkMobileAccordion,
+} from "@/components/WhyMekarkAccordion";
 
 const DESIGN_WIDTH = 1920;
 const DESIGN_HEIGHT = 866;
@@ -103,65 +106,6 @@ function Arrow() {
   );
 }
 
-type MobilePoint = {
-  value: string;
-  text: string;
-  /** Gap between the value group and the description */
-  gap: number;
-  /** Gap between arrow and value */
-  arrowGap: number;
-  /** Fixed width of the value group (first row only) */
-  valueGroupWidth?: number;
-  textWidth: number;
-};
-
-// Mobile frame (390px): spacing and text widths come from the Figma frame
-const MOBILE_POINTS: MobilePoint[] = [
-  {
-    value: "5X",
-    text: "Faster Project Planning & Execution Speed",
-    gap: 14,
-    arrowGap: 10,
-    valueGroupWidth: 112,
-    textWidth: 220,
-  },
-  {
-    value: "100%",
-    text: "Turnkey EPC Project Responsibility",
-    gap: 14,
-    arrowGap: 13,
-    textWidth: 183,
-  },
-  {
-    value: "200+",
-    text: "Industrial & Warehouse Projects Delivered",
-    gap: 18,
-    arrowGap: 13,
-    textWidth: 203,
-  },
-  {
-    value: "90%",
-    text: "Quality & Safety Compliance Standards",
-    gap: 30,
-    arrowGap: 10,
-    textWidth: 197,
-  },
-  {
-    value: "40k +",
-    text: "PEB & Structural Steel Expertise",
-    gap: 20,
-    arrowGap: 10,
-    textWidth: 189,
-  },
-  {
-    value: "18+ ",
-    text: "Years Industrial Construction Excellence",
-    gap: 45,
-    arrowGap: 10,
-    textWidth: 214,
-  },
-];
-
 function Heading() {
   return (
     <div className="flex flex-col gap-[22px]">
@@ -170,21 +114,21 @@ function Heading() {
         <br />
         Choose Mekark
       </h2>
-      <p className="text-[16px] leading-[28px] font-normal text-[#424242] min-[1024px]:text-[21.333px]">
-        Text
+      <p className="text-[16px] leading-[28px] font-normal text-[#424242] min-[1024px]:text-[20px] min-[1024px]:leading-[normal]">
+        India’s Leading Industrial Warehouse Construction
       </p>
     </div>
   );
 }
 
-export default function WhyMekarkSection() {
+export default function   WhyMekarkSection() {
   return (
     <section className={`${manrope.className} w-full bg-white`}>
       {/* DESKTOP: exact Figma frame, scaled to the viewport */}
       <div className="hidden min-[1024px]:block">
         <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
           <div
-            className="relative w-[1920px] overflow-hidden bg-white"
+            className="group/why relative w-[1920px] overflow-hidden bg-white"
             style={{ height: DESIGN_HEIGHT }}
           >
             {/* scene */}
@@ -201,7 +145,8 @@ export default function WhyMekarkSection() {
 
             {/* red panel */}
             <div className="absolute top-0 left-[1004px] h-[701.333px] w-[916px] bg-[#E60F1A]" />
-            <div className="absolute top-[554.67px] left-[984px] h-[146.667px] w-[936px] bg-[#E60F1A]" />
+            {/* grows downward while an accordion row is open so the content stays on red */}
+            <div className="absolute top-[554.67px] left-[964px] h-[183px] w-[956px] bg-[#E60F1A] transition-[height] duration-300 ease-in-out group-has-[[aria-expanded=true]]/why:h-[250px]" />
 
             {/* white fade over the top of the red panel */}
             <div className="absolute top-[-2.67px] left-[1004px] h-[398.667px] w-[916px]">
@@ -231,53 +176,11 @@ export default function WhyMekarkSection() {
               <Heading />
             </div>
 
-            {/* points */}
-            <div className="absolute top-[256px] left-[1130.67px] h-[406.667px] w-[540.444px]">
-              {POINTS.map((point) => (
-                <div
-                  key={point.value}
-                  className={`absolute flex gap-[20px] border-b-[1.333px] border-solid border-[#E2E2E2] pt-[12px] pb-[13.333px] ${
-                    point.centered
-                      ? "items-center justify-center"
-                      : "items-center"
-                  }`}
-                  style={{
-                    left: point.left,
-                    top: point.top,
-                    width: point.width,
-                  }}
-                >
-                  <div
-                    className={`flex shrink-0 py-[5px] ${
-                      point.alignEnd ? "items-end" : "items-center"
-                    }`}
-                    style={{ gap: point.arrowGap }}
-                  >
-                    <Arrow />
-                    <p
-                      className="shrink-0 text-[32px] leading-[28px] font-semibold whitespace-nowrap text-[#080808]"
-                      style={
-                        point.valueWidth
-                          ? { width: point.valueWidth }
-                          : undefined
-                      }
-                    >
-                      {point.value}
-                    </p>
-                  </div>
-                  <p
-                    className={`leading-[29.867px] font-bold whitespace-nowrap text-white ${
-                      point.textWidth ? "shrink-0" : "min-w-px flex-1"
-                    }`}
-                    style={{
-                      fontSize: point.textSize,
-                      width: point.textWidth,
-                    }}
-                  >
-                    {point.text}
-                  </p>
-                </div>
-              ))}
+            {/* accordion */}
+            <div className="absolute top-[265.67px] left-[1071px] w-[750px]">
+              <div className="flex justify-end">
+                <WhyMekarkAccordion />
+              </div>
             </div>
           </div>
         </ScaledCanvas>
@@ -298,56 +201,19 @@ export default function WhyMekarkSection() {
           </div>
         </div>
 
-        <div className="flex w-full flex-col items-center gap-[10px] bg-gradient-to-b from-[#FFFDFD] from-[6.034%] to-[#E60F1A] to-[47.028%] px-[20px] pt-[20px] pb-[30px]">
+        <div className="flex w-full flex-col items-center gap-[20px] bg-gradient-to-b from-[#FFFDFD] from-[6.034%] to-[#E60F1A] to-[47.028%] px-[20px] pt-[20px] pb-[30px]">
           <div className="flex w-full flex-col gap-[12px]">
             <h2 className="text-[28px] leading-[34px] font-bold text-[#030303]">
               Why Top Industries
               <br />
               Choose Mekark
             </h2>
-            <p className="text-[14px] leading-[28px] font-normal text-[#424242]">
-              Text
+            <p className="text-[12px] leading-[19px] font-normal text-[#424242]">
+              India’s Leading Industrial Warehouse Construction
             </p>
           </div>
 
-          <ul className="flex w-full flex-col gap-px">
-            {MOBILE_POINTS.map((point, index) => (
-              <li
-                key={point.value}
-                className={`flex w-full items-center ${
-                  index < MOBILE_POINTS.length - 1
-                    ? "border-b border-solid border-[#E58282] pt-[10px] pb-[11px]"
-                    : "py-[10px]"
-                }`}
-                style={{ gap: point.gap }}
-              >
-                <div
-                  className="flex shrink-0 items-center py-[5px]"
-                  style={{
-                    gap: point.arrowGap,
-                    width: point.valueGroupWidth,
-                  }}
-                >
-                  <Image
-                    src="/Images/why/arrow-up.svg"
-                    alt=""
-                    width={18}
-                    height={18}
-                    className="size-[18px] shrink-0"
-                  />
-                  <span className="text-[32px] leading-[28px] font-extrabold whitespace-nowrap text-[#F0E4E4]">
-                    {point.value}
-                  </span>
-                </div>
-                <p
-                  className="shrink-0 text-[16px] leading-[18px] font-medium text-white"
-                  style={{ width: point.textWidth }}
-                >
-                  {point.text}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <WhyMekarkMobileAccordion />
         </div>
       </div>
 
@@ -368,7 +234,7 @@ export default function WhyMekarkSection() {
             Why Top Industries Choose Mekark
           </h2>
           <p className="mt-3 text-[16px] leading-[28px] font-normal text-white/80">
-            Text
+            India’s Leading Industrial Warehouse Construction
           </p>
 
           <ul className="mt-8 flex flex-col">

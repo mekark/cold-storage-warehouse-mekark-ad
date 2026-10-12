@@ -12,7 +12,6 @@ export default function Home() {
       <BlueprintHeroSection />
       <ProcessSection />
       <WhyMekarkSection />
-      <WhyEditorialMobile />
       <ProjectsGallerySection />
       <FaqAccordionSection />
       <LeadBlueprintSection />

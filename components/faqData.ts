@@ -1,26 +1,37 @@
-import { Settings, Trophy, Wrench } from "lucide-react";
+import { ClipboardCheck, Wrench } from "lucide-react";
 
 export const FAQ_GROUPS = [
   {
-    title: "Technical Questions",
+    title: "Services & Capabilities",
     icon: Wrench,
     items: [
       {
         question:
-          "What is PEB warehouse construction and how is it different from conventional construction?",
+          "What is a pre-engineered warehouse building and how does it work?",
         answer:
-          "PEB warehouse construction (pre-engineered warehouse building) uses factory-fabricated steel components assembled on-site, unlike conventional construction that builds structure piece-by-piece on location. This is why a pre engineered warehouse building can be delivered in a fraction of the time of RCC construction.",
+          "A pre-engineered warehouse building is a steel structure designed and fabricated off-site, then assembled on-site with high precision, reducing construction time and material wastage. It suits large warehouse construction, logistics warehouse construction and logistics facility construction.",
       },
       {
-        question: "What is the warehouse construction cost per sq ft in India?",
+        question: "Do you provide turnkey EPC solutions for warehouses?",
         answer:
-          "Warehouse construction cost per sq ft varies based on span width, load-bearing requirements, flooring specification, and site conditions — typically ranging across a wide band depending on whether it's a basic storage shed or a high-spec manufacturing facility. We provide a detailed, itemized quote after a technical site assessment rather than a flat number that changes later.",
+          "Yes. Turnkey warehouse construction consolidates design, fabrication, civil work, and project management under one contract, with single-point accountability from planning to handover.",
       },
       {
         question:
-          "Can PEB structures support heavy machinery and multi-level operations?",
+          "Is Mekark a cold storage construction company that can design and erect cold storage steel structures?",
         answer:
-          "Yes. Our steel warehouse construction and industrial steel warehouse structures are engineered for heavy load-bearing use, including cranes, mezzanine floors, and continuous manufacturing operations — not just static storage.",
+          "Yes. We build cold storage and temperature-controlled warehouses, including inspecting the building before insulation and refrigeration work begins.",
+      },
+      {
+        question:
+          "Can existing industrial warehouses be reconfigured or expanded instead of rebuilt?",
+        answer:
+          "In many cases, yes. After a technical site assessment of the existing structure, we advise whether it can be extended or reconfigured, or whether a rebuild is the better option.",
+      },
+      {
+        question: "What industries does Mekark service?",
+        answer:
+          "We deliver projects for manufacturing, logistics, FMCG, automotive, e-commerce, 3PL and cold chain clients across India.",
       },
       {
         question:
@@ -28,64 +39,33 @@ export const FAQ_GROUPS = [
         answer:
           "Yes. As an industrial shed construction company and factory shed construction company, we deliver both warehouse shed construction and full-scale warehouse facilities using the same PEB manufacturing process — one technology, multiple building types.",
       },
+    ],
+  },
+  {
+    title: "Process, Cost & Compliance",
+    icon: ClipboardCheck,
+    items: [
       {
-        question:
-          "How long does a typical PEB warehouse project take from planning to handover?",
+        question: "How long does it take to construct a pre-engineered warehouse?",
         answer:
           "With fast track warehouse construction, most projects are delivered in 150 days — compared to the industry-standard 9–12 months for conventional builds — because manufacturing happens in-house in parallel with site preparation.",
       },
-    ],
-  },
-  {
-    title: "Advantage Questions",
-    icon: Settings,
-    items: [
       {
         question:
-          "What's the advantage of choosing PEB over RCC for industrial warehouses?",
+          "How much does it cost to build a factory warehouse shed in India?",
         answer:
-          "PEB structures offer faster execution, lower long-term maintenance, better resale/relocation flexibility, and greater design flexibility for manufacturing warehouse construction and factory warehouse construction compared to traditional RCC buildings.",
+          "Warehouse construction cost per sq ft varies based on span width, load-bearing requirements, flooring specification, and site conditions — typically ranging across a wide band depending on whether it's a basic storage shed or a high-spec manufacturing facility. We provide a detailed, itemized quote after a technical site assessment rather than a flat number that changes later.",
+      },
+      {
+        question: "Is the construction of the warehouse at Mekark IS compliant?",
+        answer:
+          "Yes. Our structures are designed to the applicable Indian Standards, and before handover we inspect the structure, RCC quality and compliance with statutory requirements.",
       },
       {
         question:
-          "Why does in-house manufacturing matter when selecting a contractor?",
+          "What are the advantages of choosing a turnkey PEB warehouse contractor?",
         answer:
-          "Working with PEB warehouse contractors who manufacture in-house — rather than outsourcing fabrication — removes the biggest bottleneck in industrial warehouse construction, giving you tighter quality control and a firm delivery date instead of a shifting one.",
-      },
-      {
-        question:
-          "Is turnkey warehouse construction more cost-effective than hiring multiple vendors?",
-        answer:
-          "Yes. Turnkey warehouse construction consolidates design, fabrication, civil work, and project management under one contract — eliminating the coordination delays and cost overruns common when multiple vendors handle different phases separately.",
-      },
-    ],
-  },
-  {
-    title: "Why Choose Mekark",
-    icon: Trophy,
-    items: [
-      {
-        question:
-          "Why should we choose Mekark over other warehouse construction contractors?",
-        answer:
-          "Mekark is a warehouse construction company offering integrated design, in-house manufacturing, and dedicated project management — not just construction, but single-point accountability from planning to handover.",
-      },
-      {
-        question:
-          "What makes Mekark a trusted industrial warehouse construction company?",
-        answer:
-          "As an industrial warehouse construction company and established PEB warehouse construction company, Mekark has delivered projects for manufacturing, logistics, FMCG, and automotive clients across India, backed by consistent quality control at every stage.",
-      },
-      {
-        question: "Do you serve businesses outside Chennai?",
-        answer:
-          "Yes. While we're recognized as a leading warehouse construction company in Chennai, we operate as warehouse construction contractors on projects across India, not limited to one region.",
-      },
-      {
-        question:
-          "What warehouse construction services does Mekark provide end-to-end?",
-        answer:
-          "Our warehouse construction services cover site assessment, PEB design, in-house steel manufacturing, civil and structural execution, and final handover — with one team accountable for the entire project, not fragmented subcontractors.",
+          "Turnkey warehouse construction consolidates design, fabrication, civil work, and project management under one contract — eliminating the coordination delays and cost overruns common when multiple vendors handle different phases separately.",
       },
     ],
   },

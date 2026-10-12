@@ -1,13 +1,11 @@
 import { manrope, spaceGrotesk } from "@/lib/fonts";
 import {
-  CalendarCheck,
-  CircleCheck,
   ClipboardCheck,
   DraftingCompass,
   Factory,
   HardHat,
+  ShieldCheck,
   Truck,
-  Wrench,
   type LucideIcon,
 } from "lucide-react";
 import ScaledCanvas from "@/components/ScaledCanvas";
@@ -18,7 +16,7 @@ const DESIGN_WIDTH = 1867;
 type Step = {
   number: string;
   title: string;
-  description: string[];
+  description: string;
   icon: LucideIcon;
   /** Absolute left offset / width of the column in the Figma frame */
   left: number;
@@ -29,8 +27,8 @@ type Step = {
 const STEPS: Step[] = [
   {
     number: "01",
-    title: "Feasibility Analysis",
-    description: ["Requirement assessment & site", "evaluation"],
+    title: "Site & Project Feasibility",
+    description: "Geotechnical, regulatory, and budget checks.",
     icon: ClipboardCheck,
     left: -1,
     width: 270,
@@ -38,8 +36,8 @@ const STEPS: Step[] = [
   },
   {
     number: "02",
-    title: "Custom Design",
-    description: ["Tailored warehouse layout for", "your operations"],
+    title: "Design & Engineering",
+    description: "In-house engineering and planning.",
     icon: DraftingCompass,
     left: 298,
     width: 272,
@@ -47,8 +45,8 @@ const STEPS: Step[] = [
   },
   {
     number: "03",
-    title: "PEB Fabrication",
-    description: ["100% in-house manufacturing,", "controlled quality"],
+    title: "Factory Fabrication",
+    description: "Precision-made columns, rafters, and purlins.",
     icon: Factory,
     left: 598,
     width: 268,
@@ -56,8 +54,8 @@ const STEPS: Step[] = [
   },
   {
     number: "04",
-    title: "Civil Execution",
-    description: ["Foundations, flooring &", "structural work"],
+    title: "On-Site Erection",
+    description: "On-site structural assembly",
     icon: HardHat,
     left: 894,
     width: 271,
@@ -66,31 +64,21 @@ const STEPS: Step[] = [
   {
     number: "05",
     title: "Quality Validation",
-    description: ["Inspection, installation &", "compliance checks"],
-    icon: CircleCheck,
+    description: "Inspection, installation & compliance checks",
+    icon: ShieldCheck,
     left: 1193,
     width: 271,
     descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "06",
-    title: "120-Day Delivery",
-    description: ["Operational handover,", "ready to run"],
+    title: "Handover & After-Sales",
+    description: "Snag clearance, documentation, and support.",
     icon: Truck,
     left: 1492,
-    width: 209.333,
+    width: 270,
     descriptionColor: "text-[#9A9A9A]",
   },
-];
-
-// Mobile frame uses a different icon for steps 04 / 06 and softer number colours
-const MOBILE_STEP_META: { icon: LucideIcon; numberColor: string }[] = [
-  { icon: ClipboardCheck, numberColor: "text-[#FF8F92]" },
-  { icon: DraftingCompass, numberColor: "text-[#FF8F92]" },
-  { icon: Factory, numberColor: "text-[#FF8F92]" },
-  { icon: Wrench, numberColor: "text-[#FF8F92]" },
-  { icon: CircleCheck, numberColor: "text-[#FFA5A8]" },
-  { icon: CalendarCheck, numberColor: "text-[#FF8F92]" },
 ];
 
 function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
@@ -104,23 +92,14 @@ function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
 function Heading() {
   return (
     <div className="flex flex-col gap-[10px]">
-      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:w-[1204px] min-[1024px]:text-[66px] min-[1024px]:leading-[73.333px]">
-        From Idea to Operation{" "}
-        <span className="text-[#ED1D23]">Fully Managed</span>
+      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:w-[1219px] min-[1024px]:text-[66px] min-[1024px]:leading-[73.333px]">
+        Our Turnkey{" "}
+        <span className="text-[#ED1D23]">Warehouse Construction</span>
       </h2>
       <p className="text-[18px] leading-[20px] font-normal text-[#64748B] min-[1024px]:text-[24px]">
-        Text
+        As a warehouse construction company, we follow a proven 6-step process to ensure on-time delivery.
       </p>
     </div>
-  );
-}
-
-function ClosingLine() {
-  return (
-    <p className="text-center text-[16px] font-bold text-[#9A9A9A] min-[1024px]:text-[20px]">
-      No follow-ups. No uncertainty.{" "}
-      <span className="font-extrabold text-[#080808]">Just results.</span>
-    </p>
   );
 }
 
@@ -159,19 +138,11 @@ export default function ProcessSection() {
                         <p
                           className={`text-[18px] leading-[24px] font-normal ${step.descriptionColor}`}
                         >
-                          {step.description.map((line) => (
-                            <span key={line} className="block">
-                              {line}
-                            </span>
-                          ))}
+                          {step.description}
                         </p>
                       </div>
                     </div>
                   ))}
-                </div>
-
-                <div className="flex w-[1280px] items-center justify-center">
-                  <ClosingLine />
                 </div>
               </div>
             </div>
@@ -199,67 +170,60 @@ export default function ProcessSection() {
                 <p
                   className={`text-[18px] leading-[24px] font-normal ${step.descriptionColor}`}
                 >
-                  {step.description.join(" ")}
+                  {step.description}
                 </p>
               </div>
             </li>
           ))}
         </ol>
-
-        <div className="mt-12">
-          <ClosingLine />
-        </div>
       </div>
 
       {/* MOBILE (below 640px): vertical timeline */}
       <div className="px-5 pt-8 pb-10 sm:hidden">
-        <div className="flex w-full flex-col items-center gap-[24px]">
-          <div className="flex w-[324px] max-w-full flex-col gap-[12px]">
-            <h2 className="text-[28px] leading-[34px] font-bold text-[#0F172A]">
-              From Idea to Operation{" "}
-              <span className="text-[#ED1D23]">Fully Managed</span>
+        <div className="mx-auto flex w-full max-w-[350px] flex-col items-center gap-[24px]">
+          <div className="flex w-full max-w-[324px] flex-col gap-[12px]">
+            <h2 className="text-[27px] leading-[34px] font-bold text-[#0F172A]">
+              Our Turnkey{" "}
+              <span className="text-[#ED1D23]">Warehouse Construction</span>
             </h2>
             <p className="text-[14px] leading-[20px] font-normal text-[#64748B]">
-              Text
+              As a warehouse construction company, we follow a proven 6-step process to ensure on-time delivery.
             </p>
           </div>
 
-          <ol className="relative flex w-full flex-col gap-[20px]">
-            {/* timeline rail, centred on the icon column */}
+          <ol className="relative flex w-full flex-col gap-[26px]">
+            {/* timeline rail, runs behind the numbered circles */}
             <span
               aria-hidden
-              className="absolute top-[25px] bottom-[25px] left-[25px] w-[1.333px] -translate-x-1/2 bg-[#E4DFE0]"
+              className="absolute top-[25px] bottom-[33px] left-[16px] w-px -translate-x-1/2 bg-[#BCBCBC]"
             />
 
-            {STEPS.map((step, index) => {
-              const meta = MOBILE_STEP_META[index];
-              const Icon = meta.icon;
+            {STEPS.map((step) => {
+              const Icon = step.icon;
 
               return (
                 <li
                   key={step.number}
-                  className="relative flex items-start gap-[16px]"
+                  className="relative flex items-center gap-[17px]"
                 >
-                  <span className="relative flex size-[50px] shrink-0 items-center justify-center rounded-[8px] border-[0.917px] border-solid border-[#E4DFE0] bg-white">
-                    <Icon
-                      size={24}
-                      strokeWidth={2}
-                      className="text-[#ED1D23]"
-                    />
+                  <span
+                    className={`${spaceGrotesk.className} relative flex size-[33px] shrink-0 items-center justify-center rounded-full border border-dashed border-[#BCBCBC] bg-[#F9F6F7] text-[14px] leading-[normal] font-bold text-[#080808]`}
+                  >
+                    {step.number}
                   </span>
 
-                  <div className="flex min-w-0 flex-col items-start justify-center gap-[8px]">
-                    <p
-                      className={`${spaceGrotesk.className} text-[18px] leading-[normal] font-bold ${meta.numberColor}`}
-                    >
-                      {step.number}
-                    </p>
-                    <div className="flex flex-col gap-[8px]">
-                      <p className="text-[18px] leading-[22px] font-bold text-[#0F172A]">
+                  <div className="flex min-w-0 items-center gap-[10px] rounded-[6px] bg-[#FFFCFC] py-[6px] pr-[9px] pl-[10px] drop-shadow-[-1px_1px_3px_rgba(30,30,30,0.1)]">
+                    <Icon
+                      size={20}
+                      strokeWidth={2}
+                      className="shrink-0 text-[#ED1D23]"
+                    />
+                    <div className="flex min-w-0 flex-col gap-px">
+                      <p className="text-[16px] leading-[normal] font-semibold text-[#0F172A]">
                         {step.title}
                       </p>
-                      <p className="text-[14px] leading-[18px] font-normal text-[#64748B]">
-                        {step.description.join(" ")}
+                      <p className="text-[12px] leading-[20px] font-normal text-[#64748B]">
+                        {step.description}
                       </p>
                     </div>
                   </div>
@@ -268,14 +232,6 @@ export default function ProcessSection() {
             })}
           </ol>
 
-          <div className="flex flex-col items-center gap-[12px]">
-            <span className="h-[1.333px] w-[165px] bg-[#FFDCDD]" />
-            <p className="text-center text-[16px] leading-[normal] font-semibold text-[#9A9A9A]">
-              No follow-ups. No uncertainty.
-              <br />
-              <span className="font-bold text-[#080808]">Just results.</span>
-            </p>
-          </div>
         </div>
       </div>
     </section>
