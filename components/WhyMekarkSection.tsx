@@ -196,6 +196,7 @@ export default function   WhyMekarkSection() {
               width={1868}
               height={842}
               sizes="617px"
+              quality={55}
               className="absolute top-[-0.11%] left-[-0.07%] h-[106.22%] w-[96.72%] max-w-none"
             />
           </div>

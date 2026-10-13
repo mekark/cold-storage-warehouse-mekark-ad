@@ -58,7 +58,7 @@ export default function BlueprintHeroMobile() {
           alt=""
           fill
           sizes="505px"
-          fetchPriority="high"
+          quality={55}
           className="object-cover"
         />
       </div>
@@ -69,6 +69,7 @@ export default function BlueprintHeroMobile() {
           alt=""
           fill
           sizes="1028px"
+          quality={55}
           className="object-cover"
         />
       </div>
@@ -116,7 +117,8 @@ export default function BlueprintHeroMobile() {
                 fill
                 loading="eager"
                 fetchPriority="high"
-                sizes="422px"
+                sizes="(max-width: 414px) 100vw, 414px"
+                quality={55}
                 className="object-cover object-bottom"
               />
             </div>
