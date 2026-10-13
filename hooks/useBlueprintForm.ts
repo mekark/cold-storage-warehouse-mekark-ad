@@ -5,7 +5,8 @@ import { getPageSourceUrl } from "@/lib/sourceUrl";
 
 const FORM_ENDPOINT = "/api/enquiry-form";
 const THANK_YOU_URL = "https://coldstorage.mekark.com/thank-you";
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const NUMERIC_ONLY_REGEX = /^[\d\s\W_]+$/;
 
 export const SQFT_OPTIONS = [
   "10,000 - 20,000",
@@ -46,29 +47,39 @@ export function useBlueprintForm() {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
+    const value =
+      name === "phoneNumber"
+        ? e.target.value.replace(/\D/g, "").slice(0, 10)
+        : e.target.value;
     setValues((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const validate = () => {
     const next: BlueprintFormErrors = {};
-    const phoneDigits = values.phoneNumber.replace(/\D/g, "");
 
     if (!values.name.trim()) next.name = "This field is required.";
+    else if (NUMERIC_ONLY_REGEX.test(values.name.trim()))
+      next.name = "Name cannot contain only numbers.";
+
+    if (!values.location.trim()) next.location = "This field is required.";
+    else if (NUMERIC_ONLY_REGEX.test(values.location.trim()))
+      next.location = "Location cannot contain only numbers.";
 
     if (!values.phoneNumber.trim()) {
       next.phoneNumber = "This field is required.";
-    } else if (phoneDigits.length < 10 || phoneDigits.length > 15) {
-      next.phoneNumber = "Enter valid phone number.";
+    } else if (!/^\d{10}$/.test(values.phoneNumber)) {
+      next.phoneNumber = "Phone number must be 10 digits.";
     }
 
-    if (values.email.trim() && !EMAIL_REGEX.test(values.email)) {
+    if (!values.email.trim()) next.email = "This field is required.";
+    else if (!EMAIL_REGEX.test(values.email.trim()))
       next.email = "Enter valid email.";
-    }
 
     if (!values.industry.trim()) next.industry = "This field is required.";
     if (!values.sqft) next.sqft = "This field is required.";
+    if (!values.details.trim()) next.details = "This field is required.";
 
     setErrors(next);
     return Object.keys(next).length === 0;

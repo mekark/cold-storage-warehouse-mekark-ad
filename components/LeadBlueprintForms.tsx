@@ -76,7 +76,7 @@ export function BlueprintForm() {
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
               <label htmlFor="lb-location" className={labelClass}>
-                Project Location
+                Project Location*
               </label>
               <input
                 id="lb-location"
@@ -87,6 +87,7 @@ export function BlueprintForm() {
                 onChange={handleChange}
                 className={`${inputClass(errors.location)} rounded-[8.809px] pr-[36.101px] pl-[23.101px] tracking-[0.3303px]`}
               />
+              {errorText(errors.location)}
             </div>
           </div>
 
@@ -100,8 +101,9 @@ export function BlueprintForm() {
                 id="lb-phone"
                 type="tel"
                 name="phoneNumber"
-                maxLength={15}
-                placeholder="+91 98765 43210"
+                maxLength={10}
+                inputMode="numeric"
+                placeholder="98765 43210"
                 value={values.phoneNumber}
                 onChange={handleChange}
                 className={inputClass(errors.phoneNumber)}
@@ -111,7 +113,7 @@ export function BlueprintForm() {
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
               <label htmlFor="lb-email" className={labelClass}>
-                Email Address
+                Email Address*
               </label>
               <input
                 id="lb-email"
@@ -169,7 +171,7 @@ export function BlueprintForm() {
           {/* ROW 4 */}
           <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px]">
             <label htmlFor="lb-details" className={labelClass}>
-              Requirement Details
+              Requirement Details*
             </label>
             <textarea
               id="lb-details"
@@ -177,8 +179,9 @@ export function BlueprintForm() {
               placeholder="Enter Requirement Details"
               value={values.details}
               onChange={handleChange}
-              className={`${fieldBase} ${borderColor()} h-[82.6px] resize-none rounded-[8.809px] pt-[15.101px] pr-[36.101px] pb-[15.101px] pl-[23.101px]`}
+              className={`${fieldBase} ${borderColor(errors.details)} h-[82.6px] resize-none rounded-[8.809px] pt-[15.101px] pr-[36.101px] pb-[15.101px] pl-[23.101px]`}
             />
+            {errorText(errors.details)}
           </div>
         </div>
 
@@ -273,21 +276,25 @@ export function MobileBlueprintForm() {
             {errorText(errors.name)}
           </div>
 
-          <input
-            type="text"
-            name="location"
-            aria-label="Project location"
-            placeholder="Enter project location"
-            value={values.location}
-            onChange={handleChange}
-            className={`${mobileField} pr-[32px] pl-[20px] tracking-[0.3px]`}
-          />
+          <div>
+            <input
+              type="text"
+              name="location"
+              aria-label="Project location"
+              placeholder="Enter project location"
+              value={values.location}
+              onChange={handleChange}
+              className={`${mobileField} ${borderColor(errors.location)} pr-[32px] pl-[20px] tracking-[0.3px]`}
+            />
+            {errorText(errors.location)}
+          </div>
 
           <div>
             <input
               type="tel"
               name="phoneNumber"
-              maxLength={15}
+              maxLength={10}
+              inputMode="numeric"
               aria-label="Mobile number"
               placeholder="Mobile Number*"
               value={values.phoneNumber}
@@ -344,15 +351,18 @@ export function MobileBlueprintForm() {
             {errorText(errors.sqft)}
           </div>
 
-          <textarea
-            name="details"
-            rows={1}
-            aria-label="Requirement details"
-            placeholder="Enter requirement details"
-            value={values.details}
-            onChange={handleChange}
-            className={`${mobileField} block h-[46px] resize-none pr-[32px] pl-[20px]`}
-          />
+          <div>
+            <textarea
+              name="details"
+              rows={1}
+              aria-label="Requirement details"
+              placeholder="Enter requirement details"
+              value={values.details}
+              onChange={handleChange}
+              className={`${mobileField} ${borderColor(errors.details)} block h-[46px] resize-none pr-[32px] pl-[20px]`}
+            />
+            {errorText(errors.details)}
+          </div>
         </div>
 
         <div className="flex w-full flex-col gap-[16px]">
