@@ -145,8 +145,8 @@ export default function   WhyMekarkSection() {
 
             {/* red panel */}
             <div className="absolute top-0 left-[1004px] h-[701.333px] w-[916px] bg-[#E60F1A]" />
-            {/* grows downward while an accordion row is open so the content stays on red */}
-            <div className="absolute top-[554.67px] left-[964px] h-[183px] w-[956px] bg-[#E60F1A] transition-[height] duration-300 ease-in-out group-has-[[aria-expanded=true]]/why:h-[250px]" />
+            {/* fixed-height red base under the accordion (does not grow when a row opens) */}
+            <div className="absolute top-[554.67px] left-[964px] h-[205px] w-[956px] bg-[#E60F1A]" />
 
             {/* white fade over the top of the red panel */}
             <div className="absolute top-[-2.67px] left-[1004px] h-[398.667px] w-[916px]">

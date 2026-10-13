@@ -92,7 +92,7 @@ function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
 function Heading() {
   return (
     <div className="flex flex-col gap-[10px]">
-      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:w-[1279px] min-[1024px]:text-[66px] min-[1024px]:whitespace-nowrap min-[1024px]:leading-[73.333px]">
+      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:w-[1279px] min-[1024px]:text-[63px] min-[1024px]:whitespace-nowrap min-[1024px]:leading-[73.333px]">
         Our Turnkey{" "}
         <span className="text-[#ED1D23]">Cold Storage Construction</span>
       </h2>
