@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     // Serve AVIF where supported (smaller than WebP), WebP otherwise
     formats: ["image/avif", "image/webp"],
     // Finer breakpoints so phones get a closer-sized image instead of the next big step up
-    qualities: [55, 75],
+    qualities: [50, 55, 75],
     deviceSizes: [360, 414, 480, 560, 640, 750, 828, 1080, 1200, 1920, 2048],
   },
   experimental: {

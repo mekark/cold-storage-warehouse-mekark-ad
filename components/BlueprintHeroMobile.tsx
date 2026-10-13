@@ -58,7 +58,10 @@ export default function BlueprintHeroMobile() {
           alt=""
           fill
           sizes="505px"
-          quality={55}
+          // Tallest painted image in the mobile hero, so Lighthouse picks it as LCP
+          loading="eager"
+          fetchPriority="high"
+          quality={50}
           className="object-cover"
         />
       </div>
@@ -68,7 +71,7 @@ export default function BlueprintHeroMobile() {
           src="/Images/hero/m-fade.webp"
           alt=""
           fill
-          sizes="1028px"
+          sizes="(max-width: 640px) 100vw, 1028px"
           quality={55}
           className="object-cover"
         />
@@ -116,7 +119,6 @@ export default function BlueprintHeroMobile() {
                 alt="Cold storage warehouse interior"
                 fill
                 loading="eager"
-                fetchPriority="high"
                 sizes="(max-width: 414px) 100vw, 414px"
                 quality={55}
                 className="object-cover object-bottom"
