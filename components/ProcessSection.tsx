@@ -1,7 +1,7 @@
 import { manrope, spaceGrotesk } from "@/lib/fonts";
 import {
   Building2,
-  CircleCheck,
+  CalendarCheck,
   Gauge,
   Snowflake,
   Thermometer,
@@ -27,8 +27,8 @@ type Step = {
 const STEPS: Step[] = [
   {
     number: "01",
-    title: "Product & Temperature Study",
-    description: "Storage temperature, product load, daily movement and pull-down requirement are fixed before design.",
+    title: "Temperature Study",
+    description: "Define storage temperature, product load, daily movement and pull-down requirements.",
     icon: Thermometer,
     left: -1,
     width: 270,
@@ -37,7 +37,7 @@ const STEPS: Step[] = [
   {
     number: "02",
     title: "Heat Load Engineering",
-    description: "In-Product heat, door openings, ambient conditions and operating loads determine the refrigeration capacity. engineering and planning.",
+    description: "Calculate refrigeration capacity on product heat, door openings and operating loads.",
     icon: Gauge,
     left: 298,
     width: 272,
@@ -45,8 +45,8 @@ const STEPS: Step[] = [
   },
   {
     number: "03",
-    title: "Cold Storage Designing",
-    description: "PEB structure, insulated floor and PUF/PIR envelope are engineered as one cold storage building.",
+    title: "Cold Storage Design",
+    description: "Engineer PEB structure, insulated flooring and PUF/PIR panels as one cold storage building.",
     icon: Building2,
     left: 598,
     width: 268,
@@ -55,7 +55,7 @@ const STEPS: Step[] = [
   {
     number: "04",
     title: "Refrigeration Integration",
-    description: "Compressors, evaporators, piping, electrical systems and controls are integrated with the building requirement.",
+    description: "Compressors, evaporators, piping, electrical systems and controls are integrated with the building.",
     icon: Snowflake,
     left: 894,
     width: 271,
@@ -64,7 +64,7 @@ const STEPS: Step[] = [
   {
     number: "05",
     title: "Cold Room Installation",
-    description: "Insulated panels, cold-room doors, flooring and refrigeration equipment are installed under coordinated site execution.",
+    description: "Install insulated panels, cold-room doors, flooring and refrigeration equipment on-site.",
     icon: Wrench,
     left: 1193,
     width: 271,
@@ -72,9 +72,9 @@ const STEPS: Step[] = [
   },
   {
     number: "06",
-    title: "Pull-Down & Commissioning",
-    description: "Temperature pull-down, controls, alarms and refrigeration performance are validated before final handover.",
-    icon: CircleCheck,
+    title: "Pull-Down & Delivery",
+    description: "Temperature pull-down, controls, alarms and refrigeration performance are validated before handover.",
+    icon: CalendarCheck,
     left: 1492,
     width: 270,
     descriptionColor: "text-[#9A9A9A]",
