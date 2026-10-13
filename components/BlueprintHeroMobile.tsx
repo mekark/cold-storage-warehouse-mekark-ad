@@ -58,6 +58,7 @@ export default function BlueprintHeroMobile() {
           alt=""
           fill
           sizes="505px"
+          fetchPriority="high"
           className="object-cover"
         />
       </div>
@@ -89,6 +90,7 @@ export default function BlueprintHeroMobile() {
               alt="Mekark"
               fill
               sizes="80px"
+              fetchPriority="high"
               className="object-cover"
             />
           </div>
@@ -112,6 +114,7 @@ export default function BlueprintHeroMobile() {
                 src="/Images/hero/hero-bg-cold.webp"
                 alt="Cold storage warehouse interior"
                 fill
+                loading="eager"
                 fetchPriority="high"
                 sizes="422px"
                 className="object-cover object-bottom"

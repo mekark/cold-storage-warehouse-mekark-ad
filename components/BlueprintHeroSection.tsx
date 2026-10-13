@@ -89,6 +89,7 @@ export default function BlueprintHeroSection() {
                   alt="Mekark"
                   fill
                   sizes="132px"
+                  fetchPriority="high"
                   className="object-cover"
                 />
               </div>
