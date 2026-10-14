@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   description:
     "Leading Turnkey Cold storage Warehouse construction EPC & Turnkey Cold chain warehouse construction Company – Cold Storage construction Turnkey EPC expertise in In House PEB Manufacturing, Civil, PEB, MEP and Seamless Execution servicing the needs of Turnkey cold storage building contractor & Turnkey cold storage warehouse construction , cold chain warehouse construction, refrigerated warehouse construction Company",
   icons: {
-    icon: "/Images/LogoMekark.webp",
-    shortcut: "/Images/LogoMekark.webp",
+    icon: "/Mekark%20Favicon-32x32px.png",
+    shortcut: "/Mekark%20Favicon-32x32px.png",
     apple: "/Images/LogoMekark.webp",
   },
 };
