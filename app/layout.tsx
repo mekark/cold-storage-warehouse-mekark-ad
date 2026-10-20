@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import DeferredGoogleTagManager from "@/components/DeferredGoogleTagManager";
+import { assetUrl } from "@/lib/assetPrefix";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 import "./globals.css";
@@ -11,9 +12,9 @@ export const metadata: Metadata = {
   description:
     "Leading Turnkey Cold storage Warehouse construction EPC & Turnkey Cold chain warehouse construction Company – Cold Storage construction Turnkey EPC expertise in In House PEB Manufacturing, Civil, PEB, MEP and Seamless Execution servicing the needs of Turnkey cold storage building contractor & Turnkey cold storage warehouse construction , cold chain warehouse construction, refrigerated warehouse construction Company",
   icons: {
-    icon: "/Mekark%20Favicon-32x32px.png",
-    shortcut: "/Mekark%20Favicon-32x32px.png",
-    apple: "/Images/LogoMekark.webp",
+    icon: assetUrl("/Mekark%20Favicon-32x32px.png"),
+    shortcut: assetUrl("/Mekark%20Favicon-32x32px.png"),
+    apple: assetUrl("/Images/LogoMekark.webp"),
   },
 };
 

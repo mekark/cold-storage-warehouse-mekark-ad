@@ -4,6 +4,7 @@ import ScaledCanvas from "@/components/ScaledCanvas";
 import WhyMekarkAccordion, {
   WhyMekarkMobileAccordion,
 } from "@/components/WhyMekarkAccordion";
+import { assetUrl } from "@/lib/assetPrefix";
 
 const DESIGN_WIDTH = 1920;
 const DESIGN_HEIGHT = 866;
@@ -97,7 +98,7 @@ const POINTS: Point[] = [
 function Arrow() {
   return (
     <Image
-      src="/Images/why/arrow.svg"
+      src={assetUrl("/Images/why/arrow.svg")}
       alt=""
       width={17}
       height={27}
