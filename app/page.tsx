@@ -16,8 +16,8 @@ export default function Home() {
       
       <FloatingContact />
       <BlueprintHeroSection />
-      <SpecsBarSection />
       <ProcessSection />
+      <SpecsBarSection />
       <SolutionsSection />
       <WhyChooseSection />
       <ProjectsGallerySection />
