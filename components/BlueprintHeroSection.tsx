@@ -101,9 +101,9 @@ export default function BlueprintHeroSection() {
             </header>
 
             {/* CONTENT */}
-            <div className="relative z-10 flex w-full flex-col gap-10 px-5 pt-6 pb-12 sm:px-[80px] min-[1024px]:h-full min-[1024px]:flex-row min-[1024px]:items-start min-[1024px]:justify-between min-[1024px]:gap-10 min-[1024px]:pt-0! min-[1024px]:pr-[130px]! min-[1024px]:pb-0">
+            <div className="relative z-10 flex w-full flex-col gap-10 px-5 pt-6 pb-12 sm:px-[80px] min-[1024px]:h-full min-[1024px]:flex-row min-[1024px]:items-start min-[1024px]:justify-between min-[1024px]:gap-6 min-[1024px]:pt-0! min-[1024px]:pr-[48px]! min-[1024px]:pb-0">
               {/* LEFT COLUMN */}
-              <div className="flex w-full min-w-0 flex-col items-start gap-[24px] min-[1024px]:mt-[118.5px] min-[1024px]:max-w-[891px] min-[1024px]:flex-1">
+              <div className="flex w-full min-w-0 flex-col items-start gap-[24px] min-[1024px]:mt-[118.5px] min-[1024px]:max-w-[1135px] min-[1024px]:flex-1">
                 {/* PILL */}
                 <div className="flex max-w-full items-center gap-[10.667px] rounded-full border-[1.333px] border-solid border-white/20 px-[17.333px] py-[9.333px]">
                   <span className="size-[10.667px] shrink-0 rounded-full bg-[#E40015]" />
@@ -116,9 +116,10 @@ export default function BlueprintHeroSection() {
 
                 {/* HEADING */}
                 <div className="flex w-full flex-col items-start gap-[13px]">
-                  <h1 className="w-full text-[32px] leading-[1.18] font-bold text-white sm:text-[48px] sm:leading-[53px] min-[1024px]:w-[891px] min-[1024px]:max-w-full">
-                    Turnkey Cold Storage &{" "}
-                    <span className="block">Temperature-Controlled</span>
+                  <h1 className="w-full text-[32px] leading-[1.18] font-bold text-white sm:text-[48px] sm:leading-[53px] min-[1024px]:w-[1135px] min-[1024px]:max-w-full">
+                    <span className="block min-[1024px]:-ml-[6px] min-[1024px]:whitespace-nowrap">
+                      Turnkey Cold Storage & Temperature-Controlled
+                    </span>
                     <span className="mt-[13px] block w-fit max-w-full bg-[#ED1D23] px-[5px] pb-[6px]">
                       Warehouse Construction Company
                     </span>
@@ -126,7 +127,7 @@ export default function BlueprintHeroSection() {
                 </div>
 
                 {/* DESCRIPTION */}
-                <div className="flex w-full flex-col gap-[16px]">
+                <div className="flex w-full flex-col gap-[16px] min-[1700px]:max-w-[891px]">
                   <p className="w-full text-[16px] leading-[24px] font-normal text-[#A9A9A9] sm:text-[22px] sm:leading-[28px]">
                     Zero thermal leakage. Precision-engineered refrigerated warehouse construction from
                     +15°C down to -25°C for Food Processing, Dairy, Pharma,
@@ -134,16 +135,14 @@ export default function BlueprintHeroSection() {
                   </p>
 
                   {/* HIGHLIGHTS */}
-                  <div className="grid w-full grid-cols-1 gap-[12px] min-[1024px]:grid-cols-3">
+                  <div className="grid w-full grid-cols-1 gap-[14px] min-[1024px]:w-full min-[1024px]:max-w-none min-[1700px]:w-[calc(100%+100px)] min-[1024px]:grid-flow-col min-[1024px]:grid-cols-2 min-[1024px]:grid-rows-2 min-[1024px]:gap-x-[16px]">
                     {HERO_FEATURES.map((item) => (
                       <div
                         key={item.title}
-                        className="flex flex-col gap-[4px] rounded-[10px] border border-solid border-[#ED1D23]/30 border-t-[#ED1D23] border-t-2 bg-gradient-to-b from-[#ED1D23]/25 to-[#ED1D23]/[0.06] px-[16px] py-[12px] backdrop-blur-[6px]"
+                        className="flex items-start gap-[12px] border-l-[3px] border-[#ED1D23] bg-white/5 py-[10px] pr-[16px] pl-[14px]"
                       >
-                        <p className="text-[15px] leading-[20px] font-bold text-white">
-                          {item.title}
-                        </p>
-                        <p className="text-[13px] leading-[18px] font-medium text-[#A9A9A9]">
+                        <p className="text-[14px] leading-[22px] font-normal text-[#F7F7F7] sm:text-[16px] sm:leading-[24px]">
+                          <span className="font-bold text-white">{item.title}:</span>{" "}
                           {item.text}
                         </p>
                       </div>

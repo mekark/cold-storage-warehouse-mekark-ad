@@ -148,22 +148,14 @@ export default function BlueprintHeroMobile() {
             </p>
 
             <div className="flex w-full flex-col gap-[4px]">
-              <ul className="mt-[6px] grid w-full grid-cols-2 gap-[8px]">
-                {HERO_FEATURES.map((item, index) => (
+              <ul className="flex w-full flex-col gap-[8px]">
+                {HERO_FEATURES.map((item) => (
                   <li
                     key={item.title}
-                    className={`flex flex-col gap-[4px] rounded-[10px] border border-solid border-[#ED1D23]/30 bg-gradient-to-b from-[#ED1D23]/25 to-[#ED1D23]/[0.06] px-[20px] py-[12px] ${
-                      index === HERO_FEATURES.length - 1 &&
-                      HERO_FEATURES.length % 2 === 1
-                        ? "col-span-2"
-                        : ""
-                    }`}
+                    className="border-l-[3px] border-[#ED1D23] bg-white/5 py-[8px] pr-[12px] pl-[12px]"
                   >
-                    <span className="flex items-center gap-[6px] text-[12px] leading-[16px] font-bold text-white">
-                      <span className="size-[5px] shrink-0 rounded-full bg-[#ED1D23]" />
-                      {item.title}
-                    </span>
-                    <span className="text-[11px] leading-[16px] font-semibold text-[#9A9A9A]">
+                    <span className="block text-[12px] leading-[18px] text-white/70">
+                      <span className="font-bold text-white">{item.title}:</span>{" "}
                       {item.text}
                     </span>
                   </li>

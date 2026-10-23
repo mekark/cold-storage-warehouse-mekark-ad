@@ -30,7 +30,7 @@ const SPECS: { label: string; value: string; icon: LucideIcon }[] = [
 export default function SpecsBarSection() {
   return (
     <section
-      className={`${manrope.className} w-full bg-[#F9F6F7] px-5 pb-12 sm:px-10 lg:px-[80px] lg:pb-[80px]`}
+      className={`${manrope.className} w-full bg-[#E0E0E0] px-5 pt-8 pb-8 sm:px-10 sm:pt-10 sm:pb-10 lg:px-[80px] lg:pt-[48px] lg:pb-[40px]`}
     >
       <div className="mx-auto max-w-[1707px] overflow-hidden rounded-[24px] bg-[#0F172A] px-6 py-8 sm:px-10 sm:py-10 lg:px-[56px] lg:py-[48px]">
         <div className="mb-8 flex items-center gap-3 lg:mb-10">

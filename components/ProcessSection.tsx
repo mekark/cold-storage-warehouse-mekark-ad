@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { manrope, spaceGrotesk } from "@/lib/fonts";
 import {
   Building2,
@@ -9,9 +10,11 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import ScaledCanvas from "@/components/ScaledCanvas";
+import { assetUrl } from "@/lib/assetPrefix";
 
-// Figma frame is 1707px of content + 80px padding on each side
-const DESIGN_WIDTH = 1867;
+// Figma frame: 1920 x 620, content 1760px wide centred (80px each side)
+const DESIGN_WIDTH = 1920;
+const DESIGN_HEIGHT = 640;
 
 type Step = {
   number: string;
@@ -83,7 +86,7 @@ const STEPS: Step[] = [
 
 function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
   return (
-    <div className="relative z-10 flex h-[92px] w-[100px] shrink-0 items-center justify-center rounded-[18px] border-[0.917px] border-solid border-[#E4DFE0] bg-white">
+    <div className="relative z-10 flex size-[90px] shrink-0 items-center justify-center rounded-full border border-solid border-[#E4DFE0] bg-[#F5F5F5] drop-shadow-[4px_4px_7px_rgba(0,0,0,0.1)]">
       <Icon size={40} strokeWidth={2} className="text-[#ED1D23]" />
     </div>
   );
@@ -91,8 +94,8 @@ function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
 
 function Heading() {
   return (
-    <div className="flex flex-col gap-[10px]">
-      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:w-[1279px] min-[1024px]:text-[63px] min-[1024px]:whitespace-nowrap min-[1024px]:leading-[73.333px]">
+    <div className="flex flex-col gap-[10px] min-[1024px]:gap-[16px]">
+      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:text-[66px] min-[1024px]:whitespace-nowrap min-[1024px]:leading-[73.333px]">
         Our Turnkey{" "}
         <span className="text-[#ED1D23]">Cold Storage Construction</span>
       </h2>
@@ -109,41 +112,57 @@ export default function ProcessSection() {
       {/* DESKTOP: exact Figma frame, scaled to the viewport */}
       <div className="hidden min-[1024px]:block">
         <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
-          <div className="flex flex-col items-start p-[80px]">
-            <div className="flex w-[1707px] flex-col gap-[50px]">
+          <div
+            className="relative w-[1920px] overflow-hidden bg-[#E0E0E0]"
+            style={{ height: DESIGN_HEIGHT }}
+          >
+            {/* warehouse photo: white gradient masked by the photo's luminance */}
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(54.52deg, rgba(255, 255, 255, 0) 31.056%, rgb(255, 255, 255) 96.496%)",
+                maskImage: `url("${assetUrl("/Images/process/bg-mask.webp")}")`,
+                maskMode: "luminance",
+                maskSize: "100% 100%",
+                maskRepeat: "no-repeat",
+                WebkitMaskImage: `url("${assetUrl("/Images/process/bg-mask.webp")}")`,
+                WebkitMaskSize: "100% 100%",
+                WebkitMaskRepeat: "no-repeat",
+              }}
+            />
+
+            <div className="absolute top-1/2 left-1/2 flex w-[1760px] -translate-x-1/2 -translate-y-1/2 flex-col gap-[50px]">
               <Heading />
 
-              <div className="flex w-full flex-col items-center justify-center gap-[50px]">
-                <div className="relative h-[351px] w-full">
-                  {/* connector line */}
-                  <div className="absolute top-[47px] left-[72px] h-[1.333px] w-[1430px] bg-[#E4DFE0]" />
+              <div className="relative h-[300px] w-full">
+                {/* connector line */}
+                <div className="absolute top-[47px] left-[72px] h-[1.333px] w-[1430px] bg-[#C6C6C6]" />
 
-                  {STEPS.map((step) => (
-                    <div
-                      key={step.number}
-                      className="absolute top-0 flex flex-col items-start gap-[53px]"
-                      style={{ left: step.left, width: step.width }}
-                    >
-                      <StepIcon icon={step.icon} />
+                {STEPS.map((step) => (
+                  <div
+                    key={step.number}
+                    className="absolute top-0 flex flex-col items-start gap-[40px]"
+                    style={{ left: step.left, width: step.width }}
+                  >
+                    <StepIcon icon={step.icon} />
 
-                      <div className="flex w-full flex-col items-start gap-[12px]">
-                        <p
-                          className={`${spaceGrotesk.className} text-[26px] leading-[21.333px] font-bold text-[#ED1D23]`}
-                        >
-                          {step.number}
-                        </p>
-                        <p className="w-full text-[21px] leading-[normal] font-bold text-[#080808]">
-                          {step.title}
-                        </p>
-                        <p
-                          className={`text-[18px] leading-[24px] font-normal ${step.descriptionColor}`}
-                        >
-                          {step.description}
-                        </p>
-                      </div>
+                    <div className="flex w-full flex-col items-start gap-[12px]">
+                      <p
+                        className={`${spaceGrotesk.className} text-[26px] leading-[21.333px] font-bold text-[#ED1D23]`}
+                      >
+                        {step.number}
+                      </p>
+                      <p className="w-full text-[21px] leading-[24px] font-bold text-[#080808]">
+                        {step.title}
+                      </p>
+                      <p className="text-[18px] leading-[22.667px] font-normal text-[#64748B]">
+                        {step.description}
+                      </p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -178,68 +197,73 @@ export default function ProcessSection() {
         </ol>
       </div>
 
-      {/* MOBILE (below 640px): vertical timeline */}
-      <div className="px-5 pt-8 pb-10 sm:hidden">
-        <div className="mx-auto flex w-full max-w-[350px] flex-col items-center gap-[24px]">
-          <div className="flex w-full max-w-[324px] flex-col gap-[12px]">
-            <h2 className="text-[27px] leading-[34px] font-bold text-[#0F172A]">
+      {/* MOBILE (below 640px): dark vertical timeline */}
+      <div className="relative overflow-hidden bg-[#212121] px-5 pt-8 pb-10 sm:hidden">
+        {/* faded warehouse photo + dark radial overlay (Figma mobile frame) */}
+        <div aria-hidden className="pointer-events-none absolute top-0 left-0 h-[654px] w-full opacity-25">
+          <div className="absolute inset-0 overflow-hidden opacity-75">
+            <div className="absolute top-[0.06%] left-[-124.17%] h-[69.29%] w-[348.57%]">
+              <Image
+                src="/Images/process/mobile-bg.webp"
+                alt=""
+                fill
+                sizes="1400px"
+                className="max-w-none object-cover"
+              />
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_90%_2%,rgba(0,0,0,0)_0%,rgba(66,66,66,0.75)_30%,rgba(16,16,16,0.91)_55%,rgb(71,71,71)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-[220px] bg-gradient-to-b from-transparent to-[#212121]" />
+        </div>
+
+        <div className="relative mx-auto flex w-full max-w-[350px] flex-col gap-[40px]">
+          <div className="flex w-full flex-col gap-[6px]">
+            <h2 className="text-[28px] leading-[34px] font-bold text-white">
               Our Turnkey{" "}
               <span className="text-[#ED1D23]">Cold Storage Construction</span>
             </h2>
-            <p className="text-[14px] leading-[20px] font-normal text-[#64748B]">
+            <p className="text-[14px] leading-[20px] font-normal text-[#A6A6A6]">
               As a cold storage construction company, we follow a proven 6-step process to ensure on-time delivery.
             </p>
           </div>
 
-          <ol className="relative flex w-full flex-col gap-[26px]">
+          <ol className="flex w-full flex-col gap-[14px]">
             {STEPS.map((step, index) => {
               const Icon = step.icon;
 
               return (
-                <li
-                  key={step.number}
-                  className="relative flex items-center gap-[17px]"
-                >
-                  {/* connector from this circle's centre to the next one */}
+                <li key={step.number} className="relative flex items-start gap-[6px]">
+                  {/* vertical connector to the next step's marker */}
                   {index < STEPS.length - 1 && (
                     <span
                       aria-hidden
-                      className="absolute top-1/2 left-[16px] h-[calc(100%+26px)] w-px -translate-x-1/2 bg-[#BCBCBC]"
+                      className="absolute top-[14px] bottom-[-24px] left-[43px] w-px bg-[#4D4D4D]"
                     />
                   )}
-                  <span
-                    className={`${spaceGrotesk.className} relative flex size-[33px] shrink-0 items-center justify-center rounded-full bg-[#F9F6F7] text-[14px] leading-[normal] font-bold text-[#080808]`}
-                  >
-                    {/* 8 long dashes: circumference 2π·15.5 ≈ 97.4 → 8 × 12.18 */}
-                    <svg
-                      aria-hidden
-                      viewBox="0 0 33 33"
-                      className="absolute inset-0 size-full -rotate-90"
+                  <div className="relative h-[34px] w-[48px] shrink-0">
+                    <p
+                      className={`${spaceGrotesk.className} text-[20px] leading-[30px] whitespace-nowrap text-[#A9ABB2]`}
                     >
-                      <circle
-                        cx="16.5"
-                        cy="16.5"
-                        r="15.5"
-                        fill="none"
-                        stroke="#BCBCBC"
-                        strokeWidth="1"
-                        strokeDasharray="8.5 3.68"
-                      />
-                    </svg>
-                    <span className="relative">{step.number}</span>
-                  </span>
+                      {step.number}
+                    </p>
+                    <span className="absolute top-[10px] left-[39.5px] size-[8px] rounded-full bg-[#ED1D23]" />
+                    <span
+                      aria-hidden
+                      className="absolute top-[14px] left-[48px] h-px w-[19px] bg-[#4D4D4D]"
+                    />
+                  </div>
 
-                  <div className="flex min-w-0 items-center gap-[10px] rounded-[6px] bg-[#FFFCFC] py-[6px] pr-[9px] pl-[10px] drop-shadow-[-1px_1px_3px_rgba(30,30,30,0.1)]">
+                  <div className="flex min-w-0 flex-1 items-start gap-[10px] py-[6px] pr-[9px] pl-[10px]">
                     <Icon
                       size={20}
                       strokeWidth={2}
                       className="shrink-0 text-[#ED1D23]"
                     />
-                    <div className="flex min-w-0 flex-col gap-px">
-                      <p className="text-[16px] leading-[normal] font-semibold text-[#0F172A]">
+                    <div className="flex min-w-0 flex-1 flex-col gap-[2px]">
+                      <p className="text-[16px] leading-[normal] font-semibold tracking-[-0.3px] text-white">
                         {step.title}
                       </p>
-                      <p className="text-[12px] leading-[20px] font-normal text-[#64748B]">
+                      <p className="text-[12px] leading-[16px] font-normal text-[#949494]">
                         {step.description}
                       </p>
                     </div>
@@ -248,7 +272,6 @@ export default function ProcessSection() {
               );
             })}
           </ol>
-
         </div>
       </div>
     </section>
