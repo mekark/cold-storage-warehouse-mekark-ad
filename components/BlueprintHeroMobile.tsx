@@ -131,7 +131,7 @@ export default function BlueprintHeroMobile() {
             <h1 className="absolute top-[2px] left-5 w-[350px] max-w-[calc(100%-40px)] text-[22px] leading-[26px] font-semibold">
               Turnkey Cold Storage &{" "}
               <span className="block">Temperature-Controlled</span>
-              <span className="mt-[4px] block w-fit bg-[#C4161C] px-[5px] pb-[4px]">
+              <span className="mt-[4px] block w-fit max-w-full bg-[#C4161C] px-[5px] pb-[4px] text-[19px] whitespace-nowrap max-[359px]:text-[16px]">
                 Warehouse Construction Company
               </span>
             </h1>

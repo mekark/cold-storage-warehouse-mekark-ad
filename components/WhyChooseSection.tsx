@@ -44,34 +44,43 @@ const GHOST_NUMBER_STYLE = {
 
 function Pillar({ index, desktop }: { index: number; desktop?: boolean }) {
   const item = PILLARS[index];
+
+  if (!desktop) {
+    return (
+      <li className="flex items-start gap-[5px] border-b border-solid border-[#EDEDED] py-[12px] last:border-b-0 sm:[&:nth-last-child(2):nth-child(odd)]:border-b-0">
+        <span
+          style={GHOST_NUMBER_STYLE}
+          className="w-[40px] shrink-0 bg-clip-text text-[28px] leading-[32px] font-extrabold text-transparent"
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="w-px self-stretch shrink-0 bg-[#ED1D23]" />
+        <div className="flex min-w-0 flex-1 flex-col gap-[6px] pl-[10px]">
+          <h3 className="text-[18px] leading-[22px] font-semibold text-[#030303]">
+            {item.title}
+          </h3>
+          <p className="text-[14px] leading-[20px] font-normal text-[#6e6e6e]">
+            {item.text}
+          </p>
+        </div>
+      </li>
+    );
+  }
+
   return (
-    <li
-      className={`relative flex items-start ${desktop ? "gap-[14px]" : "gap-[12px]"}`}
-    >
+    <li className="relative flex items-start gap-[14px]">
       <span
         style={GHOST_NUMBER_STYLE}
-        className={`shrink-0 bg-clip-text font-extrabold tracking-[-2.64px] text-transparent ${
-          desktop
-            ? "w-[72px] text-[60px] leading-[66px]"
-            : "w-[52px] text-[40px] leading-[44px]"
-        }`}
+        className="w-[72px] shrink-0 bg-clip-text text-[60px] leading-[66px] font-extrabold tracking-[-2.64px] text-transparent"
       >
         {String(index + 1).padStart(2, "0")}
       </span>
       <span className="w-[2px] self-stretch shrink-0 bg-[#ED1D23]" />
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
-        <h3
-          className={`font-semibold text-black ${
-            desktop ? "text-[22px] leading-[27px]" : "text-[18px] leading-[24px]"
-          }`}
-        >
+        <h3 className="text-[22px] leading-[27px] font-semibold text-black">
           {item.title}
         </h3>
-        <p
-          className={`font-normal text-[#6e6e6e] ${
-            desktop ? "text-[15px] leading-[23px]" : "text-[14px] leading-[22px]"
-          }`}
-        >
+        <p className="text-[15px] leading-[23px] font-normal text-[#6e6e6e]">
           {item.text}
         </p>
       </div>
@@ -81,13 +90,17 @@ function Pillar({ index, desktop }: { index: number; desktop?: boolean }) {
 
 function Heading({ desktop }: { desktop?: boolean }) {
   return (
-    <div className="flex flex-col items-center gap-[10px] text-center font-bold">
-      <h2 className="flex flex-col items-center gap-[6px]">
+    <div
+      className={`flex flex-col gap-[10px] font-bold ${
+        desktop ? "items-center text-center" : "items-start text-left"
+      }`}
+    >
+      <h2 className={`flex flex-col gap-[6px] ${desktop ? "items-center" : "items-start"}`}>
         <span
           className={`text-[#030303] ${
             desktop
               ? "text-[54px] leading-[65px]"
-              : "text-[26px] leading-[32px] sm:text-[40px] sm:leading-[48px]"
+              : "text-[28px] leading-[34px] sm:text-[40px] sm:leading-[48px]"
           }`}
         >
           {HEADING_BLACK}
@@ -96,7 +109,7 @@ function Heading({ desktop }: { desktop?: boolean }) {
           className={`text-[#ed1d23] ${
             desktop
               ? "text-[40px] leading-[48px]"
-              : "text-[22px] leading-[28px] sm:text-[30px] sm:leading-[38px]"
+              : "text-[26px] leading-[30px] sm:text-[30px] sm:leading-[38px]"
           }`}
         >
           {HEADING_RED}
@@ -155,9 +168,9 @@ export default function WhyChooseSection() {
       </div>
 
       {/* TABLET + MOBILE (below 1024px) */}
-      <div className="px-5 py-10 sm:px-10 sm:py-14 min-[1024px]:hidden">
+      <div className="px-5 py-8 sm:px-10 sm:py-14 min-[1024px]:hidden">
         <Heading />
-        <div className="relative mt-8 aspect-[1672/941] w-full overflow-hidden">
+        <div className="relative -mx-5 mt-4 aspect-[1672/941] overflow-hidden sm:-mx-10">
           <Image
             src="/Images/why2/factory.webp"
             alt="Mekark cold storage warehouse building"
@@ -166,7 +179,7 @@ export default function WhyChooseSection() {
             className="object-cover"
           />
         </div>
-        <ol className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <ol className="mt-2 grid grid-cols-1 gap-x-10 sm:grid-cols-2">
           {PILLARS.map((_, i) => (
             <Pillar key={i} index={i} />
           ))}
