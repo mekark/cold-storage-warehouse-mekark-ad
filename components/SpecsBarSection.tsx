@@ -32,7 +32,7 @@ export default function SpecsBarSection() {
     <section
       className={`${manrope.className} w-full bg-[#F9F6F7] px-5 pb-12 sm:px-10 lg:px-[80px] lg:pb-[80px]`}
     >
-      <div className="mx-auto max-w-[1707px] overflow-hidden rounded-[24px] bg-[#0A0A0A] px-6 py-8 sm:px-10 sm:py-10 lg:px-[56px] lg:py-[48px]">
+      <div className="mx-auto max-w-[1707px] overflow-hidden rounded-[24px] bg-[#0F172A] px-6 py-8 sm:px-10 sm:py-10 lg:px-[56px] lg:py-[48px]">
         <div className="mb-8 flex items-center gap-3 lg:mb-10">
           <span className="h-[2px] w-[28px] bg-[#ED1D23]" />
           <p className="text-[13px] leading-[20px] font-semibold tracking-[0.12em] text-white uppercase lg:text-[15px]">
@@ -54,7 +54,7 @@ export default function SpecsBarSection() {
                   {label}
                 </span>
               </span>
-              <p className="text-[14px] leading-[22px] font-medium text-[#A9A9A9] lg:text-[15px] lg:leading-[24px]">
+              <p className="text-[14px] leading-[22px] font-medium text-[#94A3B8] lg:text-[15px] lg:leading-[24px]">
                 {value}
               </p>
             </li>
