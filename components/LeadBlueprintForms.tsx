@@ -42,12 +42,12 @@ export function BlueprintForm() {
 
   return (
     <div className="flex w-full flex-col items-center gap-[26px] rounded-[31.931px] bg-white px-5 py-[32px] sm:px-[50px] sm:py-[44px] min-[1024px]:w-[659px]">
-      <div className="flex w-full max-w-[364px] flex-col items-start gap-[6px]">
-        <h3 className="w-full text-[22px] leading-[normal] font-extrabold text-[#080808] sm:text-[24px]">
-          Request Your Project Blueprint
+      <div className="flex w-full flex-col items-center gap-[6px] text-center">
+        <h3 className="w-full text-[22px] leading-[normal] font-extrabold text-[#080808] sm:text-[16px] sm:whitespace-nowrap">
+          Request Your Cold Storage Engineering Blueprint &amp; Quote
         </h3>
-        <p className="w-full max-w-[337px] text-[14px] leading-[normal] font-medium text-[#9A9A9A]">
-          Get a custom layout, cost range &amp; 150-day* timeline
+        <p className="w-full text-[14px] leading-[normal] font-medium text-[#9A9A9A] sm:text-[13px] sm:whitespace-nowrap">
+          Get a custom chamber layout, thermal specification &amp; turnkey cost estimate.
         </p>
       </div>
 
@@ -198,7 +198,7 @@ export function BlueprintForm() {
             disabled={isSubmitting}
             className="flex h-[63.867px] w-full items-center justify-center rounded-[9px] bg-[#C4161C] px-[40px] py-[20px] text-center text-[18px] leading-[normal] font-bold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.809px_17.618px_rgba(196,22,28,0.3)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {isSubmitting ? "Submitting..." : "Get My Free Quote →"}
+            {isSubmitting ? "Submitting..." : "Request an Estimate →"}
           </button>
 
           <p className="py-px text-center text-[12px] leading-[normal] font-medium tracking-[0.3303px] text-[#5A5A5A]">
@@ -250,11 +250,11 @@ export function MobileBlueprintForm() {
   return (
     <div className="flex w-full flex-col gap-[16px] rounded-[24px] border border-solid border-[#E2E2E2] bg-white p-[20px] drop-shadow-[0px_24px_40px_rgba(0,0,0,0.06)]">
       <div className="flex w-full flex-col items-center justify-center gap-[8px]">
-        <h3 className="w-[275px] max-w-full text-[18px] leading-[normal] font-extrabold text-[#080808]">
-          Request Your Project Blueprint
+        <h3 className="w-full text-center text-[18px] leading-[normal] font-extrabold text-[#080808]">
+          Request Your Cold Storage Engineering Blueprint &amp; Quote
         </h3>
-        <p className="w-[290px] max-w-full text-[12px] leading-[normal] font-medium text-[#9A9A9A]">
-          Get a custom layout, cost range &amp; 150-day* timeline
+        <p className="w-full text-center text-[12px] leading-[normal] font-medium text-[#9A9A9A]">
+          Get a custom chamber layout, thermal specification &amp; turnkey cost estimate.
         </p>
       </div>
 
@@ -378,7 +378,7 @@ export function MobileBlueprintForm() {
             disabled={isSubmitting}
             className="flex w-full items-center justify-center rounded-[8px] bg-[#C4161C] px-[36px] py-[14px] text-center text-[14px] leading-[normal] font-semibold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8px_16px_rgba(196,22,28,0.3)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {isSubmitting ? "Submitting..." : "Get My Free Quote →"}
+            {isSubmitting ? "Submitting..." : "Request an Estimate →"}
           </button>
 
           <p className="w-full text-center text-[12px] leading-[normal] font-medium text-[#5A5A5A]">

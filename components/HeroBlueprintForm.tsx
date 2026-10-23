@@ -41,13 +41,13 @@ export default function HeroBlueprintForm() {
 
   return (
     <div className="flex w-full max-w-[659px] shrink-0 flex-col items-center gap-[26px] self-center rounded-[31.931px] bg-white/10 px-5 py-[32px] shadow-[0px_26.428px_88.092px_0px_rgba(0,0,0,0.45)] backdrop-blur-[15px] sm:px-[50px] sm:py-[44px] min-[1024px]:mt-[1.08px] min-[1024px]:w-[659px]">
-      <div className="flex w-full max-w-[364px] flex-col items-start gap-[6px]">
-        <h3 className="w-full text-[22px] leading-[normal] font-extrabold text-white sm:text-[24px]">
-          Request Your Project Blueprint
+      <div className="flex w-full flex-col items-center gap-[6px] text-center">
+        <h3 className="w-full text-[22px] leading-[normal] font-extrabold text-white sm:text-[16px] sm:whitespace-nowrap">
+          Request Your Cold Storage Engineering Blueprint &amp; Quote
         </h3>
-        <div className="flex w-full max-w-[349.431px] flex-col items-center justify-center">
-          <p className="w-full max-w-[337px] text-[14px] leading-[normal] font-medium text-black">
-            Get a custom layout, cost range &amp; 150-day* timeline
+        <div className="flex w-full flex-col items-center justify-center">
+          <p className="w-full text-[14px] leading-[normal] font-medium text-black sm:text-[13px] sm:whitespace-nowrap">
+            Get a custom chamber layout, thermal specification &amp; turnkey cost estimate.
           </p>
         </div>
       </div>
@@ -199,7 +199,7 @@ export default function HeroBlueprintForm() {
             disabled={isSubmitting}
             className="flex h-[63.867px] w-full items-center justify-center rounded-[9px] bg-[#C4161C] px-[40px] py-[20px] text-center text-[18px] leading-[normal] font-bold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.809px_17.618px_rgba(196,22,28,0.3)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {isSubmitting ? "Submitting..." : "Get a Free Quote →"}
+            {isSubmitting ? "Submitting..." : "Request an Estimate →"}
           </button>
 
           <p className="py-px text-center text-[12px] leading-[normal] font-medium tracking-[0.3303px] text-[#DCDCDC]">

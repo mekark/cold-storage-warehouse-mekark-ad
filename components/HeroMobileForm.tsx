@@ -46,12 +46,12 @@ export default function HeroMobileForm() {
 
   return (
     <div className="flex w-full flex-col items-center gap-[16px] rounded-[24px] bg-white/[0.01] px-[20px] py-[24px] shadow-[0px_26.43px_88.09px_0px_rgba(0,0,0,0.06)] backdrop-blur-[15px]">
-      <div className="flex w-full flex-col items-start gap-[6px] text-white">
+      <div className="flex w-full flex-col items-center gap-[6px] text-center text-white">
         <h3 className="w-full text-[24px] leading-[normal] font-extrabold">
-          Request Your Project Blueprint
+          Request Your Cold Storage Engineering Blueprint &amp; Quote
         </h3>
         <p className="w-full text-[14px] leading-[normal] font-medium">
-          Get a custom layout, cost range &amp; 150-day* timeline
+          Get a custom chamber layout, thermal specification &amp; turnkey cost estimate.
         </p>
       </div>
 
@@ -175,7 +175,7 @@ export default function HeroMobileForm() {
             disabled={isSubmitting}
             className="flex w-full items-center justify-center rounded-[10px] bg-[#C4161C] px-[24px] py-[13px] text-center text-[14px] leading-[normal] font-bold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.81px_17.62px_rgba(196,22,28,0.3)] disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {isSubmitting ? "Submitting..." : "Get a Free Quote →"}
+            {isSubmitting ? "Submitting..." : "Request an Estimate →"}
           </button>
 
           <p className="w-full text-center text-[12px] leading-[normal] font-medium text-[#8A8A8A]">

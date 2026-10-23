@@ -8,9 +8,9 @@ import "./globals.css";
 const GTM_ID = "GTM-5SBMM86H";
 
 export const metadata: Metadata = {
-  title: "Turnkey Cold Storage construction Company – Cold Storage construction contractor",
+  title: "Cold Storage Construction Company in India | Turnkey Cold Chain",
   description:
-    "Leading Turnkey Cold storage Warehouse construction EPC & Turnkey Cold chain warehouse construction Company – Cold Storage construction Turnkey EPC expertise in In House PEB Manufacturing, Civil, PEB, MEP and Seamless Execution servicing the needs of Turnkey cold storage building contractor & Turnkey cold storage warehouse construction , cold chain warehouse construction, refrigerated warehouse construction Company",
+    "Leading cold storage construction contractor in India. We build turnkey refrigerated warehouses (-25°C to +15°C) with PUF/PIR panels, PEB & floor insulation.",
   icons: {
     icon: assetUrl("/Mekark%20Favicon-32x32px.png"),
     shortcut: assetUrl("/Mekark%20Favicon-32x32px.png"),

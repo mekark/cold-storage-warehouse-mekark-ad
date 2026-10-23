@@ -5,7 +5,7 @@ import HeroBlueprintForm from "@/components/HeroBlueprintForm";
 import ScaledCanvas from "@/components/ScaledCanvas";
 import BlueprintHeroMobile from "@/components/BlueprintHeroMobile";
 import {
-  DESKTOP_HIGHLIGHTS,
+  HERO_FEATURES,
   PHONE_NUMBER,
   WHATSAPP_MESSAGE,
   WHATSAPP_NUMBER,
@@ -96,7 +96,7 @@ export default function BlueprintHeroSection() {
               </div>
 
               <EnquiryFormButton className="flex items-center justify-center rounded-[8px] bg-[#C4161C] px-[16px] py-[8px] text-[14px] font-semibold leading-[normal] whitespace-pre text-[#F5F5F5] drop-shadow-[0px_8.809px_17.618px_rgba(196,22,28,0.3)] sm:px-[24px] sm:py-[10px] sm:text-[16px]">
-                {"Get  Free Quote "}
+                {"Request an Estimate"}
               </EnquiryFormButton>
             </header>
 
@@ -110,45 +110,41 @@ export default function BlueprintHeroSection() {
                   <p
                     className={`${inter.className} text-[11px] leading-[20px] font-medium text-white sm:text-[14px] sm:whitespace-nowrap`}
                   >
-                    Cold Storage Warehouse Construction Company
+                    Complete Thermal Envelope, PEB Structure & Civil Execution
                   </p>
                 </div>
 
                 {/* HEADING */}
                 <div className="flex w-full flex-col items-start gap-[13px]">
-                  <h2 className="w-full text-[32px] leading-[1.1] font-bold text-white sm:text-[48px] sm:leading-[48px] min-[1024px]:w-[891px] min-[1024px]:max-w-full">
-                    Build Warehouses. Design to Delivery
-                  </h2>
-                  <p className="flex max-w-full items-center bg-[#ED1D23] px-[5px] text-[24px] leading-[40px] font-bold text-white sm:h-[56px] sm:text-[32px] sm:leading-[58px] min-[1024px]:text-[42px]!">
-                    <span>Cold Storage Construction - 150 days</span>
-                    <span className="self-start text-[30px] leading-[58px] font-normal sm:self-center">
-                      *
+                  <h1 className="w-full text-[32px] leading-[1.18] font-bold text-white sm:text-[48px] sm:leading-[53px] min-[1024px]:w-[891px] min-[1024px]:max-w-full">
+                    Turnkey Cold Storage &{" "}
+                    <span className="block">Temperature-Controlled</span>
+                    <span className="mt-[13px] block w-fit max-w-full bg-[#ED1D23] px-[5px] pb-[6px]">
+                      Warehouse Construction Company
                     </span>
-                  </p>
+                  </h1>
                 </div>
 
                 {/* DESCRIPTION */}
                 <div className="flex w-full flex-col gap-[16px]">
-                  <p className="w-full text-[16px] leading-[24px] font-normal text-[#A9A9A9] sm:text-[22px] sm:leading-[28px] min-[1024px]:whitespace-nowrap">
-                    <span className="font-bold text-[#ED1D23]">MEKARK</span>
-                    {" - Builds Every Structure You Want."}
-                    <br />
-                    {
-                      "All Temperature Controlled - Refrigerated - Cold Storage - Warehouse Constructions  – "
-                    }
-                    <span className="font-bold text-white">ALL INDIA</span>
-                  </p>
-                  <p className="w-full text-[16px] leading-[24px] font-bold text-[#F3F3F3] sm:text-[22px] sm:leading-[28px]">
-                    In-House PEB Manufacturing - Civil - PEB – MEP - Turnkey EPC.
+                  <p className="w-full text-[16px] leading-[24px] font-normal text-[#A9A9A9] sm:text-[22px] sm:leading-[28px]">
+                    Zero thermal leakage. Precision-engineered refrigerated warehouse construction from
+                    +15°C down to -25°C for Food Processing, Dairy, Pharma,
+                    Seafood & Cold Chain 3PLs.
                   </p>
 
                   {/* HIGHLIGHTS */}
-                  <div className="grid grid-cols-1 gap-x-[20px] gap-y-[16px] min-[1024px]:inline-grid min-[1024px]:grid-cols-[repeat(2,fit-content(100%))]">
-                    {DESKTOP_HIGHLIGHTS.map((item) => (
-                      <div key={item} className="flex items-center gap-[8px]">
-                        <span className="size-[8px] shrink-0 rounded-full bg-[#ED1D23]" />
-                        <p className="text-[14px] leading-[20px] font-normal text-[#F7F7F7] sm:text-[18px] min-[1024px]:whitespace-nowrap">
-                          {item}
+                  <div className="grid w-full grid-cols-1 gap-[12px] min-[1024px]:grid-cols-3">
+                    {HERO_FEATURES.map((item) => (
+                      <div
+                        key={item.title}
+                        className="flex flex-col gap-[4px] rounded-[10px] border border-solid border-[#ED1D23]/30 border-t-[#ED1D23] border-t-2 bg-gradient-to-b from-[#ED1D23]/25 to-[#ED1D23]/[0.06] px-[16px] py-[12px] backdrop-blur-[6px]"
+                      >
+                        <p className="text-[15px] leading-[20px] font-bold text-white">
+                          {item.title}
+                        </p>
+                        <p className="text-[13px] leading-[18px] font-medium text-[#A9A9A9]">
+                          {item.text}
                         </p>
                       </div>
                     ))}

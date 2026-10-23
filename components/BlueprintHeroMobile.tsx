@@ -2,7 +2,7 @@ import Image from "next/image";
 import EnquiryFormButton from "@/components/EnquiryFormButton";
 import HeroMobileForm from "@/components/HeroMobileForm";
 import {
-  DESKTOP_HIGHLIGHTS,
+  HERO_FEATURES,
   PHONE_NUMBER,
   WHATSAPP_MESSAGE,
   WHATSAPP_NUMBER,
@@ -100,7 +100,7 @@ export default function BlueprintHeroMobile() {
             />
           </div>
           <EnquiryFormButton className="flex items-center justify-center rounded-[8px] bg-[#C4161C] px-[12px] py-[6px] text-[12px] leading-[normal] font-semibold whitespace-nowrap text-[#F5F5F5]">
-            Get Free Quote
+            Request an Estimate
           </EnquiryFormButton>
         </header>
 
@@ -109,7 +109,7 @@ export default function BlueprintHeroMobile() {
           <div className="absolute top-[15px] left-5 flex max-w-[calc(100%-40px)] items-center gap-[8px] rounded-full border border-solid border-white/20 px-[12px] py-[6px]">
             <span className="size-[8px] shrink-0 rounded-full bg-[#E40015]" />
             <p className="text-[10px] leading-[16px] font-medium">
-              Cold Storage Warehouse Construction Company
+              Complete Thermal Envelope, PEB Structure & Civil Execution
             </p>
           </div>
 
@@ -128,13 +128,13 @@ export default function BlueprintHeroMobile() {
             <div className="absolute inset-x-0 -top-px h-[91px] bg-[linear-gradient(180deg,#060606_0%,#202020_45.616%,rgba(6,6,6,0)_76.212%)]" />
             <div className="absolute inset-x-0 bottom-0 h-[61px] bg-[linear-gradient(181.565deg,rgba(30,30,30,0)_1.0095%,#1E1E1E_99.312%)]" />
 
-            <h2 className="absolute top-[2px] left-5 w-[350px] max-w-[calc(100%-40px)] text-[22px] leading-[24px] font-semibold">
-              Build Warehouses. Design to Delivery
-            </h2>
-
-            <p className="absolute top-[55px] left-0 flex h-[23px] items-center bg-[#C4161C] pr-[6px] pl-5 text-[16px] leading-[normal] font-semibold whitespace-nowrap">
-              Cold Storage Construction - 150 days*
-            </p>
+            <h1 className="absolute top-[2px] left-5 w-[350px] max-w-[calc(100%-40px)] text-[22px] leading-[26px] font-semibold">
+              Turnkey Cold Storage &{" "}
+              <span className="block">Temperature-Controlled</span>
+              <span className="mt-[4px] block w-fit bg-[#C4161C] px-[5px] pb-[4px]">
+                Warehouse Construction Company
+              </span>
+            </h1>
           </div>
         </div>
 
@@ -142,28 +142,29 @@ export default function BlueprintHeroMobile() {
           {/* DESCRIPTION + HIGHLIGHTS */}
           <div className="flex w-full flex-col gap-[10px]">
             <p className="w-full text-[13px] leading-[normal] font-normal text-[#F3F3F3]">
-              <span className="text-[#ED1D23]">MEKARK</span>
-              {" - Builds Every Structure You Want."}
-              <br />
-              {
-                "All Temperature Controlled - Refrigerated - Cold Storage - Warehouse Constructions  – "
-              }
-              <span className="font-bold text-white">ALL INDIA</span>
+              Zero thermal leakage. Precision-engineered refrigerated warehouse construction from
+              +15°C down to -25°C for Food Processing, Dairy, Pharma, Seafood &
+              Cold Chain 3PLs.
             </p>
 
             <div className="flex w-full flex-col gap-[4px]">
-              <p className="w-full text-[13px] leading-[normal] font-bold text-white">
-                In-House PEB Manufacturing - Civil - PEB – MEP - Turnkey EPC.
-              </p>
-              <ul className="flex w-full flex-col gap-[6px]">
-                {DESKTOP_HIGHLIGHTS.map((item) => (
+              <ul className="mt-[6px] grid w-full grid-cols-2 gap-[8px]">
+                {HERO_FEATURES.map((item, index) => (
                   <li
-                    key={item}
-                    className="flex items-center gap-[6px] px-[12px]"
+                    key={item.title}
+                    className={`flex flex-col gap-[4px] rounded-[10px] border border-solid border-[#ED1D23]/30 bg-gradient-to-b from-[#ED1D23]/25 to-[#ED1D23]/[0.06] px-[20px] py-[12px] ${
+                      index === HERO_FEATURES.length - 1 &&
+                      HERO_FEATURES.length % 2 === 1
+                        ? "col-span-2"
+                        : ""
+                    }`}
                   >
-                    <span className="size-[5px] shrink-0 rounded-full bg-[#ED1D23]" />
-                    <span className="min-w-0 flex-1 text-[12px] leading-[20px] text-white/70">
-                      {item}
+                    <span className="flex items-center gap-[6px] text-[12px] leading-[16px] font-bold text-white">
+                      <span className="size-[5px] shrink-0 rounded-full bg-[#ED1D23]" />
+                      {item.title}
+                    </span>
+                    <span className="text-[11px] leading-[16px] font-semibold text-[#9A9A9A]">
+                      {item.text}
                     </span>
                   </li>
                 ))}

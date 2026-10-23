@@ -1,7 +1,8 @@
 import BlueprintHeroSection from "@/components/BlueprintHeroSection";
+import SpecsBarSection from "@/components/SpecsBarSection";
 import ProcessSection from "@/components/ProcessSection";
-import WhyMekarkSection from "@/components/WhyMekarkSection";
-import WhyEditorialMobile from "@/components/WhyEditorialMobile";
+import SolutionsSection from "@/components/SolutionsSection";
+import WhyChooseSection from "@/components/WhyChooseSection";
 import ProjectsGallerySection from "@/components/ProjectsGallerySection";
 import FaqAccordionSection from "@/components/FaqAccordionSection";
 import LeadBlueprintSection from "@/components/LeadBlueprintSection";
@@ -16,7 +17,9 @@ export default function Home() {
       <FloatingContact />
       <BlueprintHeroSection />
       <ProcessSection />
-      <WhyMekarkSection />
+      <SpecsBarSection />
+      <SolutionsSection />
+      <WhyChooseSection />
       <ProjectsGallerySection />
       <FaqAccordionSection />
       <LeadBlueprintSection />
