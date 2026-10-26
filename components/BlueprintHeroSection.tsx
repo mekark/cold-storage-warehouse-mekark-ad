@@ -16,7 +16,6 @@ import { assetUrl } from "@/lib/assetPrefix";
 // extra padding inside the file; the rest use the default 34px height.
 const CLIENT_LOGOS = [
   { name: "VWU", src: "/Images/hero/clients/vwu.webp", scale: 1 },
-  { name: "Voltas", src: "/Images/hero/clients/voltas.webp", scale: 1.6 },
   { name: "TVS", src: "/Images/hero/clients/tvs.webp", scale: 1.6 },
   { name: "Tata Electronics", src: "/Images/hero/clients/tata.webp", scale: 1.6 },
   { name: "Schwing Stetter", src: "/Images/hero/clients/stetter.webp", scale: 1.6 },
@@ -118,10 +117,10 @@ export default function BlueprintHeroSection() {
                 <div className="flex w-full flex-col items-start gap-[13px]">
                   <h1 className="w-full text-[32px] leading-[1.18] font-bold text-white sm:text-[48px] sm:leading-[53px] min-[1024px]:w-[1135px] min-[1024px]:max-w-full">
                     <span className="block min-[1024px]:-ml-[6px] min-[1024px]:whitespace-nowrap">
-                      Turnkey Cold Storage & Temperature-Controlled
+                      Turnkey Cold Storage &
                     </span>
-                    <span className="mt-[13px] block w-fit max-w-full bg-[#ED1D23] px-[5px] pb-[6px]">
-                      Warehouse Construction Company
+                    <span className="block w-fit max-w-full min-[1024px]:-ml-[6px]">
+                      Temperature-Controlled Warehouse Construction Company
                     </span>
                   </h1>
                 </div>
@@ -135,7 +134,7 @@ export default function BlueprintHeroSection() {
                   </p>
 
                   {/* HIGHLIGHTS */}
-                  <div className="grid w-full grid-cols-1 gap-[14px] min-[1024px]:w-full min-[1024px]:max-w-none min-[1700px]:w-[calc(100%+100px)] min-[1024px]:grid-flow-col min-[1024px]:grid-cols-2 min-[1024px]:grid-rows-2 min-[1024px]:gap-x-[16px]">
+                  <div className="grid w-full grid-cols-1 gap-[14px] min-[1024px]:w-full min-[1024px]:max-w-none min-[1280px]:grid-cols-3 min-[1280px]:gap-[16px] min-[1700px]:w-[calc(100%+100px)]">
                     {HERO_FEATURES.map((item) => (
                       <div
                         key={item.title}

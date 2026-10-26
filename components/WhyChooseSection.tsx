@@ -109,10 +109,17 @@ function Heading({ desktop }: { desktop?: boolean }) {
           className={`text-[#ed1d23] ${
             desktop
               ? "text-[40px] leading-[48px]"
-              : "text-[26px] leading-[30px] sm:text-[30px] sm:leading-[38px]"
+              : "text-[26px] leading-[30px] max-sm:whitespace-nowrap max-sm:tracking-[min(0px,calc((100vw-40px-342px)/25))] sm:text-[30px] sm:leading-[38px]"
           }`}
         >
-          {HEADING_RED}
+          {desktop ? (
+            HEADING_RED
+          ) : (
+            <>
+              Cold Storage Construction <br className="max-sm:block hidden" />
+              Contractor
+            </>
+          )}
         </span>
       </h2>
       <p
@@ -145,7 +152,7 @@ export default function WhyChooseSection() {
             {/* factory image sits behind the text columns */}
             <div className="absolute top-[376px] left-[470px] h-[563px] w-[1000px]">
               <Image
-                src="/Images/why2/factory.webp"
+                src="/Images/why2/cold-storage-v2.webp"
                 alt="Mekark cold storage warehouse building"
                 fill
                 sizes="1000px"
@@ -172,7 +179,7 @@ export default function WhyChooseSection() {
         <Heading />
         <div className="relative -mx-5 mt-4 aspect-[1672/941] overflow-hidden sm:-mx-10">
           <Image
-            src="/Images/why2/factory.webp"
+            src="/Images/why2/cold-storage-v2.webp"
             alt="Mekark cold storage warehouse building"
             fill
             sizes="(max-width: 1023px) 100vw, 1024px"

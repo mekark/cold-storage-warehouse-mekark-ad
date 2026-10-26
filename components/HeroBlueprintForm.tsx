@@ -1,5 +1,7 @@
 "use client";
 
+import type { ChangeEvent } from "react";
+import SqftSelect from "@/components/SqftSelect";
 import {
   SQFT_OPTIONS,
   useBlueprintForm,
@@ -42,11 +44,11 @@ export default function HeroBlueprintForm() {
   return (
     <div className="flex w-full max-w-[659px] shrink-0 flex-col items-center gap-[26px] self-center rounded-[31.931px] bg-white/10 px-5 py-[32px] shadow-[0px_26.428px_88.092px_0px_rgba(0,0,0,0.45)] backdrop-blur-[15px] sm:px-[50px] sm:py-[44px] min-[1024px]:mt-[1.08px] min-[1024px]:w-[659px]">
       <div className="flex w-full flex-col items-center gap-[6px] text-center">
-        <h3 className="w-full text-[22px] leading-[normal] font-extrabold text-white sm:text-[16px] sm:whitespace-nowrap">
+        <h3 className="w-full text-[19px] leading-[normal] font-extrabold text-white sm:text-[24px]">
           Request Your Cold Storage Engineering Blueprint &amp; Quote
         </h3>
         <div className="flex w-full flex-col items-center justify-center">
-          <p className="w-full text-[14px] leading-[normal] font-medium text-black sm:text-[13px] sm:whitespace-nowrap">
+          <p className="w-full text-[12px] leading-[normal] font-medium text-white sm:text-[14px]">
             Get a custom chamber layout, thermal specification &amp; turnkey cost estimate.
           </p>
         </div>
@@ -62,7 +64,7 @@ export default function HeroBlueprintForm() {
           <div className="flex w-full flex-col gap-0 sm:flex-row sm:items-center sm:gap-[35px]">
             <div className="flex w-full flex-col items-start gap-[7px] sm:w-[262.202px]">
               <label htmlFor="bh-name" className={labelClass}>
-                Full Name*
+                Full Name<span className="text-[#ED1D23]">*</span>
               </label>
               <input
                 id="bh-name"
@@ -78,7 +80,7 @@ export default function HeroBlueprintForm() {
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
               <label htmlFor="bh-location" className={labelClass}>
-                Project Location*
+                Project Location<span className="text-[#ED1D23]">*</span>
               </label>
               <input
                 id="bh-location"
@@ -97,7 +99,7 @@ export default function HeroBlueprintForm() {
           <div className="flex w-full flex-col sm:flex-row sm:items-center sm:gap-[35.237px]">
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
               <label htmlFor="bh-phone" className={labelClass}>
-                Mobile Number*
+                Mobile Number<span className="text-[#ED1D23]">*</span>
               </label>
               <input
                 id="bh-phone"
@@ -115,7 +117,7 @@ export default function HeroBlueprintForm() {
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
               <label htmlFor="bh-email" className={labelClass}>
-                Email Address*
+                Email Address<span className="text-[#ED1D23]">*</span>
               </label>
               <input
                 id="bh-email"
@@ -134,7 +136,7 @@ export default function HeroBlueprintForm() {
           <div className="flex w-full flex-col sm:flex-row sm:items-center sm:gap-[37px]">
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
               <label htmlFor="bh-industry" className={labelClass}>
-                Industry Type*
+                Industry Type<span className="text-[#ED1D23]">*</span>
               </label>
               <input
                 id="bh-industry"
@@ -150,22 +152,19 @@ export default function HeroBlueprintForm() {
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
               <label htmlFor="bh-sqft" className={labelClass}>
-                Project Sq. Ft*
+                Project Sq. Ft<span className="text-[#ED1D23]">*</span>
               </label>
-              <select
+              <SqftSelect
                 id="bh-sqft"
                 name="sqft"
                 value={values.sqft}
-                onChange={handleChange}
+                options={SQFT_OPTIONS}
+                placeholder="Select Sq.ft Requirement"
                 className={`${selectClass(errors.sqft, !!values.sqft)} rounded-[8.809px] tracking-normal`}
-              >
-                <option value="">Select Sq.ft Requirement</option>
-                {SQFT_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+                onSelect={(name, value) =>
+                  handleChange({ target: { name, value } } as ChangeEvent<HTMLSelectElement>)
+                }
+              />
               {errorText(errors.sqft)}
             </div>
           </div>
@@ -173,7 +172,7 @@ export default function HeroBlueprintForm() {
           {/* ROW 4 */}
           <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px]">
             <label htmlFor="bh-details" className={labelClass}>
-              Requirement Details*
+              Requirement Details<span className="text-[#ED1D23]">*</span>
             </label>
             <textarea
               id="bh-details"

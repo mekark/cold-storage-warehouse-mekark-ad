@@ -13,65 +13,65 @@ type Tile = {
   radiusClass: string;
   /** Tailwind classes positioning the <img> inside the tile (Figma crop) */
   imageClass: string;
+  /** Extra zoom for mobile/tablet object-cover images */
+  coverClass?: string;
 };
 
 // 2 x 3 grid, left-to-right / top-to-bottom, as laid out in the Figma frame
 const TILES: Tile[] = [
   {
+    src: "/Images/gallery/p6.webp",
+    alt: "Steel warehouse with blue trim and loading bays",
+    radiusClass: "rounded-tl-[32px]",
+    imageClass:
+      "absolute top-[-10.66%] left-[-10.82%] h-[110.75%] w-[110.81%] max-w-none",
+    coverClass: "object-cover scale-[1.22]",
+  },
+  {
     src: "/Images/gallery/p1.webp",
     alt: "Modern PEB warehouse with striped glazed facade",
-    radiusClass: "rounded-tl-[32px]",
-    imageClass: "absolute top-0 left-[0.02%] h-[101.74%] w-[101.65%] max-w-none",
+    radiusClass: "rounded-tr-[32px]",
+    imageClass:
+      "absolute top-0 left-[0.02%] h-[101.74%] w-[101.65%] max-w-none",
+  },
+  {
+    src: "/Images/gallery/g3-v4.webp",
+    alt: "Aerial view of a green and beige distribution warehouse with loading docks",
+    radiusClass: "rounded-bl-[32px]",
+    imageClass: "absolute inset-0 size-full max-w-none object-cover",
   },
   {
     src: "/Images/gallery/p2.webp",
     alt: "Aerial view of a large white warehouse with loading docks",
-    radiusClass: "rounded-tr-[32px]",
-    imageClass: "absolute top-[-2.5%] left-[-5.01%] size-[104.97%] max-w-none",
-  },
-  {
-    src: "/Images/gallery/p3.webp",
-    alt: "Warehouse with brown glazed entrance",
-    radiusClass: "rounded-bl-[32px]",
+    radiusClass: "rounded-br-[32px]",
     imageClass:
-      "absolute top-[-2.25%] left-[-11.16%] h-[119.15%] w-[119.17%] max-w-none",
+      "absolute top-[-2.5%] left-[-5.01%] size-[104.97%] max-w-none",
   },
   {
     src: "/Images/gallery/p4.webp",
     alt: "Blue PEB warehouse on an industrial estate",
-    radiusClass: "rounded-br-[32px]",
-    imageClass: "absolute inset-0 size-full max-w-none object-cover",
-  },
-  {
-    src: "/Images/gallery/p5.webp",
-    alt: "Aerial view of a white PEB industrial warehouse",
     radiusClass: "rounded-bl-[32px]",
     imageClass:
-      "absolute top-[-16.65%] left-[-3.05%] h-[116.64%] w-[116.44%] max-w-none",
+      "absolute inset-0 size-full max-w-none object-cover",
   },
   {
-    src: "/Images/gallery/p6.webp",
-    alt: "Steel warehouse with blue trim and loading bays",
+    src: "/Images/gallery/p3-v3.webp",
+    alt: "Large cold storage warehouse with rooftop condensers and loading trucks",
     radiusClass: "rounded-br-[32px]",
     imageClass:
-      "absolute top-[-10.66%] left-[-10.82%] h-[110.75%] w-[110.81%] max-w-none",
+      "absolute top-[-2.74%] left-[-3.73%] h-[110.81%] w-[110.82%] max-w-none",
   },
 ];
 
 function Heading() {
   return (
-    <div className="flex flex-col items-start gap-[14px]">
-      <div className="flex w-full flex-col gap-[13px] font-bold min-[1024px]:w-[509px]">
-        <p className="text-[14px] leading-[21.304px] tracking-[1.5978px] text-[#ED1D23] uppercase min-[1024px]:text-[16px]">
-          our work
-        </p>
-        <h2 className="text-[40px] leading-[1.05] text-[#0F172A] sm:text-[52px] min-[1024px]:text-[66px]! min-[1024px]:leading-[60px]!">
-          Projects <span className="text-[#ED1D23]">Gallery</span>
-        </h2>
-      </div>
-      <p className="text-[16px] leading-[26px] font-medium text-[#64748B] sm:text-[20px] min-[1024px]:text-[24px]! min-[1024px]:leading-[36px]! min-[1024px]:whitespace-nowrap">
-      Our Completed Projects Across India .
+    <div className="flex w-full flex-col gap-[13px] font-bold min-[1024px]:w-[509px]">
+      <p className="text-[14px] leading-[21.304px] tracking-[1.5978px] text-[#ED1D23] uppercase min-[1024px]:text-[16px]">
+        our work
       </p>
+      <h2 className="text-[40px] leading-[1.05] text-[#0F172A] sm:text-[52px] min-[1024px]:text-[66px]! min-[1024px]:leading-[60px]!">
+        Projects <span className="text-[#ED1D23]">Gallery</span>
+      </h2>
     </div>
   );
 }
@@ -121,18 +121,13 @@ export default function ProjectsGallerySection() {
 
       {/* MOBILE (below 640px) */}
       <div className="flex flex-col gap-[24px] px-[20px] py-[32px] sm:hidden">
-        <div className="flex w-full flex-col gap-[12px]">
-          <div className="flex w-full flex-col gap-[8px] font-bold">
-            <p className="text-[12px] leading-[18px] tracking-[1.5978px] text-[#ED1D23] uppercase">
-              our work
-            </p>
-            <h2 className="text-[28px] leading-[32px] whitespace-nowrap text-[#0F172A]">
-              Projects <span className="text-[#ED1D23]">Gallery</span>
-            </h2>
-          </div>
-          <p className="w-[307px] max-w-full text-[14px] leading-[20px] font-medium text-[#64748B]">
-          Our Completed Projects Across India .
+        <div className="flex w-full flex-col gap-[8px] font-bold">
+          <p className="text-[12px] leading-[18px] tracking-[1.5978px] text-[#ED1D23] uppercase">
+            our work
           </p>
+          <h2 className="text-[28px] leading-[32px] whitespace-nowrap text-[#0F172A]">
+            Projects <span className="text-[#ED1D23]">Gallery</span>
+          </h2>
         </div>
 
         <div className="flex w-full flex-col gap-[16px]">
@@ -147,7 +142,7 @@ export default function ProjectsGallerySection() {
                 fill
                 sizes="100vw"
                 quality={55}
-                className="object-cover"
+                className={tile.coverClass ?? "object-cover"}
               />
             </div>
           ))}
@@ -169,7 +164,7 @@ export default function ProjectsGallerySection() {
                 alt={tile.alt}
                 fill
                 sizes="50vw"
-                  className="object-cover"
+                className="object-cover"
               />
             </div>
           ))}

@@ -7,7 +7,7 @@ import { FAQ_ITEMS } from "@/components/faqData";
 import ScaledCanvas from "@/components/ScaledCanvas";
 
 const DESIGN_WIDTH = 1920;
-const DESIGN_HEIGHT = 1080;
+const DESIGN_HEIGHT = 1000;
 
 type Item = (typeof FAQ_ITEMS)[number];
 
@@ -98,19 +98,46 @@ function Items({
   );
 }
 
-function Heading() {
+function Badge({ desktop = false }: { desktop?: boolean }) {
   return (
-    <div className="flex flex-col items-start gap-[6px]">
-      <div className="flex items-center gap-[10.667px]">
-        <span className="h-[2.667px] w-[26.667px] bg-[#C4161C]" />
-        <span className="text-[14.667px] leading-[normal] font-extrabold tracking-[2.6667px] whitespace-nowrap text-[#C4161C] uppercase">
-          FAQ
-        </span>
-      </div>
-      <h2 className="text-[30px] leading-[normal] font-bold text-[#070506] sm:text-[38px] min-[1024px]:text-[46px]! min-[1024px]:whitespace-nowrap">
-        Frequently Asked Questions.
-      </h2>
-    </div>
+    <span
+      className={`inline-flex items-center rounded-full border border-solid border-[rgba(237,32,36,0.2)] bg-[rgba(237,32,36,0.1)] ${
+        desktop
+          ? "gap-[8.485px] px-[13.788px] py-[7.425px]"
+          : "gap-[6px] px-[11px] py-[5px]"
+      }`}
+    >
+      <span
+        className={`shrink-0 rounded-full bg-[#E40015] ${
+          desktop ? "size-[8.485px]" : "size-[6px]"
+        }`}
+      />
+      <span
+        className={`font-bold text-[#5A5656] uppercase ${
+          desktop
+            ? "text-[15.333px] leading-[23.04px] tracking-[3.3787px]"
+            : "text-[12px] leading-[18px] tracking-[2.6px]"
+        }`}
+      >
+        faq
+      </span>
+    </span>
+  );
+}
+
+function Heading({ desktop = false }: { desktop?: boolean }) {
+  return (
+    <h2
+      className={`font-extrabold tracking-[-2.56px] text-[#101116] ${
+        desktop
+          ? "text-[64px] leading-[60.8px]"
+          : "text-[32px] leading-[36px] sm:text-[44px] sm:leading-[48px]"
+      }`}
+    >
+      Frequently Asked
+      <br />
+      <span className="text-[#E60F1A]">Questions</span>
+    </h2>
   );
 }
 
@@ -129,22 +156,27 @@ export default function FaqAccordionSection() {
             className="relative w-[1920px] overflow-hidden bg-white"
             style={{ minHeight: DESIGN_HEIGHT }}
           >
-            {/* question-mark artwork */}
-            <div className="absolute bottom-[132px] left-[-240px] h-[1002px] w-[1098px] overflow-hidden">
-              <Image
-                src="/Images/faq/faq-bg.webp"
-                alt=""
-                width={1536}
-                height={1024}
-                sizes="79vw"
-                className="absolute top-[-0.02%] left-0 h-[100.07%] w-[136.98%] max-w-none"
-              />
+            {/* left: title + image (Figma) */}
+            <div className="absolute top-[100px] left-[187px] flex w-[531px] flex-col items-start justify-center gap-[28px] pt-[10.507px]">
+              <div className="flex flex-col items-start gap-[24px]">
+                <Badge desktop />
+                <Heading desktop />
+              </div>
+
+              <div className="relative h-[464px] w-[463px] shrink-0 overflow-hidden">
+                <Image
+                  src="/Images/faq/faq-qmark.webp"
+                  alt=""
+                  width={926}
+                  height={928}
+                  sizes="24vw"
+                  className="absolute inset-0 size-full max-w-none object-cover"
+                />
+              </div>
             </div>
 
-            {/* faq list */}
-            <div className="relative ml-[901px] flex flex-col items-start gap-[40px] pt-[81px] pb-[81px]">
-              <Heading />
-
+            {/* right: faq list */}
+            <div className="relative ml-[901px] flex flex-col items-start pt-[95px] pb-[40px]">
               <Items
                 items={FAQ_ITEMS}
                 openIndex={openIndex}
@@ -158,27 +190,18 @@ export default function FaqAccordionSection() {
 
       {/* MOBILE (below 640px) */}
       <div className="flex flex-col gap-[24px] bg-[#F9F6F7] px-[20px] py-[32px] sm:hidden">
-        <div className="flex w-full flex-col">
-          <div className="flex flex-col items-start gap-[12px] py-[6px]">
-            <span className="rounded-full border border-solid border-[#FCD5D0] bg-[#FEEAE7] px-[18.67px] py-[8px] text-[14px] leading-[26px] font-semibold text-[#CC000A]">
-              FAQ
-            </span>
+        <div className="flex w-full flex-col items-start gap-[16px]">
+          <Badge />
+          <Heading />
 
-            <h2 className="w-[309px] max-w-full text-[28px] leading-[32px] font-bold text-[#070506]">
-              Frequently Asked
-              <br />
-              Questions
-            </h2>
-          </div>
-
-          <div className="relative aspect-[350/327] w-full overflow-hidden">
+          <div className="relative mx-auto aspect-square w-[220px] max-w-full overflow-hidden">
             <Image
-              src="/Images/faq/faq-bg.webp"
+              src="/Images/faq/faq-qmark.webp"
               alt=""
-              width={1536}
-              height={1024}
-              sizes="140vw"
-              className="absolute top-[-0.02%] left-0 h-[100.07%] w-[140.11%] max-w-none"
+              width={926}
+              height={928}
+              sizes="220px"
+              className="size-full object-cover"
             />
           </div>
         </div>
@@ -246,18 +269,20 @@ export default function FaqAccordionSection() {
 
       {/* TABLET (640px - 1023px) */}
       <div className="hidden sm:max-[1023px]:block">
-        <div className="relative mx-auto h-[220px] w-full max-w-[560px] overflow-hidden sm:h-[320px]">
-          <Image
-            src="/Images/faq/faq-bg.webp"
-            alt=""
-            fill
-            sizes="(min-width: 640px) 560px, 100vw"
-            className="object-cover object-[15%_center]"
-          />
-        </div>
-
         <div className="flex flex-col gap-8 px-5 pt-8 pb-12 sm:px-10 sm:pb-16">
-          <Heading />
+          <div className="flex flex-col items-start gap-6">
+            <Badge />
+            <Heading />
+            <div className="relative mx-auto h-[240px] w-full max-w-[320px] overflow-hidden">
+              <Image
+                src="/Images/faq/faq-qmark.webp"
+                alt=""
+                fill
+                sizes="320px"
+                className="object-contain"
+              />
+            </div>
+          </div>
 
           <Items
             items={FAQ_ITEMS}

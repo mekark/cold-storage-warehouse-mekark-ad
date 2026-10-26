@@ -53,33 +53,34 @@ export default function BlueprintHeroMobile() {
       className={`${manrope.className} relative w-full overflow-hidden bg-[#060606] text-white`}
     >
       {/* BACKGROUND: sunset steel frame, dark overlay, fade-to-black, radial vignette */}
-      <div className="pointer-events-none absolute top-[419px] bottom-0 left-1/2 w-[505px] -translate-x-1/2">
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-[1203px] w-full -translate-x-1/2 overflow-hidden">
         <Image
-          src="/Images/hero/m-bg.webp"
+          src="/Images/hero/m-bg-v2.webp"
           alt=""
           fill
-          sizes="505px"
+          sizes="100vw"
           // Tallest painted image in the mobile hero, so Lighthouse picks it as LCP
           loading="eager"
           fetchPriority="high"
           quality={50}
-          className="object-cover"
+          className="scale-[1.04] object-cover blur-[2px]"
         />
       </div>
       <div className="pointer-events-none absolute inset-x-0 top-[284px] bottom-0 bg-[rgba(15,15,15,0.4)]" />
-      <div className="pointer-events-none absolute top-0 left-1/2 h-[1690px] w-[1028px] -translate-x-1/2">
+      <div className="pointer-events-none absolute top-0 left-1/2 h-[1803px] w-[1097px] -translate-x-1/2 overflow-hidden">
         <Image
-          src="/Images/hero/m-fade.webp"
+          src="/Images/hero/m-fade-v2.webp"
           alt=""
-          fill
-          sizes="(max-width: 640px) 100vw, 1028px"
+          width={941}
+          height={1672}
+          sizes="1097px"
           quality={55}
-          className="object-cover"
+          className="absolute top-[-0.47%] left-[0.02%] h-[108.04%] w-[99.96%] max-w-none"
         />
       </div>
-      <div className="pointer-events-none absolute top-0 -bottom-[43px] left-1/2 w-[1017px] -translate-x-1/2">
+      <div className="pointer-events-none absolute inset-y-0 left-1/2 w-[1017px] -translate-x-1/2">
         <Image
-          src={assetUrl("/Images/hero/m-radial.svg")}
+          src={assetUrl("/Images/hero/m-radial-v2.svg")}
           alt=""
           fill
           className="object-fill"
@@ -131,7 +132,7 @@ export default function BlueprintHeroMobile() {
             <h1 className="absolute top-[2px] left-5 w-[350px] max-w-[calc(100%-40px)] text-[22px] leading-[26px] font-semibold">
               Turnkey Cold Storage &{" "}
               <span className="block">Temperature-Controlled</span>
-              <span className="mt-[4px] block w-fit max-w-full bg-[#C4161C] px-[5px] pb-[4px] text-[19px] whitespace-nowrap max-[359px]:text-[16px]">
+              <span className="mt-[4px] block w-fit max-w-full pb-[4px] text-[19px] whitespace-nowrap max-[359px]:text-[16px]">
                 Warehouse Construction Company
               </span>
             </h1>
