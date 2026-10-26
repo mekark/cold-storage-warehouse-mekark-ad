@@ -174,7 +174,10 @@ function Background() {
 
 export default function LeadBlueprintSection() {
   return (
-    <section className={`${manrope.className} w-full bg-white`}>
+    <section
+      id="enquiry-form"
+      className={`${manrope.className} w-full bg-white`}
+    >
       {/* DESKTOP: exact Figma frame, scaled to the viewport */}
       <div className="hidden min-[1024px]:block">
         <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
