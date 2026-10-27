@@ -42,7 +42,7 @@ export default function HeroBlueprintForm() {
     ) : null;
 
   return (
-    <div className="flex w-full max-w-[659px] shrink-0 flex-col items-center gap-[26px] self-center rounded-[31.931px] bg-white/10 px-5 py-[32px] shadow-[0px_26.428px_88.092px_0px_rgba(0,0,0,0.45)] backdrop-blur-[15px] sm:px-[50px] sm:py-[44px] min-[1024px]:mt-[1.08px] min-[1024px]:w-[659px]">
+    <div className="flex w-full max-w-[659px] shrink-0 flex-col items-center gap-[26px] self-center rounded-[31.931px] bg-white/10 px-5 py-[32px] shadow-[0px_26.428px_88.092px_0px_rgba(0,0,0,0.45)] backdrop-blur-[15px] sm:px-[50px] sm:py-[44px] min-[1024px]:mt-[1.08px] min-[1024px]:mr-[45px] min-[1024px]:w-[659px]">
       <div className="flex w-full flex-col items-center gap-[6px] text-center">
         <h3 className="w-full text-[19px] leading-[normal] font-extrabold text-white sm:text-[24px]">
           Request Your Cold Storage Engineering Blueprint &amp; Quote
