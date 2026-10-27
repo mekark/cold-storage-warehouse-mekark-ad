@@ -69,9 +69,6 @@ function beamGradient(alpha: number) {
   return `linear-gradient(to bottom, ${stops.join(", ")})`;
 }
 
-// Floor strip fades in from transparent (53px into the strip) to solid at the bottom
-const FLOOR_MASK = "linear-gradient(to top, #000 0px, transparent 245.6px)";
-
 export default function SolutionsSection() {
   return (
     <section className={`${manrope.className} w-full bg-[#f9f6f7]`}>
@@ -82,33 +79,6 @@ export default function SolutionsSection() {
             className="relative flex w-[1920px] flex-col items-center gap-[50px] overflow-hidden bg-[#f2f6f9] px-[80px] py-[60px]"
             style={{ height: DESIGN_HEIGHT }}
           >
-            {/* concrete floor along the bottom, fading up into the background */}
-            <div
-              className="pointer-events-none absolute top-[395px] left-0 h-[299px] w-[1920px] opacity-72"
-              style={{ maskImage: FLOOR_MASK, WebkitMaskImage: FLOOR_MASK }}
-            >
-              <Image
-                src="/Images/solutions/solutions-floor.webp"
-                alt=""
-                width={2000}
-                height={312}
-                sizes="100vw"
-                className="block h-auto w-full max-w-none"
-              />
-            </div>
-
-            {/* faint, blurred cold-store photo behind everything */}
-            <div className="pointer-events-none absolute top-[-42px] left-[-6px] h-[1087px] w-[1932px] opacity-20 blur-[3px]">
-              <Image
-                src="/Images/solutions/solutions-desktop-bg.webp"
-                alt=""
-                fill
-                sizes="60vw"
-                quality={50}
-                className="object-cover"
-              />
-            </div>
-
             {/* soft grey glow behind the heading */}
             <Image
               src={assetUrl("/Images/solutions/glow.svg")}
@@ -177,20 +147,6 @@ export default function SolutionsSection() {
 
       {/* TABLET + MOBILE (below 1024px) */}
       <div className="relative overflow-hidden bg-[#f2f2f2] px-5 pt-8 pb-[30px] sm:px-10 sm:pt-12 sm:pb-14 min-[1024px]:hidden">
-        {/* faint, blurred cold-store photo behind everything (Figma 390 frame: 853x1516, bleeds off the right edge) */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-[-80px] h-[1516px] w-[853px] opacity-25 blur-[3px] sm:inset-0 sm:h-full sm:w-full">
-            <Image
-              src="/Images/solutions/solutions-mobile-bg.webp"
-              alt=""
-              fill
-              sizes="(min-width: 640px) 100vw, 400px"
-              quality={50}
-              className="object-cover"
-            />
-          </div>
-        </div>
-
         {/* red light beam from the left edge */}
         <div className="pointer-events-none absolute top-[108px] left-[-270.7px] flex h-[294.5px] w-[457.9px] items-center justify-center">
           <div
