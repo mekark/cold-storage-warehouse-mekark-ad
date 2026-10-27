@@ -4,122 +4,73 @@ import { assetUrl } from "@/lib/assetPrefix";
 import ScaledCanvas from "@/components/ScaledCanvas";
 
 const DESIGN_WIDTH = 1920;
-const DESIGN_HEIGHT = 648;
+const DESIGN_HEIGHT = 694;
 
 const EYEBROW = "Specialized Cold Chain Solutions We Build";
-
-// Icon SVGs keep their Figma root size and offset inside a 40px box
-const ICONS = {
-  warehouse: { src: "/Images/solutions/warehouse.svg", width: 36.0833, height: 34.4173, top: 1.96, left: 1.96 },
-  arrows: { src: "/Images/solutions/arrow-left-right.svg", width: 40, height: 40, top: 0, left: 0 },
-  building: { src: "/Images/solutions/building-complex.svg", width: 36.0833, height: 32.75, top: 3.63, left: 1.96 },
-};
+const SUBTITLE = "Industry-Specific Temperature Controlled Warehouse Construction";
 
 const SOLUTIONS: {
   title: string;
   text: string;
-  icon: keyof typeof ICONS;
-  // Desktop text widths from Figma, so titles wrap like the design
-  width: number;
-  titleWidth: number;
-  textWidth: number;
+  // Card photo; desktopPosition keeps the Figma crop on the wide desktop card
+  image: string;
+  desktopPosition?: string;
+  // The 3PL photo is much wider than its mobile box, so it needs more width to stay sharp
+  mobileSize?: string;
 }[] = [
   {
     title: "3PL Multi-Temperature Cold Chain Hubs",
     text: "High-bay mobile/pallet racking cold stores with 12m+ height, insulated dock pods, and multi-chamber layouts for frozen and chilled SKUs.",
-    icon: "warehouse",
-    width: 422,
-    titleWidth: 365,
-    textWidth: 389,
+    image: "/Images/solutions/card-3pl.webp",
+    desktopPosition: "26% center",
+    mobileSize: "85vw",
   },
   {
     title: "Pharmaceutical & Life Sciences Cold Rooms",
     text: "WHO-GMP compliant +2°C to +8°C and +15°C to +25°C facilities with cleanroom-grade cam-lock PIR panels and redundant HVAC support.",
-    icon: "arrows",
-    width: 422,
-    titleWidth: 325,
-    textWidth: 381,
+    image: "/Images/solutions/card-pharma.webp",
   },
   {
     title: "Seafood, Meat & Dairy Processing Cold Stores",
     text: "Integrated blast freezers (-35°C), glazing/processing halls, and deep-freeze pallet chambers with hygienic stainless-steel coving and epoxy flooring.",
-    icon: "building",
-    width: 423,
-    titleWidth: 300,
-    textWidth: 390,
+    image: "/Images/solutions/card-seafood.webp",
   },
   {
     title: "Agri & Controlled Atmosphere (CA) Cold Stores",
     text: "Gas-tight cold rooms for fruits, vegetables, and seeds with humidity and CO₂/O₂ control readiness.",
-    icon: "building",
-    width: 421,
-    titleWidth: 386,
-    textWidth: 390,
+    image: "/Images/solutions/card-agri.webp",
   },
 ];
 
-// Vertical divider that fades in from the top of each card
-const DIVIDER_STYLE = {
-  backgroundImage: "linear-gradient(to bottom, rgba(181, 181, 181, 0), rgb(181, 181, 181))",
-};
+// Red light beams in the top corners: [bounding box, rotated gradient bar]
+const BEAMS = [
+  {
+    box: { left: 1349.33, top: -279.16, width: 700.721, height: 541.879 },
+    bar: { width: 628.544, rotate: 24.31, from: "#c10300" },
+  },
+  {
+    box: { left: -131.04, top: 147.13, width: 407.789, height: 373.063 },
+    bar: { width: 354.707, rotate: 11.08, from: "rgba(193,3,0,0.82)" },
+  },
+];
 
-function Icon({ name, size = 40 }: { name: keyof typeof ICONS; size?: number }) {
-  const icon = ICONS[name];
-  const k = size / 40;
-  return (
-    <span className="relative block shrink-0" style={{ width: size, height: size }}>
-      <Image
-        src={assetUrl(icon.src)}
-        alt=""
-        width={icon.width}
-        height={icon.height}
-        className="absolute max-w-none"
-        style={{
-          top: icon.top * k,
-          left: icon.left * k,
-          width: icon.width * k,
-          height: icon.height * k,
-        }}
-      />
-    </span>
-  );
+/**
+ * Red-to-transparent beam gradient as Figma paints it: Figma blends the colour
+ * toward #f2f6f9 while fading, so the middle turns soft pink. A plain CSS
+ * gradient stays pure red until it vanishes, so the stops are spelled out.
+ */
+function beamGradient(alpha: number) {
+  const stops = [0, 0.25, 0.5, 0.75, 1].map((t) => {
+    const r = 193 + (242 - 193) * t;
+    const g = 3 + (246 - 3) * t;
+    const b = 249 * t;
+    return `rgba(${r},${g},${b},${+(alpha * (1 - t)).toFixed(3)}) ${t * 100}%`;
+  });
+  return `linear-gradient(to bottom, ${stops.join(", ")})`;
 }
 
-function Heading({ desktop }: { desktop?: boolean }) {
-  return (
-    <div className={`flex flex-col font-bold ${desktop ? "gap-[10px]" : "gap-[8px]"}`}>
-      <p
-        className={`text-[#ed1d23] uppercase ${
-          desktop
-            ? "text-[16px] leading-[21.304px] tracking-[1.5978px]"
-            : "text-[12px] leading-[16px] tracking-[1.5978px] sm:text-[14px] sm:leading-[20px]"
-        }`}
-      >
-        {desktop ? (
-          EYEBROW
-        ) : (
-          <>
-            Specialized Cold Chain Solutions <br className="max-sm:block hidden" />
-            We Build
-          </>
-        )}
-      </p>
-      <h2
-        className={`text-[#0f172a] ${
-          desktop
-            ? "text-[66px] leading-[73.333px]"
-            : "text-[min(28px,calc((100vw-40px)/12.6))] leading-[1.15] font-extrabold sm:text-[44px] sm:leading-[52px]"
-        }`}
-      >
-        Industry-Specific{" "}
-        <br className={desktop ? "hidden" : "max-sm:block hidden"} />
-        <span className="text-[#ed1d23]">Temperature Controlled</span>{" "}
-        <br className={desktop ? "hidden" : "max-sm:block hidden"} />
-        Warehouse Construction
-      </h2>
-    </div>
-  );
-}
+// Floor strip fades in from transparent (53px into the strip) to solid at the bottom
+const FLOOR_MASK = "linear-gradient(to top, #000 0px, transparent 245.6px)";
 
 export default function SolutionsSection() {
   return (
@@ -128,50 +79,95 @@ export default function SolutionsSection() {
       <div className="hidden min-[1024px]:block">
         <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
           <div
-            className="relative w-[1920px] overflow-hidden bg-[#f9f6f7]"
+            className="relative flex w-[1920px] flex-col items-center gap-[50px] overflow-hidden bg-[#f2f6f9] px-[80px] py-[60px]"
             style={{ height: DESIGN_HEIGHT }}
           >
-            {/* warehouse photo, mirrored so its faded edge runs into the heading */}
-            <div className="absolute top-[-168px] left-0 h-[652px] w-[1216px] -scale-x-100">
+            {/* concrete floor along the bottom, fading up into the background */}
+            <div
+              className="pointer-events-none absolute top-[395px] left-0 h-[299px] w-[1920px] opacity-72"
+              style={{ maskImage: FLOOR_MASK, WebkitMaskImage: FLOOR_MASK }}
+            >
               <Image
-                src="/Images/solutions/solutions-bg.webp"
-                alt="Cold storage warehouse with loading docks"
+                src="/Images/solutions/solutions-floor.webp"
+                alt=""
+                width={2000}
+                height={312}
+                sizes="100vw"
+                className="block h-auto w-full max-w-none"
+              />
+            </div>
+
+            {/* faint, blurred cold-store photo behind everything */}
+            <div className="pointer-events-none absolute top-[-42px] left-[-6px] h-[1087px] w-[1932px] opacity-20 blur-[3px]">
+              <Image
+                src="/Images/solutions/solutions-desktop-bg.webp"
+                alt=""
                 fill
-                sizes="(min-width: 1024px) 64vw, 100vw"
+                sizes="60vw"
+                quality={50}
                 className="object-cover"
               />
             </div>
 
-            <div className="absolute top-[72px] left-[977px] w-[863px]">
-              <Heading desktop />
+            {/* soft grey glow behind the heading */}
+            <Image
+              src={assetUrl("/Images/solutions/glow.svg")}
+              alt=""
+              width={1665}
+              height={1099}
+              className="pointer-events-none absolute top-[-288px] left-[100px] max-w-none"
+            />
+
+            {BEAMS.map(({ box, bar }) => (
+              <div
+                key={box.left}
+                className="pointer-events-none absolute flex items-center justify-center"
+                style={box}
+              >
+                <div
+                  className="h-[310.711px] flex-none"
+                  style={{
+                    width: bar.width,
+                    transform: `rotate(${bar.rotate}deg)`,
+                    backgroundImage: `linear-gradient(to bottom, ${bar.from}, rgba(242,246,249,0))`,
+                  }}
+                />
+              </div>
+            ))}
+
+            <div className="relative flex flex-col items-center gap-[10px] text-center">
+              <h2 className="w-[1502px] text-[66px] leading-[73.333px] font-bold text-[#0f172a]">
+                {EYEBROW}
+              </h2>
+              <p className="w-[1219px] text-[24px] leading-[20px] font-normal text-[#64748b]">
+                {SUBTITLE}
+              </p>
             </div>
 
-            <ul className="absolute top-[378px] left-[80px] flex gap-[24px]">
+            <ul className="relative flex w-full items-start justify-center gap-[24px]">
               {SOLUTIONS.map((item) => (
                 <li
                   key={item.title}
-                  className="relative flex h-[210px] shrink-0 flex-col gap-[10px]"
-                  style={{ width: item.width }}
+                  className="flex h-[420px] w-[422px] shrink-0 flex-col items-center gap-[20px] overflow-clip rounded-[20px] bg-white p-[20px] shadow-[5px_5px_4.3px_-4px_rgba(0,0,0,0.2)]"
                 >
-                  <Icon name={item.icon} />
-                  <div className="flex flex-col gap-[12px]">
-                    <h3
-                      className="text-[24px] leading-[26px] font-semibold text-black"
-                      style={{ width: item.titleWidth }}
-                    >
+                  <div className="relative h-[196px] w-[384px] shrink-0 overflow-hidden rounded-t-[12px]">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="20vw"
+                      className="object-cover"
+                      style={{ objectPosition: item.desktopPosition }}
+                    />
+                  </div>
+                  <div className="flex w-full flex-col gap-[10px]">
+                    <h3 className="text-[24px] leading-[28px] font-semibold text-black">
                       {item.title}
                     </h3>
-                    <p
-                      className="text-[18px] leading-[24px] font-normal text-[#6e6e6e]"
-                      style={{ width: item.textWidth }}
-                    >
+                    <p className="text-[18px] leading-[24px] font-normal text-[#6e6e6e]">
                       {item.text}
                     </p>
                   </div>
-                  <span
-                    style={DIVIDER_STYLE}
-                    className="absolute top-0 right-0 h-full w-px"
-                  />
                 </li>
               ))}
             </ul>
@@ -180,28 +176,67 @@ export default function SolutionsSection() {
       </div>
 
       {/* TABLET + MOBILE (below 1024px) */}
-      <div className="relative overflow-hidden pb-[30px] sm:pb-14 min-[1024px]:hidden">
-        {/* Mobile (Figma 390 frame): photo bleeds past the right edge and fades under the heading */}
-        <div className="absolute top-[-22.56vw] left-0 h-[96.92vw] w-[178.97vw] -scale-x-100 sm:relative sm:top-0 sm:aspect-[1216/652] sm:h-auto sm:w-full">
-          <Image
-            src="/Images/solutions/solutions-bg.webp"
-            alt="Cold storage warehouse with loading docks"
-            fill
-            sizes="(min-width: 640px) 100vw, 179vw"
-            className="object-cover"
+      <div className="relative overflow-hidden bg-[#f2f2f2] px-5 pt-8 pb-[30px] sm:px-10 sm:pt-12 sm:pb-14 min-[1024px]:hidden">
+        {/* faint, blurred cold-store photo behind everything (Figma 390 frame: 853x1516, bleeds off the right edge) */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-[-80px] h-[1516px] w-[853px] opacity-25 blur-[3px] sm:inset-0 sm:h-full sm:w-full">
+            <Image
+              src="/Images/solutions/solutions-mobile-bg.webp"
+              alt=""
+              fill
+              sizes="(min-width: 640px) 100vw, 400px"
+              quality={50}
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        {/* red light beam from the left edge */}
+        <div className="pointer-events-none absolute top-[108px] left-[-270.7px] flex h-[294.5px] w-[457.9px] items-center justify-center">
+          <div
+            className="h-[235.7px] w-[428.6px] flex-none rotate-[8.21deg]"
+            style={{
+              backgroundImage: beamGradient(0.82),
+            }}
           />
         </div>
-        <div className="relative px-5 pt-[55.13vw] sm:-mt-10 sm:px-10 sm:pt-0">
-          <Heading />
-          <ul className="mt-[20px] grid grid-cols-1 gap-y-[16px] sm:mt-8 sm:grid-cols-2 sm:gap-x-10">
+
+        {/* red light beam from the top right corner (Figma: 240x120 bar rotated in a 268x208 box at x220.6, y-90 of the 390 frame) */}
+        <div className="pointer-events-none absolute top-[-90px] right-[-98.73px] flex h-[208.147px] w-[268.119px] items-center justify-center">
+          <div
+            className="h-[120px] w-[240px] flex-none rotate-[24.31deg]"
+            style={{
+              backgroundImage: beamGradient(1),
+            }}
+          />
+        </div>
+
+        <div className="relative mx-auto flex max-w-[350px] flex-col items-center gap-[16px] sm:max-w-none">
+          <div className="flex w-full flex-col items-center gap-[10px] text-center">
+            <h2 className="w-full text-[28px] leading-[32px] font-bold text-[#0f172a] sm:text-[44px] sm:leading-[52px]">
+              {EYEBROW}
+            </h2>
+            <p className="w-full text-[14px] leading-[20px] font-normal text-[#464748] sm:text-[18px] sm:leading-[24px]">
+              {SUBTITLE}
+            </p>
+          </div>
+          <ul className="flex w-full flex-col items-center gap-[16px] sm:grid sm:grid-cols-2 sm:items-stretch sm:gap-6">
             {SOLUTIONS.map((item) => (
               <li
                 key={item.title}
-                className="flex items-start gap-[12px] border-b border-solid border-[#E2E2E2] pb-[16px] first:pt-[16px] last:border-b-0 sm:first:pt-0 sm:[&:nth-last-child(2):nth-child(odd)]:border-b-0"
+                className="flex w-full flex-col gap-[10px] overflow-clip rounded-[20px] bg-white px-[20px] py-[16px] shadow-[5px_5px_4.3px_-4px_rgba(0,0,0,0.2)]"
               >
-                <Icon name={item.icon} size={24} />
-                <div className="flex min-w-0 flex-1 flex-col gap-[8px]">
-                  <h3 className="text-[20px] leading-[24px] font-bold text-black">
+                <div className="relative h-[160px] w-full shrink-0 overflow-hidden rounded-t-[12px] sm:h-[196px]">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes={`(min-width: 640px) 40vw, ${item.mobileSize ?? "50vw"}`}
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex w-full flex-col gap-[6px]">
+                  <h3 className="text-[18px] leading-[20px] font-semibold text-black">
                     {item.title}
                   </h3>
                   <p className="text-[14px] leading-[20px] font-normal text-[#6e6e6e]">
