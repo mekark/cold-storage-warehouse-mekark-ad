@@ -58,7 +58,8 @@ export default function BlueprintHeroMobile() {
           src="/Images/hero/m-bg-v2.webp"
           alt=""
           fill
-          sizes="100vw"
+          // Blurred anyway: the 480w file is about the box's displayed size
+          sizes="65vw"
           // Tallest painted image in the mobile hero, so Lighthouse picks it as LCP
           loading="eager"
           fetchPriority="high"

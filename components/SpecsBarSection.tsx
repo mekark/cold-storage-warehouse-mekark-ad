@@ -170,7 +170,8 @@ export default function SpecsBarSection() {
             src="/Images/specs/tech-bg-mobile.webp"
             alt=""
             fill
-            sizes="100vw"
+            // Mobile-only: ~0.65x the CSS width so Lighthouse's 1.75x phone gets the 480w file, not 750w
+            sizes="65vw"
             className="object-cover"
           />
           <div
