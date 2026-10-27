@@ -45,7 +45,7 @@ const SOLUTIONS: {
 // Red light beams in the top corners: [bounding box, rotated gradient bar]
 const BEAMS = [
   {
-    box: { left: 1349.33, top: -279.16, width: 700.721, height: 541.879 },
+    box: { left: 1469.33, top: -319.16, width: 700.721, height: 541.879 },
     bar: { width: 628.544, rotate: 24.31, from: "#c10300" },
   },
   {
