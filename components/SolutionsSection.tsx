@@ -42,33 +42,6 @@ const SOLUTIONS: {
   },
 ];
 
-// Red light beams in the top corners: [bounding box, rotated gradient bar]
-const BEAMS = [
-  {
-    box: { left: 1469.33, top: -319.16, width: 700.721, height: 541.879 },
-    bar: { width: 628.544, rotate: 24.31, from: "#c10300" },
-  },
-  {
-    box: { left: -131.04, top: 147.13, width: 407.789, height: 373.063 },
-    bar: { width: 354.707, rotate: 11.08, from: "rgba(193,3,0,0.82)" },
-  },
-];
-
-/**
- * Red-to-transparent beam gradient as Figma paints it: Figma blends the colour
- * toward #f2f6f9 while fading, so the middle turns soft pink. A plain CSS
- * gradient stays pure red until it vanishes, so the stops are spelled out.
- */
-function beamGradient(alpha: number) {
-  const stops = [0, 0.25, 0.5, 0.75, 1].map((t) => {
-    const r = 193 + (242 - 193) * t;
-    const g = 3 + (246 - 3) * t;
-    const b = 249 * t;
-    return `rgba(${r},${g},${b},${+(alpha * (1 - t)).toFixed(3)}) ${t * 100}%`;
-  });
-  return `linear-gradient(to bottom, ${stops.join(", ")})`;
-}
-
 export default function SolutionsSection() {
   return (
     <section className={`${manrope.className} w-full bg-[#f9f6f7]`}>
@@ -87,23 +60,6 @@ export default function SolutionsSection() {
               height={1099}
               className="pointer-events-none absolute top-[-288px] left-[100px] max-w-none"
             />
-
-            {BEAMS.map(({ box, bar }) => (
-              <div
-                key={box.left}
-                className="pointer-events-none absolute flex items-center justify-center"
-                style={box}
-              >
-                <div
-                  className="h-[310.711px] flex-none"
-                  style={{
-                    width: bar.width,
-                    transform: `rotate(${bar.rotate}deg)`,
-                    backgroundImage: `linear-gradient(to bottom, ${bar.from}, rgba(242,246,249,0))`,
-                  }}
-                />
-              </div>
-            ))}
 
             <div className="relative flex flex-col items-center gap-[10px] text-center">
               <h2 className="w-[1502px] text-[66px] leading-[73.333px] font-bold text-[#0f172a]">
@@ -147,26 +103,6 @@ export default function SolutionsSection() {
 
       {/* TABLET + MOBILE (below 1024px) */}
       <div className="relative overflow-hidden bg-[#f2f2f2] px-5 pt-8 pb-[30px] sm:px-10 sm:pt-12 sm:pb-14 min-[1024px]:hidden">
-        {/* red light beam from the left edge */}
-        <div className="pointer-events-none absolute top-[108px] left-[-270.7px] flex h-[294.5px] w-[457.9px] items-center justify-center">
-          <div
-            className="h-[235.7px] w-[428.6px] flex-none rotate-[8.21deg]"
-            style={{
-              backgroundImage: beamGradient(0.82),
-            }}
-          />
-        </div>
-
-        {/* red light beam from the top right corner (Figma: 240x120 bar rotated in a 268x208 box at x220.6, y-90 of the 390 frame) */}
-        <div className="pointer-events-none absolute top-[-90px] right-[-98.73px] flex h-[208.147px] w-[268.119px] items-center justify-center">
-          <div
-            className="h-[120px] w-[240px] flex-none rotate-[24.31deg]"
-            style={{
-              backgroundImage: beamGradient(1),
-            }}
-          />
-        </div>
-
         <div className="relative mx-auto flex max-w-[350px] flex-col items-center gap-[16px] sm:max-w-none">
           <div className="flex w-full flex-col items-center gap-[10px] text-center">
             <h2 className="w-full text-[28px] leading-[32px] font-bold text-[#0f172a] sm:text-[44px] sm:leading-[52px]">
