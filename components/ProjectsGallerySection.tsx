@@ -17,60 +17,43 @@ type Tile = {
   coverClass?: string;
 };
 
-// 2 x 3 grid, left-to-right / top-to-bottom, as laid out in the Figma frame
+// 2 x 2 grid, left-to-right / top-to-bottom, as laid out in the Figma frame
 const TILES: Tile[] = [
   {
-    src: "/Images/gallery/p6.webp",
-    alt: "Steel warehouse with blue trim and loading bays",
-    radiusClass: "rounded-tl-[32px]",
-    imageClass:
-      "absolute top-[-10.66%] left-[-10.82%] h-[110.75%] w-[110.81%] max-w-none",
-    coverClass: "object-cover scale-[1.22]",
-  },
-  {
-    src: "/Images/gallery/p1.webp",
-    alt: "Modern PEB warehouse with striped glazed facade",
-    radiusClass: "rounded-tr-[32px]",
-    imageClass:
-      "absolute top-0 left-[0.02%] h-[101.74%] w-[101.65%] max-w-none",
-  },
-  {
-    src: "/Images/gallery/g3-v4.webp",
-    alt: "Aerial view of a green and beige distribution warehouse with loading docks",
-    radiusClass: "rounded-bl-[32px]",
-    imageClass: "absolute inset-0 size-full max-w-none object-cover",
-  },
-  {
-    src: "/Images/gallery/p2.webp",
+    src: "/Images/gallery/c1.webp",
     alt: "Aerial view of a large white warehouse with loading docks",
-    radiusClass: "rounded-br-[32px]",
+    radiusClass: "rounded-tl-[32px]",
     imageClass:
       "absolute top-[-2.5%] left-[-5.01%] size-[104.97%] max-w-none",
   },
   {
-    src: "/Images/gallery/p4.webp",
-    alt: "Blue PEB warehouse on an industrial estate",
-    radiusClass: "rounded-bl-[32px]",
+    src: "/Images/gallery/c2.webp",
+    alt: "Cold storage interior with pallet racking and blue lighting",
+    radiusClass: "rounded-tr-[32px]",
     imageClass:
       "absolute inset-0 size-full max-w-none object-cover",
   },
   {
-    src: "/Images/gallery/p3-v3.webp",
+    src: "/Images/gallery/c3.webp",
     alt: "Large cold storage warehouse with rooftop condensers and loading trucks",
-    radiusClass: "rounded-br-[32px]",
+    radiusClass: "rounded-bl-[32px]",
     imageClass:
       "absolute top-[-2.74%] left-[-3.73%] h-[110.81%] w-[110.82%] max-w-none",
+  },
+  {
+    src: "/Images/gallery/c4.webp",
+    alt: "Cold storage corridor with stacked pallets and loading docks",
+    radiusClass: "rounded-br-[32px]",
+    imageClass:
+      "absolute inset-0 size-full max-w-none object-cover",
   },
 ];
 
 function Heading() {
   return (
-    <div className="flex w-full flex-col gap-[13px] font-bold min-[1024px]:w-[509px]">
-      <p className="text-[14px] leading-[21.304px] tracking-[1.5978px] text-[#ED1D23] uppercase min-[1024px]:text-[16px]">
-        our work
-      </p>
-      <h2 className="text-[40px] leading-[1.05] text-[#0F172A] sm:text-[52px] min-[1024px]:text-[66px]! min-[1024px]:leading-[60px]!">
-        Projects <span className="text-[#ED1D23]">Gallery</span>
+    <div className="flex w-full flex-col gap-[13px] font-bold min-[1024px]:w-[648px]">
+      <h2 className="text-[40px] whitespace-nowrap leading-[1.05] text-[#0F172A] sm:text-[52px] min-[1024px]:text-[66px]! min-[1024px]:leading-[60px]!">
+        Completed Projects
       </h2>
     </div>
   );
@@ -98,7 +81,7 @@ export default function ProjectsGallerySection() {
           <div className="flex w-[1920px] flex-col items-start gap-[52px] bg-[#F9F6F7] px-[80px] py-[52px]">
             <Heading />
 
-            <div className="grid h-[1515.5px] w-full grid-cols-2 grid-rows-3 gap-[25px]">
+            <div className="grid h-[1001.5px] w-full grid-cols-2 grid-rows-2 gap-[25px]">
               {TILES.map((tile) => (
                 <div
                   key={tile.src}
@@ -122,11 +105,8 @@ export default function ProjectsGallerySection() {
       {/* MOBILE (below 640px) */}
       <div className="flex flex-col gap-[24px] px-[20px] py-[32px] sm:hidden">
         <div className="flex w-full flex-col gap-[8px] font-bold">
-          <p className="text-[12px] leading-[18px] tracking-[1.5978px] text-[#ED1D23] uppercase">
-            our work
-          </p>
           <h2 className="text-[28px] leading-[32px] whitespace-nowrap text-[#0F172A]">
-            Projects <span className="text-[#ED1D23]">Gallery</span>
+            Completed Projects <span className="text-[#ED1D23]"></span>
           </h2>
         </div>
 
@@ -142,7 +122,7 @@ export default function ProjectsGallerySection() {
                 fill
                 sizes="100vw"
                 quality={55}
-                className={tile.coverClass ?? "object-cover"}
+                className="object-cover"
               />
             </div>
           ))}
