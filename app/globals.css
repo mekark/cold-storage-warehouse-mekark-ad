@@ -17,6 +17,24 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 16px;
+}
+
+/* Phone: the header is fixed (~45px tall), so keep anchor targets clear of it */
+@media (max-width: 639px) {
+  html {
+    scroll-padding-top: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -59,6 +77,17 @@ select {
 
 .hero-logo-track {
   animation: hero-logo-marquee 40s linear infinite;
+}
+
+/* Phone: no marquee, just the first four logos spread across the card. */
+@media (max-width: 639px) {
+  .hero-logo-track {
+    animation: none;
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    padding-right: 0;
+  }
 }
 
 .hero-logo-track:hover {

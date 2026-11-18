@@ -9,12 +9,8 @@ const VIEW_ALL_HREF = "https://www.mekark.com/projects/completed-projects";
 type Tile = {
   src: string;
   alt: string;
-  /** Rounded corner of the tile in the Figma grid (only outer-style corners are rounded) */
+  /** Desktop-only rounded corner of the tile in the Figma grid (outer corners only) */
   radiusClass: string;
-  /** Tailwind classes positioning the <img> inside the tile (Figma crop) */
-  imageClass: string;
-  /** Extra zoom for mobile/tablet object-cover images */
-  coverClass?: string;
 };
 
 // 2 x 2 grid, left-to-right / top-to-bottom, as laid out in the Figma frame
@@ -22,138 +18,69 @@ const TILES: Tile[] = [
   {
     src: "/Images/gallery/c1.webp",
     alt: "Aerial view of a large white warehouse with loading docks",
-    radiusClass: "rounded-tl-[32px]",
-    imageClass:
-      "absolute top-[-2.5%] left-[-5.01%] size-[104.97%] max-w-none",
+    radiusClass: "lg:rounded-none lg:rounded-tl-[32px]",
   },
   {
     src: "/Images/gallery/c2.webp",
     alt: "Cold storage interior with pallet racking and blue lighting",
-    radiusClass: "rounded-tr-[32px]",
-    imageClass:
-      "absolute inset-0 size-full max-w-none object-cover",
+    radiusClass: "lg:rounded-none lg:rounded-tr-[32px]",
   },
   {
     src: "/Images/gallery/c3.webp",
     alt: "Large cold storage warehouse with rooftop condensers and loading trucks",
-    radiusClass: "rounded-bl-[32px]",
-    imageClass:
-      "absolute top-[-2.74%] left-[-3.73%] h-[110.81%] w-[110.82%] max-w-none",
+    radiusClass: "lg:rounded-none lg:rounded-bl-[32px]",
   },
   {
     src: "/Images/gallery/c4.webp",
     alt: "Cold storage corridor with stacked pallets and loading docks",
-    radiusClass: "rounded-br-[32px]",
-    imageClass:
-      "absolute inset-0 size-full max-w-none object-cover",
+    radiusClass: "lg:rounded-none lg:rounded-br-[32px]",
   },
 ];
-
-function Heading() {
-  return (
-    <div className="flex w-full flex-col gap-[13px] font-bold min-[1024px]:w-[648px]">
-      <h2 className="text-[40px] whitespace-nowrap leading-[1.05] text-[#0F172A] sm:text-[52px] min-[1024px]:text-[66px]! min-[1024px]:leading-[60px]!">
-        Completed Projects
-      </h2>
-    </div>
-  );
-}
-
-function ViewAllButton({ className }: { className: string }) {
-  return (
-    <a
-      href={VIEW_ALL_HREF}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`flex items-center justify-center bg-[#C4161C] text-center font-extrabold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.809px_17.618px_rgba(196,22,28,0.3)] ${className}`}
-    >
-      View All →
-    </a>
-  );
-}
 
 export default function ProjectsGallerySection() {
   return (
     <section className={`${manrope.className} w-full bg-[#F9F6F7]`}>
-      {/* DESKTOP: exact Figma frame, scaled to the viewport */}
-      <div className="hidden min-[1024px]:block">
-        <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
-          <div className="flex w-[1920px] flex-col items-start gap-[52px] bg-[#F9F6F7] px-[80px] py-[52px]">
-            <Heading />
-
-            <div className="grid h-[1001.5px] w-full grid-cols-2 grid-rows-2 gap-[25px]">
-              {TILES.map((tile) => (
-                <div
-                  key={tile.src}
-                  className={`relative overflow-hidden bg-[#D9D9D9] ${tile.radiusClass}`}
-                >
-                  <Image
-                    src={tile.src}
-                    alt={tile.alt}
-                    width={1672}
-                    height={941}
-                    sizes="46vw"
-                    className={tile.imageClass}
-                  />
-                </div>
-              ))}
-            </div>
+      {/* One responsive layout: phone stack, tablet 2-col grid, desktop Figma frame
+          (1920 wide) scaled to the viewport. */}
+      <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
+        <div className="flex flex-col gap-[24px] bg-[#F9F6F7] px-[20px] py-[32px] sm:gap-8 sm:px-10 sm:py-16 lg:w-[1920px] lg:items-start lg:gap-[52px] lg:px-[80px] lg:py-[52px]">
+          <div className="flex w-full flex-col gap-[13px] font-bold lg:w-[648px]">
+            <h2 className="text-[28px] leading-[32px] font-bold whitespace-nowrap text-[#0F172A] sm:text-[52px] sm:leading-[1.05] lg:text-[66px] lg:leading-[60px]">
+              Completed Projects
+            </h2>
           </div>
-        </ScaledCanvas>
-      </div>
 
-      {/* MOBILE (below 640px) */}
-      <div className="flex flex-col gap-[24px] px-[20px] py-[32px] sm:hidden">
-        <div className="flex w-full flex-col gap-[8px] font-bold">
-          <h2 className="text-[28px] leading-[32px] whitespace-nowrap text-[#0F172A]">
-            Completed Projects <span className="text-[#ED1D23]"></span>
-          </h2>
-        </div>
+          <div className="flex w-full flex-col gap-[16px] sm:grid sm:grid-cols-2 lg:h-[1001.5px] lg:grid-rows-2 lg:gap-[25px]">
+            {TILES.map((tile) => (
+              <div
+                key={tile.src}
+                className={`relative aspect-[1672/941] w-full overflow-hidden rounded-[16px] bg-[#D9D9D9] lg:aspect-auto ${tile.radiusClass}`}
+              >
+                <Image
+                  src={tile.src}
+                  alt={tile.alt}
+                  fill
+                  sizes="(min-width: 1024px) 46vw, (min-width: 640px) 50vw, 100vw"
+                  quality={55}
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
 
-        <div className="flex w-full flex-col gap-[16px]">
-          {TILES.map((tile) => (
-            <div
-              key={tile.src}
-              className="relative aspect-[1672/941] w-full overflow-hidden rounded-[16px] bg-[#D9D9D9]"
+          {/* tablet only (640px - 1023px) */}
+          <div className="hidden justify-center sm:max-[1023px]:flex sm:max-[1023px]:w-full">
+            <a
+              href={VIEW_ALL_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center rounded-[8.809px] bg-[#C4161C] px-10 py-4 text-center text-[20px] font-extrabold whitespace-nowrap text-[#F5F5F5] drop-shadow-[0px_8.809px_17.618px_rgba(196,22,28,0.3)]"
             >
-              <Image
-                src={tile.src}
-                alt={tile.alt}
-                fill
-                sizes="100vw"
-                quality={55}
-                className="object-cover"
-              />
-            </div>
-          ))}
+              View All →
+            </a>
+          </div>
         </div>
-      </div>
-
-      {/* TABLET (640px - 1023px) */}
-      <div className="hidden px-10 py-16 sm:max-[1023px]:block">
-        <Heading />
-
-        <div className="mt-8 grid grid-cols-2 gap-4">
-          {TILES.map((tile) => (
-            <div
-              key={tile.src}
-              className="relative aspect-[1672/941] overflow-hidden rounded-[16px] bg-[#D9D9D9]"
-            >
-              <Image
-                src={tile.src}
-                alt={tile.alt}
-                fill
-                sizes="50vw"
-                className="object-cover"
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 flex justify-center">
-          <ViewAllButton className="rounded-[8.809px] px-10 py-4 text-[20px]" />
-        </div>
-      </div>
+      </ScaledCanvas>
     </section>
   );
 }

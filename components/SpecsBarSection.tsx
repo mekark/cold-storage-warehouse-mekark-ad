@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { manrope } from "@/lib/fonts";
 import { assetUrl } from "@/lib/assetPrefix";
 import ScaledCanvas from "@/components/ScaledCanvas";
@@ -18,6 +19,8 @@ type Spec = {
   icon: { src: string; width: number; height: number };
   /** Red cards sit on the diagonal of the 2 x 2 grid in the Figma frame */
   accent: boolean;
+  /** Phone-only stacking order; from 640px up the cards follow DOM order */
+  order: string;
 };
 
 const SPECS: Spec[] = [
@@ -27,6 +30,7 @@ const SPECS: Spec[] = [
     caption: "(Ambient/Pharma to Deep Freeze) & -35°C (Blast Freezing)",
     icon: { src: "/Images/specs/tech-thermometer.svg", width: 46.3333, height: 46.3422 },
     accent: true,
+    order: "order-1 sm:order-none",
   },
   {
     label: "Insulation Panels",
@@ -34,6 +38,7 @@ const SPECS: Spec[] = [
     caption: "FM-Approved PIR / PUF Sandwich Panels, 40±2 kg/m³ density",
     icon: { src: "/Images/specs/tech-layers.svg", width: 46.3692, height: 46.33 },
     accent: false,
+    order: "order-2 sm:order-none",
   },
   {
     label: "Floor Insulation",
@@ -41,6 +46,7 @@ const SPECS: Spec[] = [
     caption: "Multi-layer bituthene vapor barrier + sub-floor frost-heave prevention",
     icon: { src: "/Images/specs/tech-building.svg", width: 46.0833, height: 41.7504 },
     accent: false,
+    order: "order-4 sm:order-none",
   },
   {
     label: "Compliance Standards",
@@ -48,217 +54,105 @@ const SPECS: Spec[] = [
     caption: "(Pharma), ISO & National Cold Chain Guidelines",
     icon: { src: "/Images/specs/tech-shield.svg", width: 37.6667, height: 46.3406 },
     accent: true,
+    order: "order-3 sm:order-none",
   },
 ];
-
-function SpecCard({ spec, desktop }: { spec: Spec; desktop?: boolean }) {
-  return (
-    <li
-      className={`flex flex-col items-start gap-[10px] rounded-[20px] ${
-        spec.accent ? "bg-[#ED1D23] px-[20px] py-[32px]" : "bg-white p-[20px]"
-      } ${desktop ? "w-[400px] shrink-0" : "shadow-[0_4px_16px_rgba(15,23,42,0.08)]"}`}
-    >
-      <span className="flex size-[52px] shrink-0 items-center justify-center">
-        <Image
-          src={assetUrl(spec.icon.src)}
-          alt=""
-          width={spec.icon.width}
-          height={spec.icon.height}
-          className="block max-w-none"
-        />
-      </span>
-      <div className="flex flex-col gap-[12px]">
-        <h3
-          className={`text-[24px] leading-[26px] font-bold ${
-            spec.accent ? "text-white" : "text-[#ED1D23]"
-          }`}
-        >
-          {spec.label}
-        </h3>
-        <p
-          className={`text-[18px] leading-[24px] font-medium ${
-            desktop ? "w-[360px]" : ""
-          } ${spec.accent ? "text-[#F8F8F8]" : "text-[#6E6E6E]"}`}
-        >
-          {spec.value} {spec.caption}
-        </p>
-      </div>
-    </li>
-  );
-}
-
-function Heading({ desktop }: { desktop?: boolean }) {
-  return (
-    <div className="flex flex-col items-start gap-[10px] font-bold">
-      <div className="flex items-center gap-[10px]">
-        <Image
-          src={assetUrl("/Images/specs/tech-line.svg")}
-          alt=""
-          width={38}
-          height={2}
-          className="block h-[2px] w-[38px] max-w-none"
-        />
-        <p
-          className={`tracking-[1.5978px] text-[#ED1D23] uppercase ${
-            desktop
-              ? "text-[20px] leading-[21.304px]"
-              : "text-[14px] leading-[20px] sm:text-[16px]"
-          }`}
-        >
-          {EYEBROW}
-        </p>
-      </div>
-      <h2
-        className={`text-[#0F172A] ${
-          desktop
-            ? "w-[755px] text-[50px] leading-[60px]"
-            : "text-[30px] leading-[36px] sm:text-[40px] sm:leading-[48px]"
-        }`}
-      >
-        {HEADING}
-      </h2>
-    </div>
-  );
-}
 
 export default function SpecsBarSection() {
   return (
     <section className={`${manrope.className} w-full bg-white`}>
-      {/* DESKTOP: Figma frame (1920 wide), scaled to the viewport */}
-      <div className="hidden min-[1024px]:block">
-        <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
-          <div
-            className="relative w-[1920px] overflow-hidden bg-white"
-            style={{ height: DESIGN_HEIGHT }}
-          >
-            {/* warehouse photo, washed out on the left behind the heading */}
-            <div className="pointer-events-none absolute top-0 left-0 h-[671px] w-[1920px] overflow-hidden">
-              <Image
-                src="/Images/specs/tech-bg.webp"
-                alt=""
-                width={1983}
-                height={793}
-                sizes="100vw"
-                className="absolute top-0 left-[-5.01%] h-[129.66%] w-[113.31%] max-w-none"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(-85.56deg, rgba(255,255,255,0) 20.733%, rgba(255,255,255,0.6) 54.248%)",
-                }}
-              />
-            </div>
-
-            <div className="absolute top-[118px] left-[75px]">
-              <Heading desktop />
-            </div>
-
-            <ul className="absolute top-[123px] left-[calc(41.67%+91px)] grid grid-cols-[400px_400px] gap-[24px] gap-y-[30px]">
-              {SPECS.map((spec) => (
-                <SpecCard key={spec.label} spec={spec} desktop />
-              ))}
-            </ul>
+      {/* One responsive layout: phone list, tablet 2-col grid, desktop Figma frame
+          (1920 wide) scaled to the viewport. */}
+      <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
+        <div
+          className="relative overflow-hidden bg-white lg:w-[1920px]"
+          style={{ "--h": DESIGN_HEIGHT } as CSSProperties}
+        >
+          {/* warehouse photo, washed out behind the heading */}
+          <div className="pointer-events-none absolute inset-0 lg:top-0 lg:right-auto lg:bottom-auto lg:left-[-5.01%] lg:h-[129.66%] lg:w-[113.31%]">
+            <Image
+              src="/Images/specs/tech-bg.webp"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 100vw, 65vw"
+              className="object-cover"
+            />
           </div>
-        </ScaledCanvas>
-      </div>
-
-      {/* MOBILE (below 640px): Figma node 10976:3445 */}
-      <div className="relative flex flex-col gap-[20px] overflow-hidden px-[20px] py-[32px] sm:hidden">
-        <div className="pointer-events-none absolute inset-0">
-          <Image
-            src="/Images/specs/tech-bg-mobile.webp"
-            alt=""
-            fill
-            // Mobile-only: ~0.65x the CSS width so Lighthouse's 1.75x phone gets the 480w file, not 750w
-            sizes="65vw"
-            className="object-cover"
-          />
           <div
-            className="absolute inset-0"
+            className="pointer-events-none absolute inset-0 lg:hidden"
             style={{
               backgroundImage:
                 "linear-gradient(147.78deg, #fff 25.886%, rgba(255,255,255,0) 72.444%)",
             }}
           />
-        </div>
+          <div
+            className="pointer-events-none absolute inset-0 hidden lg:block"
+            style={{
+              backgroundImage:
+                "linear-gradient(-85.56deg, rgba(255,255,255,0) 20.733%, rgba(255,255,255,0.6) 54.248%)",
+            }}
+          />
 
-        <div className="relative flex flex-col items-start gap-[10px] font-bold">
-          <div className="flex items-center gap-[10px]">
-            <Image
-              src={assetUrl("/Images/specs/tech-line.svg")}
-              alt=""
-              width={38}
-              height={2}
-              className="block h-[2px] w-[38px] max-w-none"
-            />
-            <p className="text-[12px] leading-[16px] tracking-[1.6px] text-[#ED1D23] uppercase">
-              {EYEBROW}
-            </p>
-          </div>
-          <h2 className="text-[28px] leading-[32px] text-[#0F172A]">{HEADING}</h2>
-        </div>
-
-        <ul className="relative flex flex-col gap-[12px]">
-          {[SPECS[0], SPECS[1], SPECS[3], SPECS[2]].map((spec) => (
-            <li
-              key={spec.label}
-              className={`flex items-start gap-[16px] rounded-[16px] px-[20px] ${
-                spec.accent ? "bg-[#ED1D23] py-[20px]" : "bg-white py-[10px]"
-              }`}
-            >
-              <span className="flex size-[28px] shrink-0 items-center justify-center">
+          <div className="relative flex flex-col gap-[20px] px-[20px] py-[32px] sm:gap-8 sm:px-10 sm:py-14 lg:block lg:h-[calc(var(--h)*1px)] lg:p-0">
+            <div className="flex flex-col items-start gap-[10px] font-bold lg:absolute lg:top-[118px] lg:left-[75px]">
+              <div className="flex items-center gap-[10px]">
                 <Image
-                  src={assetUrl(spec.icon.src)}
+                  src={assetUrl("/Images/specs/tech-line.svg")}
                   alt=""
-                  width={spec.icon.width}
-                  height={spec.icon.height}
-                  className="block max-w-none scale-[0.54]"
+                  width={38}
+                  height={2}
+                  className="block h-[2px] w-[38px] max-w-none"
                 />
-              </span>
-              <div className="flex min-w-0 flex-col gap-[8px]">
-                <h3
-                  className={`text-[20px] leading-[24px] font-bold ${
-                    spec.accent ? "text-white" : "text-[#ED1D23]"
-                  }`}
-                >
-                  {spec.label}
-                </h3>
-                <p
-                  className={`text-[14px] leading-[20px] font-normal ${
-                    spec.accent ? "text-[#F8F8F8]" : "text-[#6E6E6E]"
-                  }`}
-                >
-                  {spec.value} {spec.caption}
+                <p className="text-[12px] leading-[16px] tracking-[1.6px] text-[#ED1D23] uppercase sm:text-[16px] sm:leading-[20px] lg:text-[20px] lg:leading-[21.304px] lg:tracking-[1.5978px]">
+                  {EYEBROW}
                 </p>
               </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+              <h2 className="text-[28px] leading-[32px] text-[#0F172A] sm:text-[40px] sm:leading-[48px] lg:w-[755px] lg:text-[50px] lg:leading-[60px]">
+                {HEADING}
+              </h2>
+            </div>
 
-      {/* TABLET (640px - 1023px) */}
-      <div className="relative hidden overflow-hidden px-10 py-14 sm:max-[1023px]:block">
-        <div className="pointer-events-none absolute inset-0">
-          <Image
-            src="/Images/specs/tech-bg.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-white/70" />
+            <ul className="flex flex-col gap-[12px] sm:grid sm:grid-cols-2 sm:gap-[16px] lg:absolute lg:top-[123px] lg:left-[calc(41.67%+91px)] lg:grid-cols-[400px_400px] lg:gap-[24px] lg:gap-y-[30px]">
+              {SPECS.map((spec) => (
+                <li
+                  key={spec.label}
+                  className={`flex items-start gap-[16px] rounded-[16px] px-[20px] ${spec.order} sm:flex-col sm:gap-[10px] sm:rounded-[20px] lg:w-[400px] lg:shrink-0 ${
+                    spec.accent
+                      ? "bg-[#ED1D23] py-[20px] sm:py-[32px]"
+                      : "bg-white py-[10px] sm:p-[20px] sm:shadow-[0_4px_16px_rgba(15,23,42,0.08)] lg:shadow-none"
+                  }`}
+                >
+                  <span className="flex size-[28px] shrink-0 items-center justify-center sm:size-[52px]">
+                    <Image
+                      src={assetUrl(spec.icon.src)}
+                      alt=""
+                      width={spec.icon.width}
+                      height={spec.icon.height}
+                      className="block max-w-none scale-[0.54] sm:scale-100"
+                    />
+                  </span>
+                  <div className="flex min-w-0 flex-col gap-[8px] sm:gap-[12px]">
+                    <h3
+                      className={`text-[20px] leading-[24px] font-bold sm:text-[24px] sm:leading-[26px] ${
+                        spec.accent ? "text-white" : "text-[#ED1D23]"
+                      }`}
+                    >
+                      {spec.label}
+                    </h3>
+                    <p
+                      className={`text-[14px] leading-[20px] font-normal sm:text-[18px] sm:leading-[24px] sm:font-medium lg:w-[360px] ${
+                        spec.accent ? "text-[#F8F8F8]" : "text-[#6E6E6E]"
+                      }`}
+                    >
+                      {spec.value} {spec.caption}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-
-        <div className="relative flex flex-col gap-8">
-          <Heading />
-          <ul className="grid grid-cols-1 gap-[16px] sm:grid-cols-2">
-            {SPECS.map((spec) => (
-              <SpecCard key={spec.label} spec={spec} />
-            ))}
-          </ul>
-        </div>
-      </div>
+      </ScaledCanvas>
     </section>
   );
 }

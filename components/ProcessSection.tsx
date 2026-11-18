@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { manrope, spaceGrotesk } from "@/lib/fonts";
 import {
   Building2,
@@ -21,10 +22,9 @@ type Step = {
   title: string;
   description: string;
   icon: LucideIcon;
-  /** Absolute left offset / width of the column in the Figma frame */
+  /** Absolute left offset / width of the column in the desktop Figma frame */
   left: number;
   width: number;
-  descriptionColor: string;
 };
 
 const STEPS: Step[] = [
@@ -35,7 +35,6 @@ const STEPS: Step[] = [
     icon: Thermometer,
     left: -1,
     width: 270,
-    descriptionColor: "text-[#64748B]",
   },
   {
     number: "02",
@@ -44,7 +43,6 @@ const STEPS: Step[] = [
     icon: Gauge,
     left: 298,
     width: 272,
-    descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "03",
@@ -53,7 +51,6 @@ const STEPS: Step[] = [
     icon: Building2,
     left: 598,
     width: 268,
-    descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "04",
@@ -62,7 +59,6 @@ const STEPS: Step[] = [
     icon: Snowflake,
     left: 894,
     width: 271,
-    descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "05",
@@ -71,7 +67,6 @@ const STEPS: Step[] = [
     icon: Wrench,
     left: 1193,
     width: 271,
-    descriptionColor: "text-[#9A9A9A]",
   },
   {
     number: "06",
@@ -80,200 +75,128 @@ const STEPS: Step[] = [
     icon: CalendarCheck,
     left: 1492,
     width: 270,
-    descriptionColor: "text-[#9A9A9A]",
   },
 ];
 
-function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
-  return (
-    <div className="relative z-10 flex size-[90px] shrink-0 items-center justify-center rounded-full border border-solid border-[#E4DFE0] bg-[#F5F5F5] drop-shadow-[4px_4px_7px_rgba(0,0,0,0.1)]">
-      <Icon size={40} strokeWidth={2} className="text-[#ED1D23]" />
-    </div>
-  );
-}
-
-function Heading() {
-  return (
-    <div className="flex flex-col gap-[10px] min-[1024px]:gap-[16px]">
-      <h2 className="text-[34px] leading-[1.15] font-bold text-[#0F172A] min-[1024px]:text-[66px] min-[1024px]:whitespace-nowrap min-[1024px]:leading-[73.333px]">
-        Our Turnkey{" "}
-        <span className="text-[#ED1D23]">Cold Storage Construction</span>
-      </h2>
-      <p className="text-[18px] leading-[20px] font-normal text-[#64748B] min-[1024px]:text-[24px]">
-        As a cold storage construction company, we follow a proven 6-step process to ensure on-time delivery.
-      </p>
-    </div>
-  );
-}
+const MASK = `url("${assetUrl("/Images/process/bg-mask.webp")}")`;
 
 export default function ProcessSection() {
   return (
     <section className={`${manrope.className} w-full bg-[#F9F6F7]`}>
-      {/* DESKTOP: exact Figma frame, scaled to the viewport */}
-      <div className="hidden min-[1024px]:block">
-        <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
+      {/* One responsive layout: dark vertical timeline below 1024px; on desktop the
+          exact Figma frame (light, horizontal), scaled to the viewport. */}
+      <ScaledCanvas designWidth={DESIGN_WIDTH} minWidth={1024}>
+        <div
+          className="relative overflow-hidden bg-[#212121] px-5 pt-8 pb-10 sm:px-10 sm:py-14 lg:h-[calc(var(--h)*1px)] lg:w-[1920px] lg:bg-[#E0E0E0] lg:p-0"
+          style={{ "--h": DESIGN_HEIGHT } as CSSProperties}
+        >
+          {/* phone/tablet: faded warehouse photo + dark radial overlay */}
           <div
-            className="relative w-[1920px] overflow-hidden bg-[#E0E0E0]"
-            style={{ height: DESIGN_HEIGHT }}
+            aria-hidden
+            className="pointer-events-none absolute top-0 left-0 h-[654px] w-full opacity-25 lg:hidden"
           >
-            {/* warehouse photo: white gradient masked by the photo's luminance */}
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                backgroundImage:
-                  "linear-gradient(54.52deg, rgba(255, 255, 255, 0) 31.056%, rgb(255, 255, 255) 96.496%)",
-                maskImage: `url("${assetUrl("/Images/process/bg-mask.webp")}")`,
-                maskMode: "luminance",
-                maskSize: "100% 100%",
-                maskRepeat: "no-repeat",
-                WebkitMaskImage: `url("${assetUrl("/Images/process/bg-mask.webp")}")`,
-                WebkitMaskSize: "100% 100%",
-                WebkitMaskRepeat: "no-repeat",
-              }}
-            />
-
-            <div className="absolute top-1/2 left-1/2 flex w-[1760px] -translate-x-1/2 -translate-y-1/2 flex-col gap-[50px]">
-              <Heading />
-
-              <div className="relative h-[300px] w-full">
-                {/* connector line */}
-                <div className="absolute top-[47px] left-[72px] h-[1.333px] w-[1430px] bg-[#C6C6C6]" />
-
-                {STEPS.map((step) => (
-                  <div
-                    key={step.number}
-                    className="absolute top-0 flex flex-col items-start gap-[40px]"
-                    style={{ left: step.left, width: step.width }}
-                  >
-                    <StepIcon icon={step.icon} />
-
-                    <div className="flex w-full flex-col items-start gap-[12px]">
-                      <p
-                        className={`${spaceGrotesk.className} text-[26px] leading-[21.333px] font-bold text-[#ED1D23]`}
-                      >
-                        {step.number}
-                      </p>
-                      <p className="w-full text-[21px] leading-[24px] font-bold text-[#080808]">
-                        {step.title}
-                      </p>
-                      <p className="text-[18px] leading-[22.667px] font-normal text-[#64748B]">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+            <div className="absolute inset-0 overflow-hidden opacity-75">
+              <div className="absolute top-[0.06%] left-[-124.17%] h-[69.29%] w-[348.57%]">
+                <Image
+                  src="/Images/process/mobile-bg.webp"
+                  alt=""
+                  fill
+                  sizes="1400px"
+                  className="max-w-none object-cover"
+                />
               </div>
             </div>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_90%_2%,rgba(0,0,0,0)_0%,rgba(66,66,66,0.75)_30%,rgba(16,16,16,0.91)_55%,rgb(71,71,71)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-[220px] bg-gradient-to-b from-transparent to-[#212121]" />
           </div>
-        </ScaledCanvas>
-      </div>
 
-      {/* TABLET (640px - 1023px) */}
-      <div className="hidden px-10 py-16 sm:max-[1023px]:block">
-        <Heading />
+          {/* desktop: warehouse photo, white gradient masked by the photo luminance */}
+          <div
+            aria-hidden
+            className="absolute inset-0 hidden lg:block"
+            style={{
+              backgroundImage:
+                "linear-gradient(54.52deg, rgba(255, 255, 255, 0) 31.056%, rgb(255, 255, 255) 96.496%)",
+              maskImage: MASK,
+              maskMode: "luminance",
+              maskSize: "100% 100%",
+              maskRepeat: "no-repeat",
+              WebkitMaskImage: MASK,
+              WebkitMaskSize: "100% 100%",
+              WebkitMaskRepeat: "no-repeat",
+            }}
+          />
 
-        <ol className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
-          {STEPS.map((step) => (
-            <li key={step.number} className="flex flex-col items-start gap-6">
-              <StepIcon icon={step.icon} />
-              <div className="flex flex-col gap-3">
-                <p
-                  className={`${spaceGrotesk.className} text-[26px] leading-[21.333px] font-bold text-[#ED1D23]`}
-                >
-                  {step.number}
-                </p>
-                <p className="text-[21px] leading-[normal] font-bold text-[#080808]">
-                  {step.title}
-                </p>
-                <p
-                  className={`text-[18px] leading-[24px] font-normal ${step.descriptionColor}`}
-                >
-                  {step.description}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      {/* MOBILE (below 640px): dark vertical timeline */}
-      <div className="relative overflow-hidden bg-[#212121] px-5 pt-8 pb-10 sm:hidden">
-        {/* faded warehouse photo + dark radial overlay (Figma mobile frame) */}
-        <div aria-hidden className="pointer-events-none absolute top-0 left-0 h-[654px] w-full opacity-25">
-          <div className="absolute inset-0 overflow-hidden opacity-75">
-            <div className="absolute top-[0.06%] left-[-124.17%] h-[69.29%] w-[348.57%]">
-              <Image
-                src="/Images/process/mobile-bg.webp"
-                alt=""
-                fill
-                sizes="1400px"
-                className="max-w-none object-cover"
-              />
+          <div className="relative mx-auto flex w-full max-w-[350px] flex-col gap-[40px] sm:max-w-[640px] lg:absolute lg:top-1/2 lg:left-1/2 lg:mx-0 lg:w-[1760px] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2 lg:gap-[50px]">
+            <div className="flex w-full flex-col gap-[6px] lg:gap-[16px]">
+              <h2 className="text-[28px] leading-[34px] font-bold text-white sm:text-[34px] sm:leading-[1.15] lg:text-[66px] lg:leading-[73.333px] lg:whitespace-nowrap lg:text-[#0F172A]">
+                Our Turnkey{" "}
+                <span className="text-[#ED1D23]">Cold Storage Construction</span>
+              </h2>
+              <p className="text-[14px] leading-[20px] font-normal text-[#A6A6A6] sm:text-[18px] lg:text-[24px] lg:text-[#64748B]">
+                As a cold storage construction company, we follow a proven 6-step process to ensure on-time delivery.
+              </p>
             </div>
-          </div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_90%_2%,rgba(0,0,0,0)_0%,rgba(66,66,66,0.75)_30%,rgba(16,16,16,0.91)_55%,rgb(71,71,71)_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-[220px] bg-gradient-to-b from-transparent to-[#212121]" />
-        </div>
 
-        <div className="relative mx-auto flex w-full max-w-[350px] flex-col gap-[40px]">
-          <div className="flex w-full flex-col gap-[6px]">
-            <h2 className="text-[28px] leading-[34px] font-bold text-white">
-              Our Turnkey{" "}
-              <span className="text-[#ED1D23]">Cold Storage Construction</span>
-            </h2>
-            <p className="text-[14px] leading-[20px] font-normal text-[#A6A6A6]">
-              As a cold storage construction company, we follow a proven 6-step process to ensure on-time delivery.
-            </p>
-          </div>
+            <div className="relative lg:h-[300px] lg:w-full">
+              {/* desktop connector line */}
+              <div className="absolute top-[47px] left-[72px] hidden h-[1.333px] w-[1430px] bg-[#C6C6C6] lg:block" />
 
-          <ol className="flex w-full flex-col gap-[14px]">
-            {STEPS.map((step, index) => {
-              const Icon = step.icon;
+              <ol className="flex w-full flex-col gap-[14px]">
+                {STEPS.map((step, index) => {
+                  const Icon = step.icon;
 
-              return (
-                <li key={step.number} className="relative flex items-start gap-[6px]">
-                  {/* vertical connector to the next step's marker */}
-                  {index < STEPS.length - 1 && (
-                    <span
-                      aria-hidden
-                      className="absolute top-[14px] bottom-[-24px] left-[43px] w-px bg-[#4D4D4D]"
-                    />
-                  )}
-                  <div className="relative h-[34px] w-[48px] shrink-0">
-                    <p
-                      className={`${spaceGrotesk.className} text-[20px] leading-[30px] whitespace-nowrap text-[#A9ABB2]`}
+                  return (
+                    <li
+                      key={step.number}
+                      className="relative flex items-start gap-[6px] lg:absolute lg:top-0 lg:left-[calc(var(--l)*1px)] lg:w-[calc(var(--w)*1px)] lg:flex-col lg:gap-[40px]"
+                      style={{ "--l": step.left, "--w": step.width } as CSSProperties}
                     >
-                      {step.number}
-                    </p>
-                    <span className="absolute top-[10px] left-[39.5px] size-[8px] rounded-full bg-[#ED1D23]" />
-                    <span
-                      aria-hidden
-                      className="absolute top-[14px] left-[48px] h-px w-[19px] bg-[#4D4D4D]"
-                    />
-                  </div>
+                      {/* phone/tablet: vertical connector to the next step marker */}
+                      {index < STEPS.length - 1 && (
+                        <span
+                          aria-hidden
+                          className="absolute top-[14px] bottom-[-24px] left-[43px] w-px bg-[#4D4D4D] lg:hidden"
+                        />
+                      )}
 
-                  <div className="flex min-w-0 flex-1 items-start gap-[10px] py-[6px] pr-[9px] pl-[10px]">
-                    <Icon
-                      size={20}
-                      strokeWidth={2}
-                      className="shrink-0 text-[#ED1D23]"
-                    />
-                    <div className="flex min-w-0 flex-1 flex-col gap-[2px]">
-                      <p className="text-[16px] leading-[normal] font-semibold tracking-[-0.3px] text-white">
-                        {step.title}
-                      </p>
-                      <p className="text-[12px] leading-[16px] font-normal text-[#949494]">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
+                      {/* number: left column on phone/tablet, below the icon on desktop */}
+                      <div className="relative order-1 h-[34px] w-[48px] shrink-0 lg:order-2 lg:mb-[-28px] lg:h-auto lg:w-auto">
+                        <p
+                          className={`${spaceGrotesk.className} text-[20px] leading-[30px] whitespace-nowrap text-[#A9ABB2] lg:text-[26px] lg:leading-[21.333px] lg:font-bold lg:text-[#ED1D23]`}
+                        >
+                          {step.number}
+                        </p>
+                        <span className="absolute top-[10px] left-[39.5px] size-[8px] rounded-full bg-[#ED1D23] lg:hidden" />
+                        <span
+                          aria-hidden
+                          className="absolute top-[14px] left-[48px] h-px w-[19px] bg-[#4D4D4D] lg:hidden"
+                        />
+                      </div>
+
+                      <div className="order-2 mt-[6px] ml-[10px] shrink-0 lg:relative lg:z-10 lg:order-1 lg:m-0 lg:flex lg:size-[90px] lg:items-center lg:justify-center lg:rounded-full lg:border lg:border-solid lg:border-[#E4DFE0] lg:bg-[#F5F5F5] lg:drop-shadow-[4px_4px_7px_rgba(0,0,0,0.1)]">
+                        <Icon
+                          strokeWidth={2}
+                          className="size-5 text-[#ED1D23] lg:size-10"
+                        />
+                      </div>
+
+                      <div className="order-3 flex min-w-0 flex-1 flex-col gap-[2px] py-[6px] pr-[9px] pl-[10px] lg:w-full lg:flex-none lg:gap-[12px] lg:p-0">
+                        <p className="text-[16px] leading-[normal] font-semibold tracking-[-0.3px] text-white lg:text-[21px] lg:leading-[24px] lg:font-bold lg:tracking-normal lg:text-[#080808]">
+                          {step.title}
+                        </p>
+                        <p className="text-[12px] leading-[16px] font-normal text-[#949494] sm:text-[14px] sm:leading-[20px] lg:text-[18px] lg:leading-[22.667px] lg:text-[#64748B]">
+                          {step.description}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          </div>
         </div>
-      </div>
+      </ScaledCanvas>
     </section>
   );
 }

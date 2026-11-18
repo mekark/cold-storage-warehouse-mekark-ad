@@ -13,7 +13,15 @@ const fieldBase =
 const labelClass = "text-[14px] font-bold leading-[normal] text-white";
 
 /** The hero's "Request Your Project Blueprint" card — the only interactive part of the hero. */
-export default function HeroBlueprintForm() {
+export default function HeroBlueprintForm({
+  idPrefix = "bh",
+  anchorId,
+}: {
+  /** Prefix for field ids, so two copies of the form never share an id */
+  idPrefix?: string;
+  /** id of the card itself (scroll target for the "Request an Estimate" links) */
+  anchorId?: string;
+}) {
   const {
     values,
     errors,
@@ -42,7 +50,7 @@ export default function HeroBlueprintForm() {
     ) : null;
 
   return (
-    <div className="flex w-full max-w-[659px] shrink-0 flex-col items-center gap-[26px] self-center rounded-[31.931px] bg-white/10 px-5 py-[32px] shadow-[0px_26.428px_88.092px_0px_rgba(0,0,0,0.45)] backdrop-blur-[15px] sm:px-[50px] sm:py-[44px] min-[1024px]:mt-[1.08px] min-[1024px]:mr-[45px] min-[1024px]:w-[659px]">
+    <div id={anchorId} className="flex w-full max-w-[659px] shrink-0 flex-col items-center gap-[26px] self-center rounded-[31.931px] bg-white/10 px-5 py-[32px] shadow-[0px_26.428px_88.092px_0px_rgba(0,0,0,0.45)] backdrop-blur-[15px] sm:px-[50px] sm:py-[44px] min-[1024px]:mt-[1.08px] min-[1024px]:mr-[45px] min-[1024px]:w-[659px]">
       <div className="flex w-full flex-col items-center gap-[6px] text-center">
         <h3 className="w-full text-[19px] leading-[normal] font-extrabold text-white sm:text-[24px]">
           Request Your Cold Storage Engineering Blueprint &amp; Quote
@@ -63,11 +71,11 @@ export default function HeroBlueprintForm() {
           {/* ROW 1 */}
           <div className="flex w-full flex-col gap-0 sm:flex-row sm:items-center sm:gap-[35px]">
             <div className="flex w-full flex-col items-start gap-[7px] sm:w-[262.202px]">
-              <label htmlFor="bh-name" className={labelClass}>
+              <label htmlFor={`${idPrefix}-name`} className={labelClass}>
                 Full Name<span className="text-[#ED1D23]">*</span>
               </label>
               <input
-                id="bh-name"
+                id={`${idPrefix}-name`}
                 type="text"
                 name="name"
                 placeholder="Your name"
@@ -79,11 +87,11 @@ export default function HeroBlueprintForm() {
             </div>
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
-              <label htmlFor="bh-location" className={labelClass}>
+              <label htmlFor={`${idPrefix}-location`} className={labelClass}>
                 Project Location<span className="text-[#ED1D23]">*</span>
               </label>
               <input
-                id="bh-location"
+                id={`${idPrefix}-location`}
                 type="text"
                 name="location"
                 placeholder="Enter Project Location"
@@ -98,11 +106,11 @@ export default function HeroBlueprintForm() {
           {/* ROW 2 */}
           <div className="flex w-full flex-col sm:flex-row sm:items-center sm:gap-[35.237px]">
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
-              <label htmlFor="bh-phone" className={labelClass}>
+              <label htmlFor={`${idPrefix}-phone`} className={labelClass}>
                 Mobile Number<span className="text-[#ED1D23]">*</span>
               </label>
               <input
-                id="bh-phone"
+                id={`${idPrefix}-phone`}
                 type="tel"
                 name="phoneNumber"
                 maxLength={10}
@@ -116,11 +124,11 @@ export default function HeroBlueprintForm() {
             </div>
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
-              <label htmlFor="bh-email" className={labelClass}>
+              <label htmlFor={`${idPrefix}-email`} className={labelClass}>
                 Email Address<span className="text-[#ED1D23]">*</span>
               </label>
               <input
-                id="bh-email"
+                id={`${idPrefix}-email`}
                 type="email"
                 name="email"
                 placeholder="abcd@gmail.com"
@@ -135,11 +143,11 @@ export default function HeroBlueprintForm() {
           {/* ROW 3 */}
           <div className="flex w-full flex-col sm:flex-row sm:items-center sm:gap-[37px]">
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
-              <label htmlFor="bh-industry" className={labelClass}>
+              <label htmlFor={`${idPrefix}-industry`} className={labelClass}>
                 Industry Type<span className="text-[#ED1D23]">*</span>
               </label>
               <input
-                id="bh-industry"
+                id={`${idPrefix}-industry`}
                 type="text"
                 name="industry"
                 placeholder="Enter your Industry type"
@@ -151,11 +159,11 @@ export default function HeroBlueprintForm() {
             </div>
 
             <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px] sm:w-[261.339px]">
-              <label htmlFor="bh-sqft" className={labelClass}>
+              <label htmlFor={`${idPrefix}-sqft`} className={labelClass}>
                 Project Sq. Ft<span className="text-[#ED1D23]">*</span>
               </label>
               <SqftSelect
-                id="bh-sqft"
+                id={`${idPrefix}-sqft`}
                 name="sqft"
                 value={values.sqft}
                 options={SQFT_OPTIONS}
@@ -171,11 +179,11 @@ export default function HeroBlueprintForm() {
 
           {/* ROW 4 */}
           <div className="flex w-full flex-col items-start gap-[6.607px] pt-[14px]">
-            <label htmlFor="bh-details" className={labelClass}>
+            <label htmlFor={`${idPrefix}-details`} className={labelClass}>
               Requirement Details<span className="text-[#ED1D23]">*</span>
             </label>
             <textarea
-              id="bh-details"
+              id={`${idPrefix}-details`}
               name="details"
               placeholder="Enter Requirement Details"
               value={values.details}

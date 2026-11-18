@@ -1,7 +1,7 @@
 export const WHATSAPP_NUMBER = "919790924754";
 export const WHATSAPP_MESSAGE =
   "Hello Mekark, I would like to discuss about my warehouse construction project.";
-export const PHONE_NUMBER = "9790924754";
+export const PHONE_NUMBER = "+919790924754";
 
 // Row-major order for the desktop 2-column grid: left column reads
 // 1st/3rd/5th, right column 2nd/4th/6th
